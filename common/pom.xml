@@ -34,6 +34,7 @@
 
     <modules>
         <module>value</module>
+        <module>sprites</module>
     </modules>
 
 

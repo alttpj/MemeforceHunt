@@ -17,7 +17,7 @@
 package io.github.alttpj.memeforcehunt.app.gui;
 
 
-import io.github.alttpj.memeforcehunt.common.value.DefaultSpritemapWithSkins;
+import io.github.alttpj.memeforcehunt.common.sprites.DefaultSpritemapWithSkins;
 import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
 import io.github.alttpj.memeforcehunt.lib.AlttpRomPatcher;
 
@@ -37,7 +37,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import javax.imageio.ImageIO;
@@ -61,9 +61,7 @@ public class MemeforceHuntGui implements Callable<Integer> {
 
   private static final int PER_ROW = 8;
 
-  private static final SpritemapWithSkin[] SPRITEMAPS_WITH_SKIN = Arrays.stream(DefaultSpritemapWithSkins.values())
-      .map(DefaultSpritemapWithSkins::getSpritemapWithSkin)
-      .toArray(SpritemapWithSkin[]::new);
+  private static final List<SpritemapWithSkin> SPRITEMAPS_WITH_SKIN = DefaultSpritemapWithSkins.values();
 
   private JTextField fileName;
   private JLabel preview;
@@ -170,7 +168,7 @@ public class MemeforceHuntGui implements Callable<Integer> {
     /* *************************************
      * model (data only)
      ***************************************/
-    this.skins = new JComboBox<>(SPRITEMAPS_WITH_SKIN);
+    this.skins = new JComboBox<>(SPRITEMAPS_WITH_SKIN.toArray(new SpritemapWithSkin[0]));
     this.skins.setEditable(false);
 
     for (final SpritemapWithSkin spritemapWithSkin : SPRITEMAPS_WITH_SKIN) {
@@ -205,14 +203,14 @@ public class MemeforceHuntGui implements Callable<Integer> {
     // skin text
     this.skinsText = new JLabel("---");
     this.skinsText.setHorizontalAlignment(SwingConstants.CENTER);
-    this.skinsText.setText(DefaultSpritemapWithSkins.BENANA.toString());
+    this.skinsText.setText(DefaultSpritemapWithSkins.getByName("benana").getDescription());
     rightColumn.add(this.skinsText, gbc);
     gbc.gridy++;
 
     // preview
     this.preview = new JLabel();
     this.preview.setHorizontalAlignment(SwingConstants.CENTER);
-    this.preview.setIcon(DefaultSpritemapWithSkins.BENANA.getSpritemapWithSkin().getImageIcon());
+    this.preview.setIcon(DefaultSpritemapWithSkins.getByName("benana").getImageIcon());
     rightColumn.add(this.preview, gbc);
     gbc.gridy++;
 
@@ -294,10 +292,10 @@ public class MemeforceHuntGui implements Callable<Integer> {
     doRandom.addActionListener(
         actionEvent -> {
           final String fileNameText = this.fileName.getText();
-          final int r = (int) (Math.random() * SPRITEMAPS_WITH_SKIN.length);
+          final int r = (int) (Math.random() * SPRITEMAPS_WITH_SKIN.size());
 
           try {
-            new AlttpRomPatcher().patchROM(fileNameText, SPRITEMAPS_WITH_SKIN[r]);
+            new AlttpRomPatcher().patchROM(fileNameText, SPRITEMAPS_WITH_SKIN.get(r));
           } catch (final Exception patchException) {
             JOptionPane.showMessageDialog(parent,
                 "Something went wrong.\n\n"
@@ -305,14 +303,14 @@ public class MemeforceHuntGui implements Callable<Integer> {
                     + "" + patchException.getMessage(),
                 "PROBLEM",
                 JOptionPane.WARNING_MESSAGE,
-                DefaultSpritemapWithSkins.SCREAM.getSpritemapWithSkin().getImageIcon());
+                DefaultSpritemapWithSkins.getByName("scream").getImageIcon());
             return;
           }
           JOptionPane.showMessageDialog(parent,
               "SUCCESS",
               "Enjoy",
               JOptionPane.PLAIN_MESSAGE,
-              DefaultSpritemapWithSkins.BENANA.getSpritemapWithSkin().getImageIcon());
+              DefaultSpritemapWithSkins.getByName("benana").getImageIcon());
         });
 
     return doRandom;
@@ -336,7 +334,7 @@ public class MemeforceHuntGui implements Callable<Integer> {
                 "Something went wrong: [" + patchEx.getMessage() + "].",
                 "PROBLEM",
                 JOptionPane.WARNING_MESSAGE,
-                DefaultSpritemapWithSkins.SCREAM.getSpritemapWithSkin().getImageIcon());
+                DefaultSpritemapWithSkins.getByName("scream").getImageIcon());
             return;
           }
 
@@ -346,7 +344,7 @@ public class MemeforceHuntGui implements Callable<Integer> {
               JOptionPane.PLAIN_MESSAGE,
               Optional.ofNullable(selectedItem)
                   .map(SpritemapWithSkin::getImageIcon)
-                  .orElseGet(() -> DefaultSpritemapWithSkins.BENANA.getSpritemapWithSkin().getImageIcon()));
+                  .orElseGet(() -> DefaultSpritemapWithSkins.getByName("benana").getImageIcon()));
         });
     return doPatch;
   }

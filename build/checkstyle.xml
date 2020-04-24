@@ -34,8 +34,13 @@
   *** https://checkstyle.sourceforge.io/config_filters.html    ***
   ************************************************************ -->
 
+  <module name="SuppressionFilter">
+    <property name="file" value="${project.buildasset.dir}/suppressions.xml"/>
+  </module>
+
   <module name="BeforeExecutionExclusionFileFilter">
     <property name="fileNamePattern" value="module\-info\.java$"/>
+    <property name="fileNamePattern" value=".*\.ULID\.java$"/>
   </module>
 
   <!-- required till https://bugs.openjdk.java.net/browse/JDK-8160601 -->
@@ -580,14 +585,11 @@
 
     <module name="AbbreviationAsWordInName">
       <property name="allowedAbbreviationLength" value="2"/>
-      <property name="allowedAbbreviations" value="FI"/>
       <property name="allowedAbbreviations" value="XML"/>
       <property name="allowedAbbreviations" value="URL"/>
       <property name="allowedAbbreviations" value="URI"/>
       <property name="allowedAbbreviations" value="JSON"/>
-      <property name="allowedAbbreviations" value="MiWE"/>
-      <property name="allowedAbbreviations" value="NEAT"/>
-      <property name="allowedAbbreviations" value="FISP"/>
+      <property name="allowedAbbreviations" value="ULID"/>
 
       <property name="ignoreOverriddenMethods" value="true"/>
       <property name="ignoreFinal" value="false"/>

@@ -1,0 +1,450 @@
+---
+sprites:
+  - id: 01E6F3YXSW5A3AB0X4A1ACX0FN
+    author: unknown
+    spriteName: 1up
+    uri: "/gfx/1up.bin"
+    preview: "/previews/1up.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXT1SFAWKQBEYG77VYBQ
+    author: unknown
+    spriteName: '69'
+    uri: "/gfx/69.bin"
+    preview: "/previews/69.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXT6JSRHRYZA01KJGF5S
+    author: unknown
+    spriteName: B
+    uri: "/gfx/B.bin"
+    preview: "/previews/B.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXTA9GXB7T51WRHYCAC3
+    author: unknown
+    spriteName: bee
+    uri: "/gfx/bee.bin"
+    preview: "/previews/bee.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXTEQG0XQ2KXFEYQF4G0
+    author: unknown
+    spriteName: beer
+    uri: "/gfx/beer.bin"
+    preview: "/previews/beer.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXTJE54A9K0B7KYSNEYF
+    author: unknown
+    spriteName: benana
+    uri: "/gfx/benana.bin"
+    preview: "/previews/benana.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXTQ4BW5WMXHZ2VDE0PN
+    author: unknown
+    spriteName: big20
+    uri: "/gfx/big20.bin"
+    preview: "/previews/big20.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXTVKF764RFBBQ9VCYMG
+    author: unknown
+    spriteName: birb
+    uri: "/gfx/birb.bin"
+    preview: "/previews/birb.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXV03Y57H01FHAK2SYHF
+    author: unknown
+    spriteName: bob
+    uri: "/gfx/bob.bin"
+    preview: "/previews/bob.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXV4F3TFQA0YPXK5RFF9
+    author: unknown
+    spriteName: boots
+    uri: "/gfx/boots.bin"
+    preview: "/previews/boots.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXV9TS1PKWYCQ1G5RJAT
+    author: unknown
+    spriteName: broccoli
+    uri: "/gfx/broccoli.bin"
+    preview: "/previews/broccoli.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXVDW2RHC2F9EPM9ARX6
+    author: unknown
+    spriteName: chest
+    uri: "/gfx/chest.bin"
+    preview: "/previews/chest.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXVJEE1PRHTZRZ6HCJAS
+    author: unknown
+    spriteName: coffee
+    uri: "/gfx/coffee.bin"
+    preview: "/previews/coffee.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXVPKM36C59KB32JM7NE
+    author: unknown
+    spriteName: coin
+    uri: "/gfx/coin.bin"
+    preview: "/previews/coin.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXVTRXA1MQQYKZ6XCVPA
+    author: unknown
+    spriteName: commonmagic
+    uri: "/gfx/commonmagic.bin"
+    preview: "/previews/commonmagic.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXVZNHCTC0TBEVXZGK4D
+    author: unknown
+    spriteName: cookie
+    uri: "/gfx/cookie.bin"
+    preview: "/previews/cookie.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXW3A2H1KQD9E8EAN5X1
+    author: unknown
+    spriteName: cube
+    uri: "/gfx/cube.bin"
+    preview: "/previews/cube.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXW7K9E0TZ769KK7Y5GE
+    author: unknown
+    spriteName: cucco
+    uri: "/gfx/cucco.bin"
+    preview: "/previews/cucco.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXWBQK99TPMRG01GZ9P1
+    author: unknown
+    spriteName: dwarf
+    uri: "/gfx/dwarf.bin"
+    preview: "/previews/dwarf.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXWGD3P0KQ1648QTYYR7
+    author: unknown
+    spriteName: E404
+    uri: "/gfx/E404.bin"
+    preview: "/previews/E404.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXWM4X0NMB44QQVEMJJK
+    author: unknown
+    spriteName: egg
+    uri: "/gfx/egg.bin"
+    preview: "/previews/egg.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXWSTGGW1TAJ9WZAT1D2
+    author: unknown
+    spriteName: fairy
+    uri: "/gfx/fairy.bin"
+    preview: "/previews/fairy.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXWXGX4MF536VF2YFX2C
+    author: unknown
+    spriteName: feather
+    uri: "/gfx/feather.bin"
+    preview: "/previews/feather.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXX2HTFKQ0RPBXJ30FPR
+    author: unknown
+    spriteName: fork
+    uri: "/gfx/fork.bin"
+    preview: "/previews/fork.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXX61RDZ9VE395Q3YHGK
+    author: unknown
+    spriteName: fortress
+    uri: "/gfx/fortress.bin"
+    preview: "/previews/fortress.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXXBF5H1XSDCQVEYFSYX
+    author: unknown
+    spriteName: glaceon
+    uri: "/gfx/glaceon.bin"
+    preview: "/previews/glaceon.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXXF5Y8JTY1J4PJFPYEJ
+    author: unknown
+    spriteName: honk
+    uri: "/gfx/honk.bin"
+    preview: "/previews/honk.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXXMTDB4ZBTM8R95TQC3
+    author: unknown
+    spriteName: icerod
+    uri: "/gfx/icerod.bin"
+    preview: "/previews/icerod.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXXRT1X0FCYVN5001ZHX
+    author: unknown
+    spriteName: joypendant
+    uri: "/gfx/joypendant.bin"
+    preview: "/previews/joypendant.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXXXTH1WWSPKXMESDRGH
+    author: unknown
+    spriteName: kinstone
+    uri: "/gfx/kinstone.bin"
+    preview: "/previews/kinstone.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXY13E57KBA2WT7HTKHE
+    author: unknown
+    spriteName: koopa
+    uri: "/gfx/koopa.bin"
+    preview: "/previews/koopa.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXY64ZJ9B6Z067XWR4ZY
+    author: unknown
+    spriteName: linkface
+    uri: "/gfx/linkface.bin"
+    preview: "/previews/linkface.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXYB0ZFJZF26XA3DNHCW
+    author: unknown
+    spriteName: mail
+    uri: "/gfx/mail.bin"
+    preview: "/previews/mail.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXYFAVGDWAR3TYXMW60K
+    author: unknown
+    spriteName: meat
+    uri: "/gfx/meat.bin"
+    preview: "/previews/meat.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXYM6A12PJ2PNBX38S5N
+    author: unknown
+    spriteName: moon
+    uri: "/gfx/moon.bin"
+    preview: "/previews/moon.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXYRDBVQXQVK47CTK4RD
+    author: unknown
+    spriteName: navi
+    uri: "/gfx/navi.bin"
+    preview: "/previews/navi.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXYXR23F4QZCHWN3RW4T
+    author: unknown
+    spriteName: noag
+    uri: "/gfx/noag.bin"
+    preview: "/previews/noag.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXZ1B7QT2BS98A3MXB93
+    author: unknown
+    spriteName: nobomb
+    uri: "/gfx/nobomb.bin"
+    preview: "/previews/nobomb.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXZ4YA4ZTEWY7Y2AA35F
+    author: unknown
+    spriteName: peach
+    uri: "/gfx/peach.bin"
+    preview: "/previews/peach.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXZ8TRRSK5BR5N3FZMF9
+    author: unknown
+    spriteName: pizza
+    uri: "/gfx/pizza.bin"
+    preview: "/previews/pizza.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXZCXDMYW3MYDYW417XE
+    author: unknown
+    spriteName: pizzaslice
+    uri: "/gfx/pizzaslice.bin"
+    preview: "/previews/pizzaslice.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YXZGHFFCSPNSA2VR4G4W
+    author: unknown
+    spriteName: pokeball
+    uri: "/gfx/pokeball.bin"
+    preview: "/previews/pokeball.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXZNGH5RRASKS19VAE3A
+    author: unknown
+    spriteName: poop
+    uri: "/gfx/poop.bin"
+    preview: "/previews/poop.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YXZSTQT9DDV13Z6RKP2T
+    author: unknown
+    spriteName: puff
+    uri: "/gfx/puff.bin"
+    preview: "/previews/puff.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YXZYRZF1F6XG8MC3S3D4
+    author: unknown
+    spriteName: pug
+    uri: "/gfx/pug.bin"
+    preview: "/previews/pug.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YY038R25D82FHET4GR5P
+    author: unknown
+    spriteName: python
+    uri: "/gfx/python.bin"
+    preview: "/previews/python.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YY076Y0Q9E6BXG0STTQH
+    author: unknown
+    spriteName: qblock
+    uri: "/gfx/qblock.bin"
+    preview: "/previews/qblock.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY0BA2P283X4MYBPRP5T
+    author: unknown
+    spriteName: quack
+    uri: "/gfx/quack.bin"
+    preview: "/previews/quack.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY0GPJBRBN5BVGHJZRT7
+    author: unknown
+    spriteName: scream
+    uri: "/gfx/scream.bin"
+    preview: "/previews/scream.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YY0MTRD494Y8BX54BG6P
+    author: unknown
+    spriteName: shard
+    uri: "/gfx/shard.bin"
+    preview: "/previews/shard.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YY0SFEEPYPGZJK8201GC
+    author: unknown
+    spriteName: shine
+    uri: "/gfx/shine.bin"
+    preview: "/previews/shine.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY0Y4CJSR2H8SWXRVTY7
+    author: unknown
+    spriteName: skulltula
+    uri: "/gfx/skulltula.bin"
+    preview: "/previews/skulltula.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY1265KKJ6X0QT00WVVZ
+    author: unknown
+    spriteName: snes
+    uri: "/gfx/snes.bin"
+    preview: "/previews/snes.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY169W7V9GEVJSG751AC
+    author: unknown
+    spriteName: star
+    uri: "/gfx/star.bin"
+    preview: "/previews/star.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY1AYXJY7PE2EY6X8992
+    author: unknown
+    spriteName: tea
+    uri: "/gfx/tea.bin"
+    preview: "/previews/tea.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YY1EG5E3925J8TVSKFNP
+    author: unknown
+    spriteName: thinking
+    uri: "/gfx/thinking.bin"
+    preview: "/previews/thinking.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY1J94KJ4WB58P4ZK0PA
+    author: unknown
+    spriteName: tile
+    uri: "/gfx/tile.bin"
+    preview: "/previews/tile.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YY1QGBRZN9QHF0G45S51
+    author: unknown
+    spriteName: triforce
+    uri: "/gfx/triforce.bin"
+    preview: "/previews/triforce.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY1VNB2QSS6P45P68YGB
+    author: unknown
+    spriteName: veetorp
+    uri: "/gfx/veetorp.bin"
+    preview: "/previews/veetorp.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY20KVDTMCG96TN22J21
+    author: unknown
+    spriteName: vitreous
+    uri: "/gfx/vitreous.bin"
+    preview: "/previews/vitreous.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY24Z5RT9DSZP05Y368Z
+    author: unknown
+    spriteName: woodfella
+    uri: "/gfx/woodfella.bin"
+    preview: "/previews/woodfella.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'BLUE'
+  - id: 01E6F3YY29R5BXAT8XZFA6G559
+    author: unknown
+    spriteName: yoshi
+    uri: "/gfx/yoshi.bin"
+    preview: "/previews/yoshi.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'RED'
+  - id: 01E6F3YY2DPC99VW8V6GWJJQQZ
+    author: unknown
+    spriteName: z1link
+    uri: "/gfx/z1link.bin"
+    preview: "/previews/z1link.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'
+  - id: 01E6F3YY2J6H53ZFKXXGAPHK1R
+    author: unknown
+    spriteName: z1oldman
+    uri: "/gfx/z1oldman.bin"
+    preview: "/previews/z1oldman.png"
+    created: '2020-04-21T21:38:11+02:00'
+    palette: 'GREEN'

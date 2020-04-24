@@ -39,8 +39,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!--suppress UnresolvedMavenProperty -->
-    <project.buidasset.dir>${maven.multiModuleProjectDirectory}/build</project.buidasset.dir>
-    <checkstyle.header.file>${project.buidasset.dir}/header.txt</checkstyle.header.file>
+    <project.buildasset.dir>${maven.multiModuleProjectDirectory}/build</project.buildasset.dir>
+    <checkstyle.header.file>${project.buildasset.dir}/header.txt</checkstyle.header.file>
 
     <!-- default fork arguments. -->
     <argLine>-Xmx1024m</argLine>
@@ -316,10 +316,11 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>3.1.1</version>
         <configuration>
-          <configLocation>${project.buidasset.dir}/checkstyle.xml</configLocation>
+          <configLocation>${project.buildasset.dir}/checkstyle.xml</configLocation>
           <encoding>UTF-8</encoding>
           <consoleOutput>false</consoleOutput>
           <linkXRef>false</linkXRef>
+          <propertyExpansion>project.buildasset.dir=${project.buildasset.dir}</propertyExpansion>
         </configuration>
         <dependencies>
           <dependency>
@@ -357,7 +358,7 @@
             <bundledSignature>jdk-reflection</bundledSignature>
           </bundledSignatures>
           <signaturesFiles>
-            <signaturesFile>${project.buidasset.dir}/forbiddenapis/java.util.txt</signaturesFile>
+            <signaturesFile>${project.buildasset.dir}/forbiddenapis/java.util.txt</signaturesFile>
           </signaturesFiles>
           <suppressAnnotations>
             <suppressAnnotation>io.github.alttpj.memeforcehunt.app.cli.internal.SuppressForbidden</suppressAnnotation>

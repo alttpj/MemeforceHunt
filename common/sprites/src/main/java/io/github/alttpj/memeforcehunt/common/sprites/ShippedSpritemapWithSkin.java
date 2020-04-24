@@ -14,32 +14,38 @@
  * limitations under the License.
  */
 
-package io.github.alttpj.memeforcehunt.common.value;
+package io.github.alttpj.memeforcehunt.common.sprites;
+
+import io.github.alttpj.memeforcehunt.common.value.AbstractSpritemapWithSkin;
+import io.github.alttpj.memeforcehunt.common.value.ItemPalette;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Locale;
 import javax.imageio.ImageIO;
 
 public class ShippedSpritemapWithSkin extends AbstractSpritemapWithSkin {
 
 
   private final String skinResourceName;
+  private final String skinPreviewPath;
 
-  public ShippedSpritemapWithSkin(final String description,
-                                  final String skinResourceName,
+  public ShippedSpritemapWithSkin(final String spriteId,
+                                  final String spriteName,
+                                  final String description,
+                                  final String author,
+                                  final String skinResourcePath,
+                                  final String skinPreviewPath,
                                   final ItemPalette palette) {
-    super(description, palette);
-    this.skinResourceName = skinResourceName;
+    super(spriteId, spriteName, description, author, palette);
+    this.skinResourceName = skinResourcePath;
+    this.skinPreviewPath = skinPreviewPath;
   }
 
   @Override
   protected BufferedImage getImage() {
-    final String previewLocation = String.format(Locale.ENGLISH, "/previews/%s.png", getSkinResourceName());
-
     BufferedImage itemp;
-    try (final InputStream inputStream = DefaultSpritemapWithSkins.class.getResourceAsStream(previewLocation)) {
+    try (final InputStream inputStream = this.getClass().getResourceAsStream(getSkinPreviewPath())) {
       itemp = ImageIO.read(inputStream);
     } catch (final IOException imageReadEx) {
       itemp = new BufferedImage(16, 16, BufferedImage.TYPE_4BYTE_ABGR);
@@ -50,12 +56,16 @@ public class ShippedSpritemapWithSkin extends AbstractSpritemapWithSkin {
 
   @Override
   protected InputStream getSpritemapInputStream() {
-    final String spritemapLocation = String.format(Locale.ENGLISH, "/gfx/%s.bin", getSkinResourceName());
+    final String spritemapLocation = getSkinResourceName();
 
     return this.getClass().getResourceAsStream(spritemapLocation);
   }
 
   private String getSkinResourceName() {
     return this.skinResourceName;
+  }
+
+  public String getSkinPreviewPath() {
+    return this.skinPreviewPath;
   }
 }

@@ -26,18 +26,54 @@ import javax.swing.ImageIcon;
 public abstract class AbstractSpritemapWithSkin implements SpritemapWithSkin {
 
   private static final int BUFFER_SIZE = 512;
+  private final ULID.Value id;
+  private final String spriteName;
   private final String description;
+  private final String author;
   private final ItemPalette palette;
 
-  public AbstractSpritemapWithSkin(final String description,
+  public AbstractSpritemapWithSkin(final String spriteId,
+                                   final String spriteName,
+                                   final String description,
+                                   final String author,
                                    final ItemPalette palette) {
+    this.id = ULID.parseULID(spriteId);
+    this.spriteName = spriteName;
     this.description = description;
+    this.author = author;
     this.palette = palette;
+  }
+
+  public AbstractSpritemapWithSkin(final ULID.Value spriteId,
+                                   final String spriteName,
+                                   final String description,
+                                   final String author,
+                                   final ItemPalette palette) {
+    this.id = spriteId;
+    this.spriteName = spriteName;
+    this.description = description;
+    this.author = author;
+    this.palette = palette;
+  }
+
+  @Override
+  public ULID.Value getId() {
+    return this.id;
+  }
+
+  @Override
+  public String getSpriteName() {
+    return this.spriteName;
   }
 
   @Override
   public String getDescription() {
     return this.description;
+  }
+
+  @Override
+  public String getAuthor() {
+    return this.author;
   }
 
   @Override

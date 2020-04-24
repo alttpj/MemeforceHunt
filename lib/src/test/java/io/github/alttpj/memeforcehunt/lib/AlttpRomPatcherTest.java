@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.github.alttpj.memeforcehunt.common.value.AbstractSpritemapWithSkin;
 import io.github.alttpj.memeforcehunt.common.value.ItemPalette;
+import io.github.alttpj.memeforcehunt.common.value.ULID;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,20 +34,21 @@ import java.io.InputStream;
 class AlttpRomPatcherTest {
 
   @Test
-  void shouldRejectLongByteArrays() throws IOException {
+  void shouldRejectLongByteArrays() {
     // given big sprite map
     final byte[] bytes = new byte[AlttpRomPatcher.MAX_SPRITEMAP_SIZE * 2];
-    final AbstractSpritemapWithSkin spritemap = new AbstractSpritemapWithSkin("test", ItemPalette.GREEN) {
-      @Override
-      protected BufferedImage getImage() {
-        return null;
-      }
+    final AbstractSpritemapWithSkin spritemap =
+        new AbstractSpritemapWithSkin(new ULID().nextULID(), "test", "test", "author", ItemPalette.GREEN) {
+          @Override
+          protected BufferedImage getImage() {
+            return null;
+          }
 
-      @Override
-      protected InputStream getSpritemapInputStream() {
-        return new ByteArrayInputStream(bytes);
-      }
-    };
+          @Override
+          protected InputStream getSpritemapInputStream() {
+            return new ByteArrayInputStream(bytes);
+          }
+        };
 
     // when
     final AlttpRomPatcher alttpRomPatcher = new AlttpRomPatcher();

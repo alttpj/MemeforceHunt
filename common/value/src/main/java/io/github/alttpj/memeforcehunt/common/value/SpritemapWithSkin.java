@@ -32,7 +32,18 @@ import javax.swing.ImageIcon;
  */
 public interface SpritemapWithSkin {
 
+  ULID.Value getId();
+
+  /**
+   * Returns a short, non-changing identifier.
+   *
+   * @return a short human-readable ID.
+   */
+  String getSpriteName();
+
   String getDescription();
+
+  String getAuthor();
 
   /**
    * Returns a 32x32 image icon.

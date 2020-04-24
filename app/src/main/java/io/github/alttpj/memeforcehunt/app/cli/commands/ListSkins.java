@@ -17,11 +17,12 @@
 package io.github.alttpj.memeforcehunt.app.cli.commands;
 
 import io.github.alttpj.memeforcehunt.app.cli.internal.SuppressForbidden;
-import io.github.alttpj.memeforcehunt.common.value.DefaultSpritemapWithSkins;
+import io.github.alttpj.memeforcehunt.common.sprites.DefaultSpritemapWithSkins;
+import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
 
 import picocli.CommandLine.Command;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
@@ -30,20 +31,21 @@ public class ListSkins implements Callable<Integer> {
 
   @Override
   public Integer call() throws Exception {
-    final DefaultSpritemapWithSkins[] values = DefaultSpritemapWithSkins.values();
+    final List<SpritemapWithSkin> values = DefaultSpritemapWithSkins.values();
 
-    Arrays.stream(values)
-        .forEach(ListSkins::printSkin);
+    values.forEach(ListSkins::printSkin);
 
     return 0;
   }
 
   @SuppressForbidden
-  private static void printSkin(final DefaultSpritemapWithSkins spritemapWithSkin) {
+  private static void printSkin(final SpritemapWithSkin spritemapWithSkin) {
     final String format = String.format(Locale.ENGLISH,
-        "[%3d] - %s",
-        spritemapWithSkin.ordinal(),
-        spritemapWithSkin.getSpritemapWithSkin().getDescription());
+        "%-16s - %-32s by %-16s",
+        spritemapWithSkin.getSpriteName(),
+        spritemapWithSkin.getDescription(),
+        spritemapWithSkin.getAuthor()
+    );
 
     System.out.println(format);
   }
