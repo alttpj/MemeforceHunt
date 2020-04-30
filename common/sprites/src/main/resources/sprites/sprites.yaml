@@ -90,6 +90,7 @@ sprites:
     description: Gotta go fast! Oh wait.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'RED'
+    displayName: Pegasus Boots
   - id: 01E6F3YXV9TS1PKWYCQ1G5RJAT
     author: unknown
     spriteName: broccoli
@@ -130,6 +131,7 @@ sprites:
     description: The most basic of magic signatures.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: Common Magic
   - id: 01E6F3YXVZNHCTC0TBEVXZGK4D
     author: Fish_waffle64
     spriteName: cookie
@@ -170,6 +172,7 @@ sprites:
     description: Error, image not found.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: Error 404
   - id: 01E6F3YXWM4X0NMB44QQVEMJJK
     author: unknown
     spriteName: egg
@@ -234,6 +237,7 @@ sprites:
     description: Now you need to kill Trinexx!
     created: '2020-04-21T21:38:11+02:00'
     palette: 'BLUE'
+    displayName: Ice Rod
   - id: 01E6F3YXXRT1X0FCYVN5001ZHX
     author: Fish_waffle64
     spriteName: joypendant
@@ -242,6 +246,7 @@ sprites:
     description: Gives you the deed to a private island (And a butler!)
     created: '2020-04-21T21:38:11+02:00'
     palette: 'BLUE'
+    displayName: Joy Pendant
   - id: 01E6F3YXXXTH1WWSPKXMESDRGH
     author: unknown
     spriteName: kinstone
@@ -274,6 +279,7 @@ sprites:
     description: The Hero's New Clothes
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: Green Mail
   - id: 01E6F3YXYFAVGDWAR3TYXMW60K
     author: unknown
     spriteName: meat
@@ -306,6 +312,7 @@ sprites:
     description: You're in Hard Mode now.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'RED'
+    displayName: No Silver Arrows
   - id: 01E6F3YXZ1B7QT2BS98A3MXB93
     author: unknown
     spriteName: nobomb
@@ -314,6 +321,7 @@ sprites:
     description: I bet you wouldn't like to have more bombs.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: No Bombs
   - id: 01E6F3YXZ4YA4ZTEWY7Y2AA35F
     author: unknown
     spriteName: peach
@@ -338,6 +346,7 @@ sprites:
     description: A large slice of pepperoni pizza.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: Pizza Slice
   - id: 01E6F3YXZGHFFCSPNSA2VR4G4W
     author: unknown
     spriteName: pokeball
@@ -346,6 +355,7 @@ sprites:
     description: Gotta catch 'em all
     created: '2020-04-21T21:38:11+02:00'
     palette: 'RED'
+    displayName: Poké Ball
   - id: 01E6F3YXZNGH5RRASKS19VAE3A
     author: unknown
     spriteName: poop
@@ -386,6 +396,7 @@ sprites:
     description: What's inside? One way to find out.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: Question Block
   - id: 01E6F3YY0BA2P283X4MYBPRP5T
     author: unknown
     spriteName: quack
@@ -434,6 +445,7 @@ sprites:
     description: The SNES Logo!
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: SNES Logo
   - id: 01E6F3YY169W7V9GEVJSG751AC
     author: unknown
     spriteName: star
@@ -514,6 +526,7 @@ sprites:
     description: The classic!
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: Z1 Link
   - id: 01E6F3YY2J6H53ZFKXXGAPHK1R
     author: unknown
     spriteName: z1oldman
@@ -522,6 +535,7 @@ sprites:
     description: Gives good advice, most of the time.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: Z1 Old Man
 
   ## Begin Fish's sprites
   - id: 01E6YC4JCNSQHD3XTRP6CRMZAY
@@ -529,7 +543,7 @@ sprites:
     spriteName: acorn
     uri: "/sprites/fish/acorn.gfx"
     preview: "/sprites/fish/acorn.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "One of Squirrel's prized acorns."
 
   - id: 01E6YCKEK6A91EYH3NZ8W6YQQ1
@@ -537,15 +551,16 @@ sprites:
     spriteName: bpendant
     uri: "/sprites/fish/bpendant.gfx"
     preview: "/sprites/fish/bpendant.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "The Pendant of Power?"
+    displayName: Blue Pendant
 
   - id: 01E6YCKN2QGE1BJ2GBNCX6A0ZX
     palette: 'BLUE'
     spriteName: cake
     uri: "/sprites/fish/cake.gfx"
     preview: "/sprites/fish/cake.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "Happy Birthday!"
 
   - id: 01E6YCKRZFE81DZRS464WHPMES
@@ -553,7 +568,7 @@ sprites:
     spriteName: cog
     uri: "/sprites/fish/cog.gfx"
     preview: "/sprites/fish/cog.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "A Cog from Ty the Tasmanian Tiger"
 
   - id: 01E6YCKX4GZ1THG89ZVNJH6K7K
@@ -561,7 +576,7 @@ sprites:
     spriteName: crystal
     uri: "/sprites/fish/crystal.gfx"
     preview: "/sprites/fish/crystal.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "Maiden not included"
 
   - id: 01E6YCM37BVM7WY1W4MX7WVKH3
@@ -569,7 +584,7 @@ sprites:
     spriteName: donut
     uri: "/sprites/fish/donut.gfx"
     preview: "/sprites/fish/donut.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "A tasty, strawberry iced donut."
 
   - id: 01E6YCM7RMJPPZ761PPWZ1VCNC
@@ -577,31 +592,34 @@ sprites:
     spriteName: earthbadge
     uri: "/sprites/fish/earthbadge.gfx"
     preview: "/sprites/fish/earthbadge.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "The last gym badge for Kanto."
+    displayName: Earth Badge
 
   - id: 01E6YCMC30D417BSMS5A23CYTQ
     palette: 'GREEN'
     spriteName: gpendant
     uri: "/sprites/fish/gpendant.gfx"
     preview: "/sprites/fish/gpendant.png"
-    author: 'Fish'
-    description: "Bring this to Sassy! "
+    author: 'Fish_waffle64'
+    description: "Bring this to Sassy!"
+    displayName: Green Pendant
 
   - id: 01E6YCMGAQ3457X5J7MD4VM4D6
     palette: 'BLUE'
     spriteName: icecream
     uri: "/sprites/fish/icecream.gfx"
     preview: "/sprites/fish/icecream.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "A large scoop of vanilla ice cream."
+    displayName: Ice Cream
 
   - id: 01E6YCMNEXBBBC2K7B0Y35ZA9Q
     palette: 'GREEN'
     spriteName: magicite
     uri: "/sprites/fish/magicite.gfx"
     preview: "/sprites/fish/magicite.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "An Esper now at your service."
 
   - id: 01E6YCMSR3HZW4GY90RSWZF8ZY
@@ -609,30 +627,33 @@ sprites:
     spriteName: mmetank
     uri: "/sprites/fish/mmetank.gfx"
     preview: "/sprites/fish/mmetank.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "Gotta keep your energy up."
+    displayName: Mega Man Energy Tank
 
   - id: 01E6YCP392S32XQCSF8V3SP3KW
     palette: 'BLUE'
     spriteName: mmlife
     uri: "/sprites/fish/mmlife.gfx"
     preview: "/sprites/fish/mmlife.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "An extra life!"
+    displayName: Mega Man Extra Life
 
   - id: 01E6YCNZ0SSZ81YMVN9FRD2R1A
     palette: 'BLUE'
     spriteName: mnc
     uri: "/sprites/fish/mnc.gfx"
     preview: "/sprites/fish/mnc.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "Cheesy, gooey goodness."
+    displayName: 'Mac & Cheese'
 
   - id: 01E6YCNTXX34FJR00QJ6PE5AEE
     spriteName: opal
     uri: "/sprites/fish/opal.gfx"
     preview: "/sprites/fish/opal.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     palette: 'RED'
     description: "Collect them for a new boomerang."
 
@@ -641,7 +662,7 @@ sprites:
     spriteName: orb
     uri: "/sprites/fish/orb.gfx"
     preview: "/sprites/fish/orb.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "A collectable from Ty the Tasmanian Tiger"
 
   - id: 01E6YCPD4GVECBR3PS55SF1B9Z
@@ -649,7 +670,7 @@ sprites:
     spriteName: pepsi
     uri: "/sprites/fish/pepsi.gfx"
     preview: "/sprites/fish/pepsi.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "An ice-cold can of Pepsi."
 
   - id: 01E6YCPHPM7JSJEQ8HBXY2M8G1
@@ -657,23 +678,25 @@ sprites:
     spriteName: pizzaheart
     uri: "/sprites/fish/pizzaheart.gfx"
     preview: "/sprites/fish/pizzaheart.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "You got a Pizza Heart!"
+    displayName: Pizza Heart
 
   - id: 01E6YCPPS2JKAY2ESARCGKC4J0
     palette: 'RED'
     spriteName: rpendant
     uri: "/sprites/fish/rpendant.gfx"
     preview: "/sprites/fish/rpendant.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "The Pendant of Wisdom?"
+    displayName: Red Pendant
 
   - id: 01E6YCPTP3QHB840SBQMZN6XVA
     palette: 'GREEN'
     spriteName: sandwich
     uri: "/sprites/fish/sandwich.gfx"
     preview: "/sprites/fish/sandwich.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "Piled sky high, good luck finishing it."
 
   - id: 01E6YCPYJJTYJ62446T8FJB5DQ
@@ -681,7 +704,7 @@ sprites:
     spriteName: scookie
     uri: "/sprites/fish/scookie.gfx"
     preview: "/sprites/fish/scookie.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "The addictive sandwich cookie. Has a cultfollowing."
 
   - id: 01E6YCQ2EKNXK61E3ZV23GP134
@@ -689,15 +712,16 @@ sprites:
     spriteName: snescart
     uri: "/sprites/fish/snescart.gfx"
     preview: "/sprites/fish/snescart.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "What game is this?"
+    displayName: SNES Cartridge
 
   - id: 01E6YCQ7F1B5FFN139P7QZX444
     palette: 'BLUE'
     spriteName: snickers
     uri: "/sprites/fish/snickers.gfx"
     preview: "/sprites/fish/snickers.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "You're not you when you're hungry."
 
   - id: 01E6YCQ7QRDH4JWKAHVZNV85PQ
@@ -705,7 +729,7 @@ sprites:
     spriteName: spaghetti
     uri: "/sprites/fish/spaghetti.gfx"
     preview: "/sprites/fish/spaghetti.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "With a giant meatball!"
 
   - id: 01E6YCQ7YNARAQH769V9SQC247
@@ -713,6 +737,5 @@ sprites:
     spriteName: sundrop
     uri: "/sprites/fish/sundrop.gfx"
     preview: "/sprites/fish/sundrop.png"
-    author: 'Fish'
+    author: 'Fish_waffle64'
     description: "An ice-cold can of Sun Drop."
-
