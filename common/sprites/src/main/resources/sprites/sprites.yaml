@@ -51,7 +51,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
   - id: 01E6F3YXTJE54A9K0B7KYSNEYF
-    author: unknown
+    author: ajneb174
     spriteName: benana
     uri: "/gfx/benana.bin"
     preview: "/previews/benana.png"
@@ -67,7 +67,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'RED'
   - id: 01E6F3YXTVKF764RFBBQ9VCYMG
-    author: unknown
+    author: Kelpsey
     spriteName: birb
     uri: "/gfx/birb.bin"
     preview: "/previews/birb.png"
@@ -75,7 +75,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
   - id: 01E6F3YXV03Y57H01FHAK2SYHF
-    author: unknown
+    author: KatDevsGames
     spriteName: bob
     uri: "/gfx/bob.bin"
     preview: "/previews/bob.png"
@@ -92,7 +92,7 @@ sprites:
     palette: 'RED'
     displayName: Pegasus Boots
   - id: 01E6F3YXV9TS1PKWYCQ1G5RJAT
-    author: unknown
+    author: Fatmanspanda
     spriteName: broccoli
     uri: "/gfx/broccoli.bin"
     preview: "/previews/broccoli.png"
@@ -108,7 +108,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
   - id: 01E6F3YXVJEE1PRHTZRZ6HCJAS
-    author: unknown
+    author: WillardJBradley
     spriteName: coffee
     uri: "/gfx/coffee.bin"
     preview: "/previews/coffee.png"
@@ -214,7 +214,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'RED'
   - id: 01E6F3YXXBF5H1XSDCQVEYFSYX
-    author: unknown
+    author: Espeon
     spriteName: glaceon
     uri: "/gfx/glaceon.bin"
     preview: "/previews/glaceon.png"
@@ -222,7 +222,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'BLUE'
   - id: 01E6F3YXXF5Y8JTY1J4PJFPYEJ
-    author: unknown
+    author: TheDragonFeeney
     spriteName: honk
     uri: "/gfx/honk.bin"
     preview: "/previews/honk.png"
@@ -323,7 +323,7 @@ sprites:
     palette: 'GREEN'
     displayName: No Bombs
   - id: 01E6F3YXZ4YA4ZTEWY7Y2AA35F
-    author: unknown
+    author: ChelseyxLynn
     spriteName: peach
     uri: "/gfx/peach.bin"
     preview: "/previews/peach.png"
@@ -373,7 +373,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'BLUE'
   - id: 01E6F3YXZYRZF1F6XG8MC3S3D4
-    author: unknown
+    author: Andy
     spriteName: pug
     uri: "/gfx/pug.bin"
     preview: "/previews/pug.png"
@@ -405,8 +405,9 @@ sprites:
     description: Swag Duck!
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: SwagDuck
   - id: 01E6F3YY0GPJBRBN5BVGHJZRT7
-    author: unknown
+    author: Zarby89
     spriteName: scream
     uri: "/gfx/scream.bin"
     preview: "/previews/scream.png"
@@ -455,7 +456,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
   - id: 01E6F3YY1AYXJY7PE2EY6X8992
-    author: unknown
+    author: ChristosOwen
     spriteName: tea
     uri: "/gfx/tea.bin"
     preview: "/previews/tea.png"
@@ -463,7 +464,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'RED'
   - id: 01E6F3YY1EG5E3925J8TVSKFNP
-    author: unknown
+    author: Fatmanspanda
     spriteName: thinking
     uri: "/gfx/thinking.bin"
     preview: "/previews/thinking.png"
@@ -471,7 +472,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
   - id: 01E6F3YY1J94KJ4WB58P4ZK0PA
-    author: unknown
+    author: Fatmanspanda
     spriteName: tile
     uri: "/gfx/tile.bin"
     preview: "/previews/tile.png"
@@ -487,13 +488,14 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
   - id: 01E6F3YY1VNB2QSS6P45P68YGB
-    author: unknown
+    author: Veetorp
     spriteName: veetorp
     uri: "/gfx/veetorp.bin"
     preview: "/previews/veetorp.png"
     description: Hi, do you know Veetorp? You should.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: Duck
   - id: 01E6F3YY20KVDTMCG96TN22J21
     author: unknown
     spriteName: vitreous
