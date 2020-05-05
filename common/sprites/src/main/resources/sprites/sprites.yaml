@@ -29,6 +29,7 @@ sprites:
   - id: 01E6F3YXT6JSRHRYZA01KJGF5S
     author: unknown
     spriteName: B
+    displayName: "[B]"
     uri: "/gfx/B.bin"
     preview: "/previews/B.png"
     description: For when you need to Beplace something.
@@ -263,6 +264,7 @@ sprites:
     description: Here to cause some mischief!
     created: '2020-04-21T21:38:11+02:00'
     palette: 'BLUE'
+    displayName: Koopa Kid
   - id: 01E6F3YXY64ZJ9B6Z067XWR4ZY
     author: unknown
     spriteName: linkface
@@ -271,6 +273,7 @@ sprites:
     description: WANTED! This is the criminal who kidnapped Zelda.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'BLUE'
+    displayName: Wanted Criminal
   - id: 01E6F3YXYB0ZFJZF26XA3DNHCW
     author: unknown
     spriteName: mail
@@ -296,6 +299,7 @@ sprites:
     created: '2020-04-21T21:38:11+02:00'
     description: You got a Moon! It's worth 3 lives!
     palette: 'GREEN'
+    displayName: Power Moon
   - id: 01E6F3YXYRDBVQXQVK47CTK4RD
     author: unknown
     spriteName: navi
@@ -372,6 +376,7 @@ sprites:
     description: Arrghus must be missing this little guy.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'BLUE'
+    displayName: Arrghus Puff
   - id: 01E6F3YXZYRZF1F6XG8MC3S3D4
     author: Andy
     spriteName: pug
@@ -388,6 +393,7 @@ sprites:
     description: Collect to upgrade your version.
     created: '2020-04-21T21:38:11+02:00'
     palette: 'BLUE'
+    displayName: Python Logo
   - id: 01E6F3YY076Y0Q9E6BXG0STTQH
     author: unknown
     spriteName: qblock
@@ -422,6 +428,7 @@ sprites:
     description: Trade these in for something good!
     created: '2020-04-21T21:38:11+02:00'
     palette: 'RED'
+    displayName: Red Shard
   - id: 01E6F3YY0SFEEPYPGZJK8201GC
     author: unknown
     spriteName: shine
@@ -430,6 +437,7 @@ sprites:
     description: Shine get! Wahoo!
     created: '2020-04-21T21:38:11+02:00'
     palette: 'GREEN'
+    displayName: Shine Sprite
   - id: 01E6F3YY0Y4CJSR2H8SWXRVTY7
     author: unknown
     spriteName: skulltula
@@ -520,6 +528,7 @@ sprites:
     description: A red baby Yoshi
     created: '2020-04-21T21:38:11+02:00'
     palette: 'RED'
+    displayName: Baby Yoshi
   - id: 01E6F3YY2DPC99VW8V6GWJJQQZ
     author: unknown
     spriteName: z1link
@@ -741,3 +750,461 @@ sprites:
     preview: "/sprites/fish/sundrop.png"
     author: 'Fish_waffle64'
     description: "An ice-cold can of Sun Drop."
+
+  ## Begin overstock sprites
+  - id: 01E7J4TC40W6EYK73FBKHRTS3S
+    palette: 'GREEN'
+    spriteName: banana
+    uri: "/gfx/banana.gfx"
+    preview: "/previews/banana.png"
+    description: ""
+
+  - id: 01E7J4VA636GTDTP71XZYTAVTP
+    palette: 'BLUE'
+    spriteName: barrel
+    uri: "/gfx/barrel.gfx"
+    preview: "/previews/barrel.png"
+    description: "A simian surprise!"
+
+  - id: 01E7J4VPZMNABR881HSCWX0CSH
+    palette: 'GREEN'
+    spriteName: bleh
+    uri: "/gfx/bleh.gfx"
+    preview: "/previews/bleh.png"
+    author: Andy
+    description: "Bleh!"
+    displayName: BLEH
+
+  - id: 01E7J4W3JHD2F3WC6CEC6VKC1G
+    palette: 'BLUE'
+    spriteName: bonkers
+    uri: "/gfx/bonkers.gfx"
+    preview: "/previews/bonkers.png"
+    description: ""
+
+  - id: 01E7J4WCJ40KH5293RV7DPCDER
+    palette: 'BLUE'
+    spriteName: bra
+    uri: "/gfx/bra.gfx"
+    preview: "/previews/bra.png"
+    description: "A Scale for a Bra!"
+    displayName: Pink Bra
+
+  - id: 01E7J4WMA0Y6RT15TMS3ESSFT7
+    palette: 'RED'
+    spriteName: candy
+    uri: "/gfx/candy.gfx"
+    preview: "/previews/candy.png"
+    description: ""
+
+  - id: 01E7J4WV5DPC6QTBCM58HEHFHR
+    palette: 'RED'
+    spriteName: cherryblossom
+    uri: "/gfx/cherryblossom.gfx"
+    preview: "/previews/cherryblossom.png"
+    author: SakuraTsubasa
+    description: "A pink flower!"
+    displayName: Cherry Blossom
+
+  - id: 01E7J4X7S15SK29FW8N9MVW0YJ
+    palette: 'GREEN'
+    spriteName: circlekey
+    uri: "/gfx/circlekey.gfx"
+    preview: "/previews/circlekey.png"
+    description: ""
+    displayName: Circle Key
+
+  - id: 01E7J4XEH0S7NSHDVDMPK46JMP
+    palette: 'GREEN'
+    spriteName: cupcake
+    uri: "/gfx/cupcake.gfx"
+    preview: "/previews/cupcake.png"
+    description: "A sweet confection!"
+
+  - id: 01E7J4XQ2FJHXWTQG0CA5EN1KJ
+    palette: 'RED'
+    spriteName: dicedicedice
+    uri: "/gfx/dicedicedice.gfx"
+    preview: "/previews/dicedicedice.png"
+    description: "Roll for damage!"
+    displayName: Dicedice Dice
+
+  - id: 01E7J4Y27F5EXVGTBDZ1N01SCT
+    palette: 'BLUE'
+    spriteName: dorito
+    uri: "/gfx/dorito.gfx"
+    preview: "/previews/dorito.png"
+    description: "An edible Triforce Piece!"
+
+  - id: 01E7J4YA9Y0KY9AN75CPHM9R30
+    palette: 'GREEN'
+    spriteName: dragonball
+    uri: "/gfx/dragonball.gfx"
+    preview: "/previews/dragonball.png"
+    description: "A round ball with some stars on it!"
+    displayName: Dragon Ball
+
+  - id: 01E7J4YHPX2P9DMNM6T91FREMM
+    palette: 'GREEN'
+    spriteName: emerald
+    uri: "/gfx/emerald.gfx"
+    preview: "/previews/emerald.png"
+    description: "A green, rounded Triforce Piece!"
+    displayName: Chaos Emerald
+
+  - id: 01E7J4YTEJMG1QKS3K80067P07
+    palette: 'BLUE'
+    spriteName: fish
+    uri: "/gfx/fish.gfx"
+    preview: "/previews/fish.png"
+    description: "A floodgate friend!"
+
+  - id: 01E7J4Z4W933M6XCJZKVBQNMYX
+    palette: 'GREEN'
+    spriteName: frogsuit
+    uri: "/gfx/frogsuit.gfx"
+    preview: "/previews/frogsuit.png"
+    description: "A frog suit resembling that from Super Mario Bros. 3!"
+    displayName: Frog Suit
+
+  - id: 01E7J4ZBDHTDTFQRWSBZAJHAX9
+    palette: 'BLUE'
+    spriteName: ghost
+    uri: "/gfx/ghost.gfx"
+    preview: "/previews/ghost.png"
+    description: ""
+
+  - id: 01E7J4ZJM6ATR3M6XSM9Y7YXVJ
+    palette: 'RED'
+    spriteName: bender
+    uri: "/gfx/bender.gfx"
+    preview: "/previews/bender.png"
+    description: ""
+    displayName: Graffiti
+
+  - id: 01E7J4ZX0GZZ3C0VEWYP66G98J
+    palette: 'RED'
+    spriteName: jpg
+    uri: "/gfx/jpg.gfx"
+    preview: "/previews/jpg.png"
+    description: ""
+    displayName: Broken Image
+
+  - id: 01E7J50460P76HCEDD718CP1J9
+    palette: 'GREEN'
+    spriteName: leaf
+    uri: "/gfx/leaf.gfx"
+    preview: "/previews/leaf.png"
+    description: "Richard wants these Golden Leaves"
+    displayName: Golden Leaf
+
+  - id: 01E7J5175RJE8HJK6RW5RTQM53
+    palette: 'RED'
+    spriteName: ham
+    uri: "/gfx/ham.gfx"
+    preview: "/previews/ham.png"
+    description: "Ham on a hambone!"
+
+  - id: 01E7J51FTHXBSGFH9P6XBBDE2X
+    palette: 'GREEN'
+    spriteName: kirbymap
+    uri: "/gfx/kirbymap.gfx"
+    preview: "/previews/kirbymap.png"
+    description: ""
+    displayName: Map (Kirby)
+
+  - id: 01E7J51P0PC9C19VEGMSZXGDQE
+    palette: 'RED'
+    spriteName: kirbymusic
+    uri: "/gfx/kirbymusic.gfx"
+    preview: "/previews/kirbymusic.png"
+    description: ""
+    displayName: Music Sheet (Kirby)
+
+  - id: 01E7J51WMKHXDFVZFANXX2J787
+    palette: 'RED'
+    spriteName: klonoaheart
+    uri: "/gfx/klonoaheart.gfx"
+    preview: "/previews/klonoaheart.png"
+    description: "Resembling a heart from Klonoa!"
+    displayName: Klonoa Heart
+
+  - id: 01E7J523KKNA6CYJET8XSXQGHJ
+    palette: 'GREEN'
+    spriteName: klonoastar
+    uri: "/gfx/klonoastar.gfx"
+    preview: "/previews/klonoastar.png"
+    description: "Resembling a star from Klonoa!"
+    displayName: Klonoa Star
+
+  - id: 01E7J52A398B8JSVQ3PM0VY4K0
+    palette: 'BLUE'
+    spriteName: largedreamstone
+    uri: "/gfx/largedreamstone.gfx"
+    preview: "/previews/largedreamstone.png"
+    description: ""
+    displayName: Large Dreamstone
+
+  - id: 01E7J52HPCWE9PBKFVSRFPSAJ5
+    palette: 'GREEN'
+    spriteName: linkdoll
+    uri: "/gfx/linkdoll.gfx"
+    preview: "/previews/linkdoll.png"
+    description: "Slightly-less classic!"
+    displayName: Z2 Link Doll
+
+  - id: 01E7J52TZVEYFWZX22VKJJNCB4
+    palette: 'GREEN'
+    spriteName: lobster
+    uri: "/gfx/lobster.gfx"
+    preview: "/previews/lobster.png"
+    description: ""
+
+  - id: 01E7J535SPNG9XRA64MXM0WXHX
+    palette: 'BLUE'
+    spriteName: log
+    uri: "/gfx/log.gfx"
+    preview: "/previews/log.png"
+    description: ""
+
+  - id: 01E7J53CS34MW8GDHFNDQ3HBDF
+    palette: 'BLUE'
+    spriteName: marill
+    uri: "/gfx/marill.gfx"
+    preview: "/previews/marill.png"
+    description: "A cute Marill Doll!"
+    displayName: Marill Doll
+
+  - id: 01E7J53WHKGJQ6525XETRKAMF6
+    palette: 'BLUE'
+    spriteName: marimba
+    uri: "/gfx/marimba.gfx"
+    preview: "/previews/marimba.png"
+    description: "An instrument to wake the Wind Fish!"
+    displayName: Wind Marimba
+
+  - id: 01E7J545S48QYAFM5AMHTQ2PF2
+    palette: 'BLUE'
+    spriteName: masterhand
+    uri: "/gfx/masterhand.gfx"
+    preview: "/previews/masterhand.png"
+    description: ""
+    displayName: Master Hand
+
+  - id: 01E7J54E18BWEB51T76D2KMY8Z
+    palette: 'BLUE'
+    spriteName: milk
+    uri: "/gfx/milk.gfx"
+    preview: "/previews/milk.png"
+    description: ""
+
+  - id: 01E7J54NP96SHP6KSX7N7XPQEC
+    palette: 'RED'
+    spriteName: missiletank
+    uri: "/gfx/missiletank.gfx"
+    preview: "/previews/missiletank.png"
+    description: "A futuristic flying bomb!"
+    displayName: Missile Tank
+
+  - id: 01E7J54YR5TN4TDSG06HNMFJT2
+    palette: 'RED'
+    spriteName: necklace
+    uri: "/gfx/necklace.gfx"
+    preview: "/previews/necklace.png"
+    description: "A Scale for a Necklace!"
+    displayName: Mermaid's Necklace
+
+  - id: 01E7J554RMZDQD08ZVKD6B5SFV
+    palette: 'RED'
+    spriteName: ohmy
+    uri: "/gfx/ohmy.gfx"
+    preview: "/previews/ohmy.png"
+    description: ""
+    displayName: "!"
+
+  - id: 01E7J55BS4PNG1W5932PH5KERE
+    palette: 'RED'
+    spriteName: ore
+    uri: "/gfx/ore.gfx"
+    preview: "/previews/ore.png"
+    description: ""
+    displayName: Ore Chunk
+
+  - id: 01E7J566J7GK40718B6Z29MVYA
+    palette: 'BLUE'
+    spriteName: painting
+    uri: "/gfx/painting.gfx"
+    preview: "/previews/painting.png"
+    description: ""
+    displayName: Pretty Painting
+
+  - id: 01E7J56HJ8JMM88X177S5V70E6
+    palette: 'RED'
+    spriteName: parasol
+    uri: "/gfx/parasol.gfx"
+    preview: "/previews/parasol.png"
+    description: ""
+
+  - id: 01E7J5716KGNGKE9CVWF0WKMND
+    palette: 'RED'
+    spriteName: phanphan
+    uri: "/gfx/phanphan.gfx"
+    preview: "/previews/phanphan.png"
+    description: ""
+    displayName: Phan Phan
+
+  - id: 01E7J578G6J0YHP9RATWG1Q1ZC
+    palette: 'BLUE'
+    spriteName: planet
+    uri: "/gfx/planet.gfx"
+    preview: "/previews/planet.png"
+    description: ""
+    displayName: Planet Model
+
+  - id: 01E7J57E8NG7PH5W66VCT54GN6
+    palette: 'GREEN'
+    spriteName: pikachu
+    uri: "/gfx/pikachu.gfx"
+    preview: "/previews/pikachu.png"
+    description: "Pika pika!"
+
+  - id: 01E7J57Z7947B6XVM956ACF385
+    palette: 'RED'
+    spriteName: pokeicon
+    uri: "/gfx/pokeicon.gfx"
+    preview: "/previews/pokeicon.png"
+    description: "A generic Pokémon species icon!"
+    displayName: Pokémon Icon
+
+  - id: 01E7J587NSD7BBV1K5SQWA3NRH
+    palette: 'BLUE'
+    spriteName: pot
+    uri: "/gfx/pot.gfx"
+    preview: "/previews/pot.png"
+    description: "Not gonna find rupees in this one!"
+
+  - id: 01E7J58DCMVBEG6NXY20EDMBA5
+    palette: 'RED'
+    spriteName: powblock
+    uri: "/gfx/powblock.gfx"
+    preview: "/previews/powblock.png"
+    description: "Old-school explosions!"
+    displayName: POW Block
+
+  - id: 01E7J58MG7WPR9DJHCG9T7MJYY
+    palette: 'GREEN'
+    spriteName: present
+    uri: "/gfx/present.gfx"
+    preview: "/previews/present.png"
+    description: "A giftbox!"
+    displayName: Festive Present
+
+  - id: 01E7J591RFG6QNYWC46RBKKSV8
+    palette: 'GREEN'
+    spriteName: rabite
+    uri: "/gfx/rabite.gfx"
+    preview: "/previews/rabite.png"
+    description: ""
+
+  - id: 01E7J597SPVS28VC2BGRYA3QZ8
+    palette: 'RED'
+    spriteName: reservetank
+    uri: "/gfx/reservetank.gfx"
+    preview: "/previews/reservetank.png"
+    description: "A futuristic stand-by heart container!"
+    displayName: Reserve Tank
+
+  - id: 01E7J59E1W3EQTV7T7B7F7E3JP
+    palette: 'GREEN'
+    spriteName: ring
+    uri: "/gfx/ring.gfx"
+    preview: "/previews/ring.png"
+    description: "A golden round rupee with a hole in the middle!"
+    displayName: Golden Ring
+
+  - id: 01E7J59M38TVKTRF1YFH33TENC
+    palette: 'GREEN'
+    spriteName: screwattack
+    uri: "/gfx/screwattack.gfx"
+    preview: "/previews/screwattack.png"
+    description: "A futuristic Starman!"
+    displayName: Screw Attack
+
+  - id: 01E7J59VTQV4BN1CX9WNF8YH1E
+    palette: 'GREEN'
+    spriteName: smalldreamstone
+    uri: "/gfx/smalldreamstone.gfx"
+    preview: "/previews/smalldreamstone.png"
+    description: ""
+    displayName: Small Dreamstone
+
+  - id: 01E7J5A2XS4F3GZG5S4FV2CEMR
+    palette: 'BLUE'
+    spriteName: shell
+    uri: "/gfx/shell.gfx"
+    preview: "/previews/shell.png"
+    description: "Bring these to the Seashell Mansion for some prizes!"
+    displayName: Secret Shell
+
+  - id: 01E7J5AE2S4TXVCSQR2AQ2951H
+    palette: 'RED'
+    spriteName: snescontroller
+    uri: "/gfx/snescontroller.gfx"
+    preview: "/previews/snescontroller.png"
+    description: "A controller for your Super Nintendo!"
+    displayName: SNES Controller
+
+  - id: 01E7J5APCBHVKBZRBPKAM0P2F4
+    palette: 'GREEN'
+    spriteName: squareforce
+    uri: "/gfx/squareforce.gfx"
+    preview: "/previews/squareforce.png"
+    description: "This Triforce Piece has four sides!"
+    displayName: Squareforce Piece
+
+  - id: 01E7J5AXE6MTVHPJ2KRPAH6BN8
+    palette: 'GREEN'
+    spriteName: steamedham
+    uri: "/gfx/steamedham.gfx"
+    preview: "/previews/steamedham.png"
+    author: JRJathome
+    description: "Steamed Ham on a bun!"
+    displayName: Steamed Ham
+
+  - id: 01E7J5B4XR3Q524NHTNS7PDWZP
+    palette: 'RED'
+    spriteName: timecode
+    uri: "/gfx/timecode.gfx"
+    preview: "/previews/timecode.png"
+    description: ""
+    displayName: Time Code
+
+  - id: 01E7J5BB8BFZ0YKEQV0MM3VTM4
+    palette: 'RED'
+    spriteName: tophat
+    uri: "/gfx/tophat.gfx"
+    preview: "/previews/tophat.png"
+    description: ""
+    displayName: Top Hat
+
+  - id: 01E7J5BK2S4VXC9VZPV0AWN7AC
+    palette: 'RED'
+    spriteName: trashcan
+    uri: "/gfx/trashcan.gfx"
+    preview: "/previews/trashcan.png"
+    description: ""
+    displayName: Trash Can
+
+  - id: 01E7J5BT04ED8X3FWZAHHTKS4C
+    palette: 'BLUE'
+    spriteName: twister
+    uri: "/gfx/twister.gfx"
+    preview: "/previews/twister.png"
+    description: ""
+
+  - id: 01E7J5C1AAA85EJEM3AB3T977F
+    palette: 'RED'
+    spriteName: wheelie
+    uri: "/gfx/wheelie.gfx"
+    preview: "/previews/wheelie.png"
+    description: ""
