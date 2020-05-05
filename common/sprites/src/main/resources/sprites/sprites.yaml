@@ -821,6 +821,14 @@ sprites:
     preview: "/previews/cupcake.png"
     description: "A sweet confection!"
 
+  - id: 01E7J4XQ2FJHXWTQG0CA5EN1KJ
+    palette: 'RED'
+    spriteName: diedicedice
+    uri: "/gfx/diedicedice.gfx"
+    preview: "/previews/diedicedice.png"
+    description: "Roll for damage!"
+    displayName: Diedice Dice
+
   - id: 01E7J4Y27F5EXVGTBDZ1N01SCT
     palette: 'BLUE'
     spriteName: dorito
