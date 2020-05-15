@@ -37,6 +37,12 @@
       <version>${project.version}</version>
     </dependency>
 
+    <!-- needed to decompress the spritemap, insert the tiles and recompress. -->
+    <dependency>
+      <groupId>io.github.alttpj.library</groupId>
+      <artifactId>alttpj-library</artifactId>
+    </dependency>
+
     <dependency>
       <artifactId>junit-jupiter-engine</artifactId>
       <groupId>org.junit.jupiter</groupId>

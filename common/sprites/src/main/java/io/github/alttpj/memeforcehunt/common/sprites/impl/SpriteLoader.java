@@ -63,14 +63,25 @@ public class SpriteLoader {
     @SuppressWarnings("unchecked") final Map<String, String> spriteMap = (Map<String, String>) sprite;
 
     final String spriteName = Objects.requireNonNull(spriteMap.get("spriteName"), "field 'spriteName' may not be missing.").trim();
-    final String description = Optional.ofNullable(spriteMap.get("description")).orElse(spriteName);
+
+    final Optional<String> displayName = Optional.ofNullable(spriteMap.get("displayName"))
+        .filter(yamlDisplayName -> !yamlDisplayName.isBlank());
+
+    final String description = Optional.ofNullable(spriteMap.get("description"))
+        .filter(yamlDesc -> !yamlDesc.isBlank())
+        .or(() -> displayName)
+        .orElse(spriteName);
+
+    final String author = Optional.ofNullable(spriteMap.get("author"))
+        .filter(yamlAuthor -> !yamlAuthor.isBlank())
+        .orElse("unknown");
 
     return new ShippedSpritemapWithSkin(
         spriteMap.get("id"),
-        spriteName,
+        displayName.orElse(spriteName),
         spriteMap.get("displayName"),
         description,
-        spriteMap.get("author"),
+        author,
         spriteMap.get("uri"),
         spriteMap.get("preview"),
         ItemPalette.valueOf(spriteMap.get("palette")));

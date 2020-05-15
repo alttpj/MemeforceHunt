@@ -16,8 +16,15 @@
 
 package io.github.alttpj.memeforcehunt.lib;
 
+import io.github.alttpj.memeforcehunt.common.value.ItemSprite;
+import io.github.alttpj.memeforcehunt.common.value.ItemSpriteFactory;
 import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
 
+import io.github.alttpj.library.compress.SnesCompressor;
+import io.github.alttpj.library.compress.SnesDecompressor;
+import io.github.alttpj.library.image.Tile;
+
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,22 +63,88 @@ public class AlttpRomPatcher {
     }
   }
 
+  /**
+   * Extracts teh four tiles of the new triforce sprite from the old format ({@link SpritemapWithSkin}) and
+   * writes them into the spritemap from the ROM.
+   *
+   * @param romStream         the romStream to write bytes into.
+   * @param spritemapWithSkin the old format, only the four item sprite tiles will be read from this.
+   * @throws IOException error reading tiles or reading rom..
+   */
   protected void writeSkin(final byte[] romStream, final SpritemapWithSkin spritemapWithSkin) throws IOException {
-    final byte[] data = spritemapWithSkin.getData();
+    // extract only the 4 triforce tiles
+    final Tile[] tiles = TileFactory.fromSpritemapWithSkin(spritemapWithSkin);
+    // convert to new format
+    final ItemSprite itemSprite = ItemSpriteFactory.fromSpritemapWithSkin(spritemapWithSkin, tiles);
 
-    if (data.length > MAX_SPRITEMAP_SIZE) {
+    // defer to new method call.
+    writeItemSprite(romStream, itemSprite);
+  }
+
+  /**
+   * Writes an item sprite to the rom, but in contrast to {@link #writeSkin(byte[], SpritemapWithSkin)}, it will
+   * first read out the existing item palette at offset {@link #getOffset()}, uncompress it, insert the uncompressed tiles,
+   * recompress it, and then write it back.
+   *
+   * <p>This way, the other sprites in the spritemap are preserved, e.g. silver arrows, swords and bombs.</p>
+   *
+   * @param romStream  the romStream to read the item palette from and write to.
+   * @param itemSprite the item sprite to write.
+   * @throws IOException problem reading or writing the rom Stream.
+   */
+  protected void writeItemSprite(final byte[] romStream, final ItemSprite itemSprite) throws IOException {
+    final byte[] decompressedSpritemapFromRom = extractDecompressedSpritemapFromRom(romStream);
+
+    doWriteItemSpriteIntoDecompressedSpritemap(itemSprite, decompressedSpritemapFromRom);
+
+    // compress
+    final byte[] compressedNewSpritemap = compressSpritemap(decompressedSpritemapFromRom);
+
+    doWriteCompressedSpritemapIntoRom(romStream, compressedNewSpritemap);
+    romStream[getPaletteLocationChest()] = itemSprite.getPalette().getPaletteIdChest();
+    romStream[getPaletteLocationOverworld()] = itemSprite.getPalette().getPaletteIdOverworld();
+  }
+
+  private void doWriteCompressedSpritemapIntoRom(final byte[] romStream, final byte[] compressedNewSpritemap) throws IOException {
+    if (compressedNewSpritemap.length > MAX_SPRITEMAP_SIZE) {
       throw new IOException(
-          "Skin too large! Max is [" + MAX_SPRITEMAP_SIZE + "], but supplied skin contains [" + data.length + "] bytes.");
+          "Skin too large! "
+              + "Max is [" + MAX_SPRITEMAP_SIZE + "], "
+              + "but supplied skin contains [" + compressedNewSpritemap.length + "] bytes.");
     }
 
     final int pos = getOffset();
-    // clear up space (safety)
+    // write back
     System.arraycopy(new byte[MAX_SPRITEMAP_SIZE], 0, romStream, pos, MAX_SPRITEMAP_SIZE);
     // write graphics
-    System.arraycopy(data, 0, romStream, pos, data.length);
+    System.arraycopy(compressedNewSpritemap, 0, romStream, pos, compressedNewSpritemap.length);
+  }
 
-    romStream[getPaletteLocationChest()] = spritemapWithSkin.getItemPalette();
-    romStream[getPaletteLocationOverworld()] = spritemapWithSkin.getPaletteOW();
+  private void doWriteItemSpriteIntoDecompressedSpritemap(final ItemSprite itemSprite, final byte[] decompressedSpritemapFromRom) {
+    final Tile[] tiles = itemSprite.getTiles();
+    final int[] tileOffsets = itemSprite.getTileOffsets();
+
+    for (int tileIndex = 0; tileIndex < tiles.length; tileIndex++) {
+      final byte[] tileToWrite = tiles[tileIndex].getBytes();
+      final int tileOffset = tileOffsets[tileIndex];
+      System.arraycopy(tileToWrite, 0, decompressedSpritemapFromRom, tileOffset, tileToWrite.length);
+    }
+  }
+
+  private byte[] compressSpritemap(final byte[] decompressedSpritemapFromRom) throws IOException {
+    try (final SnesCompressor snesCompressor = new SnesCompressor(new ByteArrayInputStream(decompressedSpritemapFromRom))) {
+      return snesCompressor.getCompressed().toByteArray();
+    }
+  }
+
+  private byte[] extractDecompressedSpritemapFromRom(final byte[] romStream) throws IOException {
+    final int pos = getOffset();
+
+    try (final ByteArrayInputStream romInputStream = new ByteArrayInputStream(romStream, pos, MAX_SPRITEMAP_SIZE)) {
+      final SnesDecompressor snesDecompressor = new SnesDecompressor(romInputStream);
+
+      return snesDecompressor.getDecompressed();
+    }
   }
 
   private byte[] readRom(final String romTarget) throws IOException {
