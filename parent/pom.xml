@@ -107,6 +107,12 @@
       </dependency>
 
       <dependency>
+        <groupId>io.github.alttpj.library</groupId>
+        <artifactId>alttpj-library</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.yaml</groupId>
         <artifactId>snakeyaml</artifactId>
         <version>${dependency.snakeyaml.version}</version>
@@ -130,6 +136,13 @@
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-library</artifactId>
         <version>2.2</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>3.3.3</version>
         <scope>test</scope>
       </dependency>
 
@@ -505,6 +518,19 @@
     <url>https://github.com/alttpj/MemeforceHunt/issues</url>
     <system>GitHub</system>
   </issueManagement>
+
+  <repositories>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
   <distributionManagement>
     <repository>

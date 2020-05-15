@@ -20,9 +20,9 @@ public enum ItemPalette {
   /**
    * Gree palette id.
    */
-  GREEN((byte) 0x04, (byte) 0x08),
-  BLUE((byte) 0x02, (byte) 0x04),
-  RED((byte) 0x01, (byte) 0x02);
+  GREEN((byte) 0x04, (byte) 0x08, 3),
+  BLUE((byte) 0x02, (byte) 0x04, 3),
+  RED((byte) 0x01, (byte) 0x02, 3);
 
   /**
    * If item is in chest, this palette ID is used.
@@ -34,9 +34,12 @@ public enum ItemPalette {
    */
   private final byte paletteIdOverworld;
 
-  ItemPalette(final byte paletteIdChest, final byte paletteIdOverworld) {
+  private final int bpp;
+
+  ItemPalette(final byte paletteIdChest, final byte paletteIdOverworld, final int bpp) {
     this.paletteIdChest = paletteIdChest;
     this.paletteIdOverworld = paletteIdOverworld;
+    this.bpp = bpp;
   }
 
   public byte getPaletteIdChest() {
@@ -45,5 +48,10 @@ public enum ItemPalette {
 
   public byte getPaletteIdOverworld() {
     return this.paletteIdOverworld;
+  }
+
+
+  public int getBitsPerPixel() {
+    return 3;
   }
 }
