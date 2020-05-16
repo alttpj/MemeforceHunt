@@ -1,0 +1,101 @@
+<!--
+  ~ Copyright 2020-2020 the ALttPJ Team @ https://github.com/alttpj
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~          http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<?import io.github.alttpj.memeforcehunt.app.gui.editor.ColorSelector?>
+<?import io.github.alttpj.memeforcehunt.app.gui.editor.PaletteSelector?>
+<?import io.github.alttpj.memeforcehunt.app.gui.editor.SpriteGridCanvas?>
+<?import io.github.alttpj.memeforcehunt.app.gui.editor.SpritePreview?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import java.net.URL?>
+<fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml" fx:id="rollYourOwnSpriteTabHbox">
+
+  <stylesheets>
+    <URL value="@cell.css"/>
+  </stylesheets>
+
+  <SpriteGridCanvas prefWidth="${rollYourOwnSpriteTabHbox.width*0.80}"
+                    minWidth="64"
+                    minHeight="64"
+                    fx:id="spriteGridCanvas">
+  </SpriteGridCanvas>
+
+  <VBox prefWidth="${rollYourOwnSpriteTabHbox.width*0.20}" minWidth="180" alignment="TOP_RIGHT">
+    <VBox alignment="TOP_CENTER" spacing="10">
+
+      <!-- previews -->
+      <HBox alignment="TOP_CENTER">
+        <padding>
+          <Insets top="5" right="5" bottom="5" left="5"/>
+        </padding>
+        <SpritePreview editable="false" fx:id="previewItem" width="64" height="64"/>
+        <Separator orientation="VERTICAL"/>
+        <Rectangle fill="aqua" fx:id="previewChest" width="64"/>
+      </HBox>
+
+      <!-- colour selector -->
+      <ColorSelector fx:id="colorSelector" minHeight="32" minWidth="64" HBox.hgrow="ALWAYS" VBox.vgrow="SOMETIMES"
+                     alignment="CENTER"/>
+
+      <!-- palette selector -->
+      <PaletteSelector fx:id="paletteSelector" minWidth="64" HBox.hgrow="ALWAYS" VBox.vgrow="SOMETIMES"
+                       alignment="CENTER"/>
+    </VBox>
+
+    <VBox VBox.vgrow="ALWAYS">
+      <!-- spacer -->
+    </VBox>
+
+    <!-- buttons -->
+    <VBox alignment="BOTTOM_RIGHT" spacing="5">
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="5"/>
+      </padding>
+      <Button text="Import" fx:id="importButton" VBox.vgrow="NEVER" maxWidth="Infinity" HBox.hgrow="ALWAYS"
+              onAction="#onImport">
+        <graphic>
+          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../icons/get_app-white-18dp-128.png"/>
+          </ImageView>
+        </graphic>
+      </Button>
+      <Button text="Export" fx:id="exportButton" VBox.vgrow="NEVER" maxWidth="Infinity" HBox.hgrow="ALWAYS"
+              onAction="#onExport">
+        <graphic>
+          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../icons/save-white-18dp-128.png"/>
+          </ImageView>
+        </graphic>
+      </Button>
+      <!-- disabled until a file is loaded. -->
+      <Button text="Patch" fx:id="patchButton" VBox.vgrow="NEVER" maxWidth="Infinity" HBox.hgrow="ALWAYS"
+              disable="true" onAction="#doPatchRom">
+        <graphic>
+          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../icons/save_alt-white-18dp-128.png"/>
+          </ImageView>
+        </graphic>
+      </Button>
+    </VBox>
+  </VBox>
+
+</fx:root>

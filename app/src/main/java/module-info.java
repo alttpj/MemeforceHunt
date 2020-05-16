@@ -12,11 +12,13 @@ module memeforcehunt.app {
   requires memforcehunt.lib;
   requires org.jfxtras.styles.jmetro;
   requires org.yaml.snakeyaml;
+  requires io.github.alttpj.library;
 
   // fxml needs to modify the gui classes.
   opens io.github.alttpj.memeforcehunt.app.gui to javafx.fxml;
   opens io.github.alttpj.memeforcehunt.app.gui.main to javafx.fxml;
   opens io.github.alttpj.memeforcehunt.app.gui.preferences to javafx.fxml;
+  opens io.github.alttpj.memeforcehunt.app.gui.editor to javafx.fxml;
 
   opens io.github.alttpj.memeforcehunt.app.cli.commands to info.picocli;
 
@@ -24,4 +26,5 @@ module memeforcehunt.app {
   exports io.github.alttpj.memeforcehunt.app.cli;
   exports io.github.alttpj.memeforcehunt.app.cli.commands;
   exports io.github.alttpj.memeforcehunt.app.gui;
+  exports io.github.alttpj.memeforcehunt.app.gui.editor;
 }
