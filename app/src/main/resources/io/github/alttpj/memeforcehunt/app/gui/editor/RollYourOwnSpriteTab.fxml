@@ -26,6 +26,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
 <?import java.net.URL?>
 <fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml" fx:id="rollYourOwnSpriteTabHbox">
 
@@ -39,10 +40,11 @@
                     fx:id="spriteGridCanvas">
   </SpriteGridCanvas>
 
-  <VBox prefWidth="${rollYourOwnSpriteTabHbox.width*0.20}" minWidth="180" alignment="TOP_RIGHT">
+  <VBox prefWidth="${rollYourOwnSpriteTabHbox.width*0.20}" minWidth="210" alignment="TOP_RIGHT">
     <VBox alignment="TOP_CENTER" spacing="10">
 
       <!-- previews -->
+      <Text text="Previews"/>
       <HBox alignment="TOP_CENTER">
         <padding>
           <Insets top="5" right="5" bottom="5" left="5"/>
@@ -53,10 +55,12 @@
       </HBox>
 
       <!-- colour selector -->
+      <Text text="Select Color"/>
       <ColorSelector fx:id="colorSelector" minHeight="32" minWidth="64" HBox.hgrow="ALWAYS" VBox.vgrow="SOMETIMES"
                      alignment="CENTER"/>
 
       <!-- palette selector -->
+      <Text text="Palette"/>
       <PaletteSelector fx:id="paletteSelector" minWidth="64" HBox.hgrow="ALWAYS" VBox.vgrow="SOMETIMES"
                        alignment="CENTER"/>
     </VBox>

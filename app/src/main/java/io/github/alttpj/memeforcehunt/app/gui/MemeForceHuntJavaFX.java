@@ -41,7 +41,7 @@ public class MemeForceHuntJavaFX extends Application {
     root.setHostServices(this.getHostServices());
 
     final JMetro jMetro = new JMetro(Style.DARK);
-    final Scene scene = new Scene(root, 720, 544);
+    final Scene scene = new Scene(root, 720, 572);
     jMetro.setScene(scene);
 
     primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/triforce piece.png")));
