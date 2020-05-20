@@ -16,6 +16,8 @@
 
 package io.github.alttpj.memeforcehunt.app.gui.main;
 
+import io.github.alttpj.memeforcehunt.app.gui.editor.RollYourOwnSpriteTab;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +31,9 @@ public class MainPane extends HBox implements Initializable {
 
   @FXML
   private DefaultSpriteTab defaultSpriteTab;
+
+  @FXML
+  private RollYourOwnSpriteTab rollYourOwnSpriteTab;
 
   public MainPane() {
     // fmxl
@@ -50,5 +55,9 @@ public class MainPane extends HBox implements Initializable {
 
   public DefaultSpriteTab getDefaultSpriteTab() {
     return this.defaultSpriteTab;
+  }
+
+  public RollYourOwnSpriteTab getRollYourOwnSpriteTab() {
+    return this.rollYourOwnSpriteTab;
   }
 }

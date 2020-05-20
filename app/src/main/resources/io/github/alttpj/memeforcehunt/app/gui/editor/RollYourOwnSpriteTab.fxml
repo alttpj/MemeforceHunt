@@ -92,7 +92,7 @@
       </Button>
       <!-- disabled until a file is loaded. -->
       <Button text="Patch" fx:id="patchButton" VBox.vgrow="NEVER" maxWidth="Infinity" HBox.hgrow="ALWAYS"
-              disable="true" onAction="#doPatchRom">
+              onAction="#doPatchRom">
         <graphic>
           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../icons/save_alt-white-18dp-128.png"/>

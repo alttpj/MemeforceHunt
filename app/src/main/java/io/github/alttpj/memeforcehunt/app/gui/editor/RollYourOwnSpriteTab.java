@@ -16,18 +16,29 @@
 
 package io.github.alttpj.memeforcehunt.app.gui.editor;
 
+import io.github.alttpj.memeforcehunt.app.gui.actions.StaticGuiActions;
+import io.github.alttpj.memeforcehunt.app.gui.properties.SelectedFileProperty;
+
 import io.github.alttpj.library.image.SnesTilePacker;
+import io.github.alttpj.library.image.Tile;
+import io.github.alttpj.library.image.TiledSprite;
+import io.github.alttpj.library.image.palette.Palette;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
 import java.util.logging.Level;
@@ -55,6 +66,11 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
   @FXML
   private PaletteSelector paletteSelector;
 
+  @FXML
+  private Button patchButton;
+
+  private final SelectedFileProperty selectedFile = new SelectedFileProperty();
+
   public RollYourOwnSpriteTab() {
     // fmxl
     final FXMLLoader fxmlLoader =
@@ -80,6 +96,22 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
     });
 
     bindPreview();
+    bindSelectedFile();
+  }
+
+  private void bindSelectedFile() {
+    this.patchButton.setDisable(true);
+    this.selectedFile.addListener(
+        (ObservableValue<?> observableValue, Object oldVal, Object newVal) -> {
+          final Optional<File> selectedFile = (Optional<File>) newVal;
+
+          if (selectedFile.isEmpty()) {
+            this.patchButton.setDisable(true);
+            return;
+          }
+
+          this.patchButton.setDisable(false);
+        });
   }
 
   private void bindPreview() {
@@ -90,7 +122,44 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
 
   @FXML
   public void doPatchRom(final ActionEvent actionEvent) {
-    // nothing yet.
+    final Palette selectedPalette = this.paletteSelector.getSelectedPalette();
+    final byte[][] tileBytes = packTilesArray();
+    final Tile[] tiles = Arrays.stream(tileBytes)
+        .map(tileByte -> (Tile) () -> tileByte)
+        .toArray(Tile[]::new);
+
+    final TiledSprite tiledSprite = new TiledSprite() {
+      @Override
+      public Tile[] getTiles() {
+        return tiles;
+      }
+
+      @Override
+      public Palette getPalette() {
+        return selectedPalette;
+      }
+    };
+    try {
+      StaticGuiActions.patch(this.selectedFile.get().orElseThrow(), tiledSprite);
+      final Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Rom file patched successfully.");
+      alert.setHeaderText("Custom sprite");
+      alert.setContentText("The custom sprite was successfully patched into your rom.");
+
+      alert.showAndWait();
+
+    } catch (final IOException ioException) {
+      LOG.log(Level.SEVERE, ioException,
+          () -> "Error patching custom sprite into [" + this.selectedFile.get() + "].");
+      final Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Unable to patch rom");
+      alert.setHeaderText("Error patching supplied rom file.");
+      alert.setContentText("Error message was: " + ioException.getMessage() + "\n"
+          + "If the error persists, please start MemeforceHunt from the command line "
+          + "and report the StackTrace on https://github.com/alttpj/MemeforceHunt/issues/.");
+
+      alert.showAndWait();
+    }
   }
 
 
@@ -112,6 +181,31 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
 
   @FXML
   public void onExport(final ActionEvent actionEvent) {
+    packTiles();
+    // TODO: Save (waiting for #23)
+  }
+
+  public Optional<File> getSelectedFile() {
+    return this.selectedFile.get();
+  }
+
+  public SelectedFileProperty selectedFileProperty() {
+    return this.selectedFile;
+  }
+
+  private byte[] packTiles() {
+    final byte[] unpackedTiles = getTileBytes();
+
+    return new SnesTilePacker().pack3bppTiles(unpackedTiles);
+  }
+
+  private byte[][] packTilesArray() {
+    final byte[] unpackedTiles = getTileBytes();
+
+    return new SnesTilePacker().pack3bppTilesIntoTiles(unpackedTiles);
+  }
+
+  private byte[] getTileBytes() {
     final List<ColourableCell> cells = this.spriteGridCanvas.getPaintableGrid().getCells();
     final Byte[] unpackedBytes1616 = cells.stream().map(ColourableCell::getSnesPaletteIndex).toArray(Byte[]::new);
     // the bytes are arranged in a 16x16 grid. Instead, we need 4 8x8 grids.
@@ -141,10 +235,7 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
         unpackedTiles[indexInTile + 192] = unpackedBytes1616[index];
       }
     }
-
-
-    final byte[] packedTiles = new SnesTilePacker().pack3bppTiles(unpackedTiles);
-    // TODO: Save (waiting for #23)
+    return unpackedTiles;
   }
 
   @Override

@@ -85,15 +85,12 @@ public class MainWindow extends BorderPane implements Initializable {
     this.fileMenuCloseRom.setDisable(true);
     final DefaultSpriteTab defaultSpriteTab = this.mainPane.getDefaultSpriteTab();
     defaultSpriteTab.fileProperty().bind(this.selectedFileProperty);
+    this.mainPane.getRollYourOwnSpriteTab().selectedFileProperty().bind(this.selectedFileProperty);
+
 
     this.selectedFileProperty.addListener(
         (ObservableValue<?> observableValue, Object oldVal, Object newVal) -> {
-          if (!(newVal instanceof Optional)) {
-            throw new IllegalStateException("Internal messup");
-          }
-
           final Optional<File> selectedFile = (Optional<File>) newVal;
-
           if (selectedFile.isEmpty()) {
             this.fileMenuCloseRom.setDisable(true);
             this.statusBarLabel.setText("No ROM File Loaded.");

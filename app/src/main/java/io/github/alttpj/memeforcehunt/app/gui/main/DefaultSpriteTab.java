@@ -30,11 +30,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.security.SecureRandom;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,13 +68,7 @@ public class DefaultSpriteTab extends HBox implements Initializable {
   public void initialize(final URL location, final ResourceBundle resources) {
     DefaultSpritemapWithSkins.values().forEach(this.defaultSpritesItemSkinList::addSkin);
     this.selectedFileProperty.addListener((source, old, newValue) -> {
-      if (!(newValue instanceof Optional)) {
-        throw new IllegalStateException("Internal messup");
-      }
-
-      final Optional<File> selectedFile = (Optional<File>) newValue;
-
-      if (selectedFile.isEmpty()) {
+      if (newValue.isEmpty()) {
         getPatchButton().setDisable(true);
         getRandomButton().setDisable(true);
         return;
