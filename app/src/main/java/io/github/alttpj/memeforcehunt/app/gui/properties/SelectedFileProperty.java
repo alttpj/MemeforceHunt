@@ -17,6 +17,7 @@
 package io.github.alttpj.memeforcehunt.app.gui.properties;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 
 import java.io.File;
 import java.util.Optional;
@@ -33,4 +34,10 @@ public final class SelectedFileProperty extends SimpleObjectProperty<Optional<Fi
   public void set(final File file) {
     set(Optional.ofNullable(file));
   }
+
+  @Override
+  public void addListener(final ChangeListener<? super Optional<File>> listener) {
+    super.addListener(listener);
+  }
+
 }

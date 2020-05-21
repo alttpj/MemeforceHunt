@@ -26,7 +26,7 @@ import java.io.IOException;
 
 public final class TileFactory {
 
-  private static final int[] TRIFORCE_TILE_POSITIONS = {44, 45, 60, 61};
+  protected static final int[] TRIFORCE_TILE_POSITIONS = {44, 45, 60, 61};
 
   /**
    * 24 bytes per 8 x 8 x 3bpp tile. It is uncompressed, but still packed.
@@ -64,5 +64,17 @@ public final class TileFactory {
     }
 
     return tiles;
+  }
+
+  public static int[] getDefaultOffsets() {
+    final int[] offsets = new int[TRIFORCE_TILE_POSITIONS.length];
+    final int[] tilePositions = TRIFORCE_TILE_POSITIONS;
+
+    for (int tileNumber = 0; tileNumber < tilePositions.length; tileNumber++) {
+      final int tilePosition = tilePositions[tileNumber];
+      offsets[tileNumber] = tilePosition * BYTES_PER_TILE;
+    }
+
+    return offsets;
   }
 }

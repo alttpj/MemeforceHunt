@@ -16,6 +16,7 @@
 
 package io.github.alttpj.memeforcehunt.lib;
 
+import io.github.alttpj.memeforcehunt.common.value.ItemPalette;
 import io.github.alttpj.memeforcehunt.common.value.ItemSprite;
 import io.github.alttpj.memeforcehunt.common.value.ItemSpriteFactory;
 import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
@@ -23,6 +24,7 @@ import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
 import io.github.alttpj.library.compress.SnesCompressor;
 import io.github.alttpj.library.compress.SnesDecompressor;
 import io.github.alttpj.library.image.Tile;
+import io.github.alttpj.library.image.TiledSprite;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -53,6 +55,14 @@ public class AlttpRomPatcher {
     final byte[] romStream = readRom(romTarget);
 
     writeSkin(romStream, spritemapWithSkin);
+
+    writeRom(romTarget, romStream);
+  }
+
+  public void patchROM(final String romTarget, final TiledSprite itemSprite) throws IOException {
+    final byte[] romStream = readRom(romTarget);
+
+    writeTiledSprite(romStream, itemSprite);
 
     writeRom(romTarget, romStream);
   }
@@ -105,6 +115,31 @@ public class AlttpRomPatcher {
     romStream[getPaletteLocationOverworld()] = itemSprite.getPalette().getPaletteIdOverworld();
   }
 
+  /**
+   * Writes an item sprite to the rom, but in contrast to {@link #writeSkin(byte[], SpritemapWithSkin)}, it will
+   * first read out the existing item palette at offset {@link #getOffset()}, uncompress it, insert the uncompressed tiles,
+   * recompress it, and then write it back.
+   *
+   * <p>This way, the other sprites in the spritemap are preserved, e.g. silver arrows, swords and bombs.</p>
+   *
+   * @param romStream   the romStream to read the item palette from and write to.
+   * @param tiledSprite the item sprite to write.
+   * @throws IOException problem reading or writing the rom Stream.
+   */
+  protected void writeTiledSprite(final byte[] romStream, final TiledSprite tiledSprite) throws IOException {
+    final byte[] decompressedSpritemapFromRom = extractDecompressedSpritemapFromRom(romStream);
+
+    doWriteTiledSpriteIntoDecompressedSpritemap(tiledSprite, decompressedSpritemapFromRom);
+
+    // compress
+    final byte[] compressedNewSpritemap = compressSpritemap(decompressedSpritemapFromRom);
+
+    doWriteCompressedSpritemapIntoRom(romStream, compressedNewSpritemap);
+    final ItemPalette itemPalette = ItemPalette.valueOf(tiledSprite.getPalette().getName());
+    romStream[getPaletteLocationChest()] = itemPalette.getPaletteIdChest();
+    romStream[getPaletteLocationOverworld()] = itemPalette.getPaletteIdOverworld();
+  }
+
   private void doWriteCompressedSpritemapIntoRom(final byte[] romStream, final byte[] compressedNewSpritemap) throws IOException {
     if (compressedNewSpritemap.length > MAX_SPRITEMAP_SIZE) {
       throw new IOException(
@@ -123,6 +158,17 @@ public class AlttpRomPatcher {
   private void doWriteItemSpriteIntoDecompressedSpritemap(final ItemSprite itemSprite, final byte[] decompressedSpritemapFromRom) {
     final Tile[] tiles = itemSprite.getTiles();
     final int[] tileOffsets = itemSprite.getTileOffsets();
+
+    for (int tileIndex = 0; tileIndex < tiles.length; tileIndex++) {
+      final byte[] tileToWrite = tiles[tileIndex].getBytes();
+      final int tileOffset = tileOffsets[tileIndex];
+      System.arraycopy(tileToWrite, 0, decompressedSpritemapFromRom, tileOffset, tileToWrite.length);
+    }
+  }
+
+  private void doWriteTiledSpriteIntoDecompressedSpritemap(final TiledSprite tiledSprite, final byte[] decompressedSpritemapFromRom) {
+    final Tile[] tiles = tiledSprite.getTiles();
+    final int[] tileOffsets = TileFactory.getDefaultOffsets();
 
     for (int tileIndex = 0; tileIndex < tiles.length; tileIndex++) {
       final byte[] tileToWrite = tiles[tileIndex].getBytes();

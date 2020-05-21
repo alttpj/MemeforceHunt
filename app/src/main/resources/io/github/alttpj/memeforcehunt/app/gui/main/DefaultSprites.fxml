@@ -26,29 +26,25 @@
 <fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml">
   <ItemSkinList fx:id="defaultSpritesItemSkinList" HBox.hgrow="ALWAYS"/>
 
-  <VBox HBox.hgrow="SOMETIMES" spacing="5" minWidth="180" alignment="BOTTOM_LEFT">
+  <VBox HBox.hgrow="SOMETIMES" spacing="5" minWidth="210" alignment="BOTTOM_RIGHT">
     <padding>
       <Insets top="5" right="5" bottom="5" left="5"/>
     </padding>
-    <!-- disabled until a file is loaded. -->
-    <Button text="Patch" fx:id="patchButton" VBox.vgrow="NEVER" maxWidth="Infinity" disable="true"
-            onAction="#doPatchRom">
-      <graphic>
-        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@../icons/save_alt-white-18dp-128.png"/>
-          </image>
-        </ImageView>
-      </graphic>
-    </Button>
     <Button text="Random"
             fx:id="randomButton" VBox.vgrow="NEVER" maxWidth="Infinity" disable="true"
             onAction="#doPatchRandom">
       <graphic>
         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@../icons/casino-white-18dp-128.png"/>
-          </image>
+          <Image url="@../icons/casino-white-18dp-128.png"/>
+        </ImageView>
+      </graphic>
+    </Button>
+    <!-- disabled until a file is loaded. -->
+    <Button text="Patch" fx:id="patchButton" VBox.vgrow="NEVER" maxWidth="Infinity" disable="true"
+            onAction="#doPatchRom">
+      <graphic>
+        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+          <Image url="@../icons/save_alt-white-18dp-128.png"/>
         </ImageView>
       </graphic>
     </Button>

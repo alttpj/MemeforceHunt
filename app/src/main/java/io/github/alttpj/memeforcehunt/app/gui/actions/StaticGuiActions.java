@@ -20,6 +20,7 @@ import io.github.alttpj.memeforcehunt.app.config.YamlConfigurator;
 import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
 import io.github.alttpj.memeforcehunt.lib.AlttpRomPatcher;
 
+import io.github.alttpj.library.image.TiledSprite;
 import javafx.application.HostServices;
 import javafx.scene.control.Alert;
 
@@ -47,6 +48,18 @@ public final class StaticGuiActions {
     }
 
     alttpRomPatcher.patchROM(romToPatch.getAbsolutePath(), selectedItem);
+  }
+
+  public static void patch(final File romToPatch, final TiledSprite tiledSprite) throws IOException {
+    final YamlConfigurator yamlConfigurator = new YamlConfigurator();
+    final int customOffset = yamlConfigurator.getCustomOffsetAddress();
+    final AlttpRomPatcher alttpRomPatcher = new AlttpRomPatcher();
+
+    if (yamlConfigurator.useCustomPatchOffset() && customOffset != 0) {
+      alttpRomPatcher.setOffset(customOffset);
+    }
+
+    alttpRomPatcher.patchROM(romToPatch.getAbsolutePath(), tiledSprite);
   }
 
   public static void tryOpenAboutPage(final HostServices hostServices) {
