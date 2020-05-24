@@ -92,6 +92,11 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
    */
   private final StringProperty authorNameProperty = new SimpleStringProperty("");
 
+  /**
+   * Description for the file.
+   */
+  private final StringProperty descriptionProperty = new SimpleStringProperty("");
+
   public RollYourOwnSpriteTab() {
     // fmxl
     final FXMLLoader fxmlLoader =
@@ -204,15 +209,6 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
   public void onExport(final ActionEvent actionEvent) {
     final byte[] bytes = packTiles();
 
-    // show metadata edit GUI.
-
-    // convert
-    final SpriteFileFormat spriteFileFormat = SpriteFileFormatFactory.create(
-        this.displayNameProperty.get(),
-        this.authorNameProperty.get(),
-        bytes,
-        this.paletteSelector.getSelectedPalette()
-    );
 
     // show file dialog
     final FileChooser fileChooser = new FileChooser();
@@ -224,12 +220,33 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
       return;
     }
 
-    if (file.getName().endsWith(".zspr.yaml")) {
+    if (!file.getName().endsWith(".zspr.yaml")) {
       file = new File(file.getAbsolutePath() + ".zspr.yaml");
     }
 
+    if (!queryMetadata()) {
+      return;
+    }
+
+    // convert
+    final SpriteFileFormat spriteFileFormat = SpriteFileFormatFactory.create(
+        this.displayNameProperty.get(),
+        this.authorNameProperty.get(),
+        bytes,
+        this.paletteSelector.getSelectedPalette()
+    );
+
+    doSaveFile(file, spriteFileFormat);
+  }
+
+  private void doSaveFile(final File file, final SpriteFileFormat spriteFileFormat) {
     try {
       SpriteFileFormatFactory.saveFile(spriteFileFormat, file);
+      final Alert success = new Alert(Alert.AlertType.INFORMATION);
+      success.setTitle("Saving successful");
+      success.setHeaderText("Successfully saved your sprite.");
+      success.setContentText("You can now open, modify, share and distribute your file " + file.getAbsolutePath() + ".");
+      success.showAndWait();
     } catch (final IOException ioException) {
       final Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Sprite save error");
@@ -241,6 +258,27 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
       alert.initModality(Modality.WINDOW_MODAL);
       alert.showAndWait();
     }
+  }
+
+  private boolean queryMetadata() {
+    // show metadata edit GUI.
+    final MetadataWindow metadataWindow = new MetadataWindow(this.getScene().getWindow());
+    metadataWindow.displayNameProperty().bindBidirectional(this.displayNameProperty);
+    metadataWindow.authorNameProperty().bindBidirectional(this.authorNameProperty);
+    metadataWindow.descriptionProperty().bindBidirectional(this.descriptionProperty);
+    metadataWindow.showAndWait();
+
+    if (metadataWindow.canceledProperty().get()) {
+      final Alert success = new Alert(Alert.AlertType.INFORMATION);
+      success.setTitle("Saving canceled");
+      success.setHeaderText("You canceled the saving process.");
+      success.setContentText("Your progress is not lost until you close MemeforceHunt.");
+      success.showAndWait();
+
+      return false;
+    }
+
+    return true;
   }
 
   public Optional<File> getSelectedFile() {
