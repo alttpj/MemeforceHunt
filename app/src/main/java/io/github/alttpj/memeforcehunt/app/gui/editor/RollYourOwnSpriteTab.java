@@ -218,10 +218,14 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
     final FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Save Sprite File");
     fileChooser.getExtensionFilters().add(SPRYAML_EXTENSION_FILTER);
-    final File file = fileChooser.showSaveDialog(this.getScene().getWindow());
+    File file = fileChooser.showSaveDialog(this.getScene().getWindow());
 
     if (file == null) {
       return;
+    }
+
+    if (file.getName().endsWith(".zspr.yaml")) {
+      file = new File(file.getAbsolutePath() + ".zspr.yaml");
     }
 
     try {
