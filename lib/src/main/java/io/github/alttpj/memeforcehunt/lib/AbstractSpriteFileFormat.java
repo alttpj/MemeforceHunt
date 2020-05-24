@@ -32,6 +32,8 @@ abstract class AbstractSpriteFileFormat implements SpriteFileFormat, Comparable<
 
   private static final List<String> ALLOWED_PALETTE_NAMES = List.of("GREEN", "RED", "BLUE");
 
+  private static final int SPRITE_DATA_LENGTH = TileFactory.BYTES_PER_TILE * 4;
+
   @Override
   @Value.Default
   public ULID.Value getUlid() {
@@ -66,6 +68,11 @@ abstract class AbstractSpriteFileFormat implements SpriteFileFormat, Comparable<
     if (!ALLOWED_PALETTE_NAMES.contains(upperCasePaletteName)) {
       return ImmutableSpriteFileFormat.copyOf(this)
           .withColorPaletteName("GREEN");
+    }
+
+    if (getData().length != SPRITE_DATA_LENGTH) {
+      throw new IllegalArgumentException("Expected sprite length to be " + SPRITE_DATA_LENGTH
+          + ", but got " + getData().length + " bytes.");
     }
 
     return this;

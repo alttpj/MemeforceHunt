@@ -58,7 +58,7 @@ public final class SpriteFileFormatFactory {
               .map(auth -> (String) auth)
               .orElse("unknonwn"))
           .data((byte[]) loaded.get("data"))
-          .colorPaletteName((String) loaded.getOrDefault("pallette", "GREEN"))
+          .colorPaletteName((String) loaded.getOrDefault("palette", "GREEN"))
           .addAllTags(parseTags(loaded))
           .ulid(ULID.parseULID((String) loaded.get("ulid")))
           .description(Optional.ofNullable((String) loaded.get("description")))
@@ -131,16 +131,23 @@ public final class SpriteFileFormatFactory {
     }
   }
 
-  public static ItemSprite toItemSprite(final SpriteFileFormat spriteFileFormat) {
-    throw new UnsupportedOperationException("not implemented");
-  }
 
   public static SpriteFileFormat create(final String displayName, final String authorName, final byte[] data, final Palette palette) {
+    return create(displayName, authorName, data, palette, null);
+  }
+
+  public static SpriteFileFormat create(final String displayName, final String authorName, final byte[] data, final Palette palette,
+                                        final String description) {
+    if (data.length != TileFactory.BYTES_PER_TILE * 4) {
+      throw new IllegalArgumentException("Expected data length to be " + TileFactory.BYTES_PER_TILE * 4 + " bytes.");
+    }
+
     return ImmutableSpriteFileFormat.builder()
         .displayName(displayName)
         .authorName(authorName)
         .data(data)
         .colorPaletteName(palette.getName())
+        .description(Optional.ofNullable(description).filter(descr -> !descr.isEmpty()).filter(descr -> !descr.isBlank()))
         .build();
   }
 }

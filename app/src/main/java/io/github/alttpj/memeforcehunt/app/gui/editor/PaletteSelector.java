@@ -26,6 +26,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 
+import java.util.Optional;
+
 public class PaletteSelector extends FlowPane {
 
   private final ObjectProperty<Palette> selectedPalette = new SimpleObjectProperty<>();
@@ -52,6 +54,17 @@ public class PaletteSelector extends FlowPane {
 
   public ObjectProperty<Palette> selectedPaletteProperty() {
     return this.selectedPalette;
+  }
+
+  public void select(final Palette palette) {
+    final Optional<PaletteRadioButton> selectableRadioButton = getChildren().stream()
+        .filter(PaletteRadioButton.class::isInstance)
+        .map(PaletteRadioButton.class::cast)
+        .filter(radioPaletteButton -> radioPaletteButton.getPalette().equals(palette))
+        .findAny();
+
+    selectableRadioButton.ifPresent(radioPaletteButton -> radioPaletteButton.selectedProperty().set(true));
+    selectableRadioButton.ifPresent(radioPaletteButton -> this.selectedPalette.set(radioPaletteButton.getPalette()));
   }
 
   static class PaletteRadioButton extends RadioButton {

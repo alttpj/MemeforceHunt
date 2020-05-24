@@ -31,9 +31,7 @@ public interface SpriteFileFormat extends Comparable<SpriteFileFormat> {
    *
    * @return the ULID
    */
-  default ULID.Value getUlid() {
-    return new ULID().nextValue();
-  }
+  ULID.Value getUlid();
 
   /**
    * A display name which will be shown upon loading. Should not be too long and just describe in one or two words

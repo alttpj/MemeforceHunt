@@ -16,17 +16,20 @@
 
 package io.github.alttpj.memeforcehunt.lib;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import io.github.alttpj.library.image.palette.Palette;
 import org.junit.jupiter.api.Test;
 
-public class SpriteFormatFactoryTest {
+public class SpriteFileFormatFactoryTest {
 
   @Test
-  public void testSaveFile() {
+  public void testData() {
     // given
     // -- empty data
     final byte[] data = new byte[0];
@@ -39,5 +42,24 @@ public class SpriteFormatFactoryTest {
     );
 
     assertTrue(illegalArgumentException.getMessage().contains("data"));
+  }
+
+  @Test
+  public void testCreate() {
+    // given
+    // -- data
+    final byte[] data = new byte[TileFactory.BYTES_PER_TILE * 4];
+    final Palette palette = mock(Palette.class);
+    when(palette.getName()).thenReturn("GREEN");
+
+    // when
+    final SpriteFileFormat spriteFileFormat = SpriteFileFormatFactory.create("asd", "me", data, palette);
+
+    // then
+    assertAll(
+        () -> assertTrue(spriteFileFormat.getDescription().isEmpty()),
+        () -> assertEquals("me", spriteFileFormat.getAuthorName()),
+        () -> assertEquals(palette.getName(), spriteFileFormat.getColorPaletteName())
+    );
   }
 }

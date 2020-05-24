@@ -25,6 +25,7 @@ import io.github.alttpj.library.image.SnesTilePacker;
 import io.github.alttpj.library.image.Tile;
 import io.github.alttpj.library.image.TiledSprite;
 import io.github.alttpj.library.image.palette.Palette;
+import io.github.alttpj.library.image.palette.Palette3bpp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -202,7 +203,62 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
 
   @FXML
   public void onImport(final ActionEvent actionEvent) {
-    // TODO: Import (waiting for #23)
+    // show file dialog
+    final FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Save Sprite File");
+    fileChooser.getExtensionFilters().add(SPRYAML_EXTENSION_FILTER);
+    final File file = fileChooser.showOpenDialog(this.getScene().getWindow());
+
+    if (file == null) {
+      return;
+    }
+
+    try {
+      final SpriteFileFormat spriteFileFormat = SpriteFileFormatFactory.fromFile(file);
+
+      final PaintableGrid paintableGrid = this.spriteGridCanvas.getPaintableGrid();
+      switch (spriteFileFormat.getColorPaletteName()) {
+        case "RED":
+          this.paletteSelector.select(Palette3bpp.RED);
+          this.colorSelector.setColors(Palette3bpp.RED);
+          paintableGrid.paletteSwap(Palette3bpp.RED);
+          break;
+        case "BLUE":
+          this.paletteSelector.select(Palette3bpp.BLUE);
+          this.colorSelector.setColors(Palette3bpp.BLUE);
+          paintableGrid.paletteSwap(Palette3bpp.BLUE);
+          break;
+        case "GREEN":
+        default:
+          this.paletteSelector.select(Palette3bpp.GREEN);
+          this.colorSelector.setColors(Palette3bpp.GREEN);
+          paintableGrid.paletteSwap(Palette3bpp.GREEN);
+      }
+
+      final Tile[] tiles = new Tile[] {
+          () -> Arrays.copyOfRange(spriteFileFormat.getData(), 0, 24),
+          () -> Arrays.copyOfRange(spriteFileFormat.getData(), 24, 48),
+          () -> Arrays.copyOfRange(spriteFileFormat.getData(), 48, 72),
+          () -> Arrays.copyOfRange(spriteFileFormat.getData(), 72, 96)
+      };
+
+      new Painter().paint(paintableGrid, tiles, this.colorSelector);
+
+      this.displayNameProperty.set(spriteFileFormat.getDisplayName());
+      this.authorNameProperty.set(spriteFileFormat.getAuthorName());
+      this.descriptionProperty.set(spriteFileFormat.getDescription().orElse(""));
+    } catch (final IOException ioException) {
+      final Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Sprite save error");
+      alert.setHeaderText("An exception occured while saving your sprite to a file.");
+      alert.setContentText("The exception message is: [" + ioException.getMessage() + "].\n"
+          + "If you encounter this problem frequently or think this shouldn't have happened, please "
+          + "look for known bugs at https://github.com/alttpj/MemeforceHunt/issues or restart MemeforceHunt "
+          + "via the command line and check the console output.");
+      alert.initModality(Modality.WINDOW_MODAL);
+      alert.showAndWait();
+    }
+
   }
 
   @FXML
@@ -233,7 +289,8 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
         this.displayNameProperty.get(),
         this.authorNameProperty.get(),
         bytes,
-        this.paletteSelector.getSelectedPalette()
+        this.paletteSelector.getSelectedPalette(),
+        this.descriptionProperty.get()
     );
 
     doSaveFile(file, spriteFileFormat);
