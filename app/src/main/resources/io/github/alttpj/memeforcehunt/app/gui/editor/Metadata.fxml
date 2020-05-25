@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2020-2020 the ALttPJ Team @ https://github.com/alttpj
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~          http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            prefHeight="320"
+            prefWidth="480"
+            styleClass="background">
+  <padding>
+    <Insets bottom="10" top="10" right="10" left="10"/>
+  </padding>
+
+  <top>
+    <Text text="Please enter some additional metadata."/>
+  </top>
+
+  <left>
+
+  </left>
+
+  <center>
+    <GridPane hgap="10" vgap="10">
+      <padding>
+        <Insets bottom="5" top="5" right="10" left="10"/>
+      </padding>
+      <Label text="Short Display Name" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES"/>
+      <TextField fx:id="displayNameTextField" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                 GridPane.hgrow="ALWAYS"
+                 minWidth="256"/>
+
+      <Label text="Author name" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES"/>
+      <TextField fx:id="authorTextField" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                 GridPane.hgrow="ALWAYS"
+                 minWidth="256"/>
+
+      <Label text="Description" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES"/>
+      <TextField fx:id="descriptionTextField" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                 GridPane.hgrow="ALWAYS"
+                 minWidth="256"/>
+
+      <Label text="Entering an author name or description is completly optional. If you do not want to expose any of your authorship,
+feel free to leave the fields blank.
+If you do not enter any description, the sprite name will be repeated.
+The sprite name is mandatory."
+             wrapText="true"
+             GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2"
+      />
+    </GridPane>
+  </center>
+
+  <right>
+
+  </right>
+
+  <bottom>
+    <HBox alignment="BOTTOM_RIGHT" spacing="10">
+      <padding>
+        <Insets bottom="5" top="5" left="20" right="10"/>
+      </padding>
+      <Button fx:id="metadataCancelButton" onAction="#onCancelClick" text="Cancel" cancelButton="true" prefWidth="128"/>
+      <Button fx:id="metadataSaveButton" onAction="#onSaveClick" text="Save" defaultButton="true" prefWidth="128"/>
+    </HBox>
+  </bottom>
+</BorderPane>

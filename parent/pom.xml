@@ -46,6 +46,7 @@
     <argLine>-Xmx1024m</argLine>
     <dependency.javafx.version>14.0.1</dependency.javafx.version>
     <dependency.snakeyaml.version>1.25</dependency.snakeyaml.version>
+    <dependency.immutables.version>2.8.2</dependency.immutables.version>
   </properties>
 
   <!-- dependencies in the management section are not forced upon the child modules. -->
@@ -116,6 +117,13 @@
         <groupId>org.yaml</groupId>
         <artifactId>snakeyaml</artifactId>
         <version>${dependency.snakeyaml.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.immutables</groupId>
+        <artifactId>value</artifactId>
+        <version>${dependency.immutables.version}</version>
+        <scope>provided</scope>
       </dependency>
 
       <!-- test dependencies -->

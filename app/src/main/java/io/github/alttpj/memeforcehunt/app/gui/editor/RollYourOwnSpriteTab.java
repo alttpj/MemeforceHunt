@@ -18,11 +18,16 @@ package io.github.alttpj.memeforcehunt.app.gui.editor;
 
 import io.github.alttpj.memeforcehunt.app.gui.actions.StaticGuiActions;
 import io.github.alttpj.memeforcehunt.app.gui.properties.SelectedFileProperty;
+import io.github.alttpj.memeforcehunt.lib.SpriteFileFormat;
+import io.github.alttpj.memeforcehunt.lib.SpriteFileFormatFactory;
 
 import io.github.alttpj.library.image.SnesTilePacker;
 import io.github.alttpj.library.image.Tile;
 import io.github.alttpj.library.image.TiledSprite;
 import io.github.alttpj.library.image.palette.Palette;
+import io.github.alttpj.library.image.palette.Palette3bpp;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +37,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,7 +53,10 @@ import java.util.logging.Logger;
 
 public class RollYourOwnSpriteTab extends HBox implements Initializable {
 
-  private static final java.util.logging.Logger LOG = Logger.getLogger(RollYourOwnSpriteTab.class.getCanonicalName());
+  private static final Logger LOG = Logger.getLogger(RollYourOwnSpriteTab.class.getCanonicalName());
+
+  private static final FileChooser.ExtensionFilter SPRYAML_EXTENSION_FILTER = new FileChooser.ExtensionFilter(
+      "ZSPR YAML sprite files (*.zspr.yaml)", "*.zspr.yaml");
 
   @FXML
   private SpriteGridCanvas spriteGridCanvas;
@@ -70,6 +80,23 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
   private Button patchButton;
 
   private final SelectedFileProperty selectedFile = new SelectedFileProperty();
+
+  // metadata for saving -- may be shown at a later time.
+
+  /**
+   * Display name for export.
+   */
+  private final StringProperty displayNameProperty = new SimpleStringProperty("");
+
+  /**
+   * Author name for export.
+   */
+  private final StringProperty authorNameProperty = new SimpleStringProperty("");
+
+  /**
+   * Description for the file.
+   */
+  private final StringProperty descriptionProperty = new SimpleStringProperty("");
 
   public RollYourOwnSpriteTab() {
     // fmxl
@@ -176,13 +203,139 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
 
   @FXML
   public void onImport(final ActionEvent actionEvent) {
-    // TODO: Import (waiting for #23)
+    // show file dialog
+    final FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Save Sprite File");
+    fileChooser.getExtensionFilters().add(SPRYAML_EXTENSION_FILTER);
+    final File file = fileChooser.showOpenDialog(this.getScene().getWindow());
+
+    if (file == null) {
+      return;
+    }
+
+    try {
+      final SpriteFileFormat spriteFileFormat = SpriteFileFormatFactory.fromFile(file);
+
+      final PaintableGrid paintableGrid = this.spriteGridCanvas.getPaintableGrid();
+      switch (spriteFileFormat.getColorPaletteName()) {
+        case "RED":
+          this.paletteSelector.select(Palette3bpp.RED);
+          this.colorSelector.setColors(Palette3bpp.RED);
+          paintableGrid.paletteSwap(Palette3bpp.RED);
+          break;
+        case "BLUE":
+          this.paletteSelector.select(Palette3bpp.BLUE);
+          this.colorSelector.setColors(Palette3bpp.BLUE);
+          paintableGrid.paletteSwap(Palette3bpp.BLUE);
+          break;
+        case "GREEN":
+        default:
+          this.paletteSelector.select(Palette3bpp.GREEN);
+          this.colorSelector.setColors(Palette3bpp.GREEN);
+          paintableGrid.paletteSwap(Palette3bpp.GREEN);
+      }
+
+      final Tile[] tiles = new Tile[] {
+          () -> Arrays.copyOfRange(spriteFileFormat.getData(), 0, 24),
+          () -> Arrays.copyOfRange(spriteFileFormat.getData(), 24, 48),
+          () -> Arrays.copyOfRange(spriteFileFormat.getData(), 48, 72),
+          () -> Arrays.copyOfRange(spriteFileFormat.getData(), 72, 96)
+      };
+
+      new Painter().paint(paintableGrid, tiles, this.colorSelector);
+
+      this.displayNameProperty.set(spriteFileFormat.getDisplayName());
+      this.authorNameProperty.set(spriteFileFormat.getAuthorName());
+      this.descriptionProperty.set(spriteFileFormat.getDescription().orElse(""));
+    } catch (final IOException ioException) {
+      final Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Sprite save error");
+      alert.setHeaderText("An exception occured while saving your sprite to a file.");
+      alert.setContentText("The exception message is: [" + ioException.getMessage() + "].\n"
+          + "If you encounter this problem frequently or think this shouldn't have happened, please "
+          + "look for known bugs at https://github.com/alttpj/MemeforceHunt/issues or restart MemeforceHunt "
+          + "via the command line and check the console output.");
+      alert.initModality(Modality.WINDOW_MODAL);
+      alert.showAndWait();
+    }
+
   }
 
   @FXML
   public void onExport(final ActionEvent actionEvent) {
-    packTiles();
-    // TODO: Save (waiting for #23)
+    final byte[] bytes = packTiles();
+
+
+    // show file dialog
+    final FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Save Sprite File");
+    fileChooser.getExtensionFilters().add(SPRYAML_EXTENSION_FILTER);
+    File file = fileChooser.showSaveDialog(this.getScene().getWindow());
+
+    if (file == null) {
+      return;
+    }
+
+    if (!file.getName().endsWith(".zspr.yaml")) {
+      file = new File(file.getAbsolutePath() + ".zspr.yaml");
+    }
+
+    if (!queryMetadata()) {
+      return;
+    }
+
+    // convert
+    final SpriteFileFormat spriteFileFormat = SpriteFileFormatFactory.create(
+        this.displayNameProperty.get(),
+        this.authorNameProperty.get(),
+        bytes,
+        this.paletteSelector.getSelectedPalette(),
+        this.descriptionProperty.get()
+    );
+
+    doSaveFile(file, spriteFileFormat);
+  }
+
+  private void doSaveFile(final File file, final SpriteFileFormat spriteFileFormat) {
+    try {
+      SpriteFileFormatFactory.saveFile(spriteFileFormat, file);
+      final Alert success = new Alert(Alert.AlertType.INFORMATION);
+      success.setTitle("Saving successful");
+      success.setHeaderText("Successfully saved your sprite.");
+      success.setContentText("You can now open, modify, share and distribute your file " + file.getAbsolutePath() + ".");
+      success.showAndWait();
+    } catch (final IOException ioException) {
+      final Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Sprite save error");
+      alert.setHeaderText("An exception occured while saving your sprite to a file.");
+      alert.setContentText("The exception message is: [" + ioException.getMessage() + "].\n"
+          + "If you encounter this problem frequently or think this shouldn't have happened, please "
+          + "look for known bugs at https://github.com/alttpj/MemeforceHunt/issues or restart MemeforceHunt "
+          + "via the command line and check the console output.");
+      alert.initModality(Modality.WINDOW_MODAL);
+      alert.showAndWait();
+    }
+  }
+
+  private boolean queryMetadata() {
+    // show metadata edit GUI.
+    final MetadataWindow metadataWindow = new MetadataWindow(this.getScene().getWindow());
+    metadataWindow.displayNameProperty().bindBidirectional(this.displayNameProperty);
+    metadataWindow.authorNameProperty().bindBidirectional(this.authorNameProperty);
+    metadataWindow.descriptionProperty().bindBidirectional(this.descriptionProperty);
+    metadataWindow.showAndWait();
+
+    if (metadataWindow.canceledProperty().get()) {
+      final Alert success = new Alert(Alert.AlertType.INFORMATION);
+      success.setTitle("Saving canceled");
+      success.setHeaderText("You canceled the saving process.");
+      success.setContentText("Your progress is not lost until you close MemeforceHunt.");
+      success.showAndWait();
+
+      return false;
+    }
+
+    return true;
   }
 
   public Optional<File> getSelectedFile() {
