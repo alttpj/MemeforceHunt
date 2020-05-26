@@ -31,10 +31,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -52,6 +54,7 @@ public final class SpriteFileFormatFactory {
 
     try (final InputStream fis = Files.newInputStream(inputFile.toPath())) {
       final Map<String, Object> loaded = yaml.load(fis);
+
       return ImmutableSpriteFileFormat.builder()
           .displayName((String) loaded.get("displayName"))
           .authorName(Optional.ofNullable(loaded.get("author"))
@@ -98,7 +101,15 @@ public final class SpriteFileFormatFactory {
     throw new UnsupportedOperationException("not implemented");
   }
 
-  public static boolean saveFile(final SpriteFileFormat spriteFileFormat, final File targetFile) throws IOException {
+  public static void saveFile(final SpriteFileFormat spriteFileFormat, final File targetFile) throws IOException {
+    try (final OutputStream os = Files.newOutputStream(targetFile.toPath(),
+        StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+         final OutputStreamWriter osw = new OutputStreamWriter(os, StandardCharsets.UTF_8)) {
+      save(spriteFileFormat, osw);
+    }
+  }
+
+  public static void save(final SpriteFileFormat spriteFileFormat, final Writer writer) throws IOException {
     final DumperOptions dumperOptions = new DumperOptions();
     dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
     dumperOptions.setAllowUnicode(true);
@@ -106,6 +117,13 @@ public final class SpriteFileFormatFactory {
     dumperOptions.setExplicitEnd(false);
     final Yaml yaml = new Yaml(dumperOptions);
 
+    final Map<String, Object> output = toMap(spriteFileFormat);
+
+    final String yamlString = yaml.dumpAs(output, Tag.MAP, DumperOptions.FlowStyle.BLOCK);
+    writer.append(yamlString);
+  }
+
+  private static Map<String, Object> toMap(final SpriteFileFormat spriteFileFormat) {
     final Map<String, Object> output = new LinkedHashMap<>();
     output.put("ulid", spriteFileFormat.getUlid().toString());
     output.put("displayName", spriteFileFormat.getDisplayName());
@@ -121,23 +139,16 @@ public final class SpriteFileFormatFactory {
     }
     output.put("timestamp", spriteFileFormat.getCreationDate().toString());
 
-    try (final OutputStream os = Files.newOutputStream(targetFile.toPath(),
-        StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
-         final OutputStreamWriter osw = new OutputStreamWriter(os, StandardCharsets.UTF_8)) {
-      final String yamlString = yaml.dumpAs(output, Tag.MAP, DumperOptions.FlowStyle.BLOCK);
-      osw.append(yamlString);
-
-      return true;
-    }
+    return output;
   }
 
 
   public static SpriteFileFormat create(final String displayName, final String authorName, final byte[] data, final Palette palette) {
-    return create(displayName, authorName, data, palette, null);
+    return create(displayName, authorName, data, palette, null, emptyList());
   }
 
   public static SpriteFileFormat create(final String displayName, final String authorName, final byte[] data, final Palette palette,
-                                        final String description) {
+                                        final String description, final Collection<String> tags) {
     if (data.length != TileFactory.BYTES_PER_TILE * 4) {
       throw new IllegalArgumentException("Expected data length to be " + TileFactory.BYTES_PER_TILE * 4 + " bytes.");
     }
@@ -148,6 +159,7 @@ public final class SpriteFileFormatFactory {
         .data(data)
         .colorPaletteName(palette.getName())
         .description(Optional.ofNullable(description).filter(descr -> !descr.isEmpty()).filter(descr -> !descr.isBlank()))
+        .addAllTags(tags)
         .build();
   }
 }
