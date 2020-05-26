@@ -144,10 +144,11 @@ public final class SpriteFileFormatFactory {
 
 
   public static SpriteFileFormat create(final String displayName, final String authorName, final byte[] data, final Palette palette) {
-    return create(displayName, authorName, data, palette, null, emptyList());
+    return create(new ULID().nextValue(), displayName, authorName, data, palette, null, emptyList());
   }
 
-  public static SpriteFileFormat create(final String displayName, final String authorName, final byte[] data, final Palette palette,
+  public static SpriteFileFormat create(final ULID.Value ulid,
+                                        final String displayName, final String authorName, final byte[] data, final Palette palette,
                                         final String description, final Collection<String> tags) {
     if (data.length != TileFactory.BYTES_PER_TILE * 4) {
       throw new IllegalArgumentException("Expected data length to be " + TileFactory.BYTES_PER_TILE * 4 + " bytes.");
@@ -160,6 +161,7 @@ public final class SpriteFileFormatFactory {
         .colorPaletteName(palette.getName())
         .description(Optional.ofNullable(description).filter(descr -> !descr.isEmpty()).filter(descr -> !descr.isBlank()))
         .addAllTags(tags)
+        .ulid(ulid)
         .build();
   }
 }

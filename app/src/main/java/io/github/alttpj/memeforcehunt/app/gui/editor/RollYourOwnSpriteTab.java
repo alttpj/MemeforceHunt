@@ -18,6 +18,7 @@ package io.github.alttpj.memeforcehunt.app.gui.editor;
 
 import io.github.alttpj.memeforcehunt.app.gui.actions.StaticGuiActions;
 import io.github.alttpj.memeforcehunt.app.gui.properties.SelectedFileProperty;
+import io.github.alttpj.memeforcehunt.common.value.ULID;
 import io.github.alttpj.memeforcehunt.lib.SpriteFileFormat;
 import io.github.alttpj.memeforcehunt.lib.SpriteFileFormatFactory;
 
@@ -103,6 +104,8 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
   private final StringProperty descriptionProperty = new SimpleStringProperty("");
 
   private final ListProperty<String> tags = new SimpleListProperty<>(FXCollections.observableArrayList(new ArrayList<>()));
+
+  private final StringProperty ulid = new SimpleStringProperty();
 
   public RollYourOwnSpriteTab() {
     // fmxl
@@ -269,6 +272,7 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
     this.displayNameProperty.set(spriteFileFormat.getDisplayName());
     this.authorNameProperty.set(spriteFileFormat.getAuthorName());
     this.descriptionProperty.set(spriteFileFormat.getDescription().orElse(""));
+    this.ulid.set(spriteFileFormat.getUlid().toString());
     this.tags.clear();
     this.tags.addAll(spriteFileFormat.getTags());
   }
@@ -297,7 +301,12 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
     }
 
     // convert
+    // retain ULID if not null.
+    final ULID.Value ulid = Optional.ofNullable(this.ulid.get())
+        .map(ULID::parseULID)
+        .orElseGet(() -> new ULID().nextValue());
     final SpriteFileFormat spriteFileFormat = SpriteFileFormatFactory.create(
+        ulid,
         this.displayNameProperty.get(),
         this.authorNameProperty.get(),
         bytes,
