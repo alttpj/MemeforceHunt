@@ -1,0 +1,49 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+        java: [ 11, 15 ]
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up cache for ~./m2/repository
+        uses: actions/cache@v2.1.1
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ matrix.os }}-java${{ matrix.java }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ matrix.os }}-java${{ matrix.java }}-
+            maven-${{ matrix.os }}-
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+      - name: Install GRAALVM
+        if: ${{ matrix.java == '11' }}
+        uses: battila7/jdk-via-jabba@v1
+        with:
+          jdk: graalvm@20.3.0
+          javaHomeEnvironmentVariable: GRAALVM_HOME
+
+      - name: Build with Maven
+        run: mvn clean verify -B -Pdocs,ci,run-its
+
+      - name: Deploy snapshot
+        if: ${{ matrix.java == '11' && matrix.os == 'ubuntu-latest' }}
+        run: mvn deploy --batch-mode -Pdocs,deploy-github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
