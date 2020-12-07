@@ -19,6 +19,8 @@ package io.github.alttpj.memeforcehunt.lib;
 
 import io.github.alttpj.memeforcehunt.common.value.ULID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.immutables.value.Value;
 
 import java.time.Instant;
@@ -28,6 +30,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Value.Immutable
+@JsonDeserialize(as = ImmutableSpriteFileFormat.class)
 abstract class AbstractSpriteFileFormat implements SpriteFileFormat, Comparable<SpriteFileFormat> {
 
   private static final List<String> ALLOWED_PALETTE_NAMES = List.of("GREEN", "RED", "BLUE");
@@ -36,21 +39,44 @@ abstract class AbstractSpriteFileFormat implements SpriteFileFormat, Comparable<
 
   @Override
   @Value.Default
+  @JsonProperty("ulid")
   public ULID.Value getUlid() {
     return new ULID().nextValue();
   }
 
   @Override
   @Value.Derived
+  @JsonProperty("created")
   public Instant getCreationDate() {
     return Instant.ofEpochMilli(getUlid().timestamp());
   }
 
   @Override
+  @JsonProperty("description")
+  public abstract Optional<String> getDescription();
+
+  @Override
+  @JsonProperty("displayName")
+  public abstract String getDisplayName();
+
+  @Override
   @Value.Default
-  public Optional<String> getDescription() {
-    return Optional.empty();
+  @JsonProperty("author")
+  public String getAuthorName() {
+    return "unknown";
   }
+
+  @Override
+  @JsonProperty("data")
+  public abstract byte[] getData();
+
+  @Override
+  @JsonProperty("palette")
+  public abstract String getColorPaletteName();
+
+  @Override
+  @JsonProperty("tags")
+  public abstract List<String> getTags();
 
   @Value.Check
   public AbstractSpriteFileFormat normalize() {

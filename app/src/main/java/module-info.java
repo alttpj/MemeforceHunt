@@ -1,18 +1,20 @@
 module memeforcehunt.app {
   requires javafx.fxml;
   requires java.logging;
-  requires transitive javafx.controls;
-  requires transitive javafx.graphics;
-  requires transitive javafx.swing;
-  requires transitive java.desktop;
+  requires javafx.controls;
+  requires javafx.graphics;
+  requires javafx.swing;
+  requires java.desktop;
 
   requires info.picocli;
   requires memeforcehunt.common.sprites;
   requires memeforcehunt.common.value;
   requires memforcehunt.lib;
   requires org.jfxtras.styles.jmetro;
-  requires org.yaml.snakeyaml;
-  requires io.github.alttpj.library;
+  requires alttpj.library;
+
+  requires com.fasterxml.jackson.databind;
+  requires com.fasterxml.jackson.dataformat.yaml;
 
   // fxml needs to modify the gui classes.
   opens io.github.alttpj.memeforcehunt.app.gui to javafx.fxml;
@@ -21,6 +23,9 @@ module memeforcehunt.app {
   opens io.github.alttpj.memeforcehunt.app.gui.editor to javafx.fxml;
 
   opens io.github.alttpj.memeforcehunt.app.cli.commands to info.picocli;
+
+  opens io.github.alttpj.memeforcehunt.app.config to com.fasterxml.jackson.databind;
+
 
   // those classes are accessible from outside, e.g. for the JavaFX loader.
   exports io.github.alttpj.memeforcehunt.app.cli;

@@ -20,11 +20,10 @@ import static java.util.Collections.emptyList;
 
 import io.github.alttpj.memeforcehunt.common.value.ItemSprite;
 import io.github.alttpj.memeforcehunt.common.value.ULID;
+import io.github.alttpj.memeforcehunt.lib.impl.YamlProvider;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.alttpj.library.image.palette.Palette;
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.nodes.Tag;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,63 +34,21 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 public final class SpriteFileFormatFactory {
+
+  private static final ObjectMapper YAML = YamlProvider.getObjectMapper();
 
   private SpriteFileFormatFactory() {
     // util
   }
 
   public static SpriteFileFormat fromFile(final File inputFile) throws IOException {
-    final Yaml yaml = new Yaml();
-
     try (final InputStream fis = Files.newInputStream(inputFile.toPath())) {
-      final Map<String, Object> loaded = yaml.load(fis);
-
-      return ImmutableSpriteFileFormat.builder()
-          .displayName((String) loaded.get("displayName"))
-          .authorName(Optional.ofNullable(loaded.get("author"))
-              .map(auth -> (String) auth)
-              .orElse("unknonwn"))
-          .data((byte[]) loaded.get("data"))
-          .colorPaletteName((String) loaded.getOrDefault("palette", "GREEN"))
-          .addAllTags(parseTags(loaded))
-          .ulid(ULID.parseULID((String) loaded.get("ulid")))
-          .description(Optional.ofNullable((String) loaded.get("description")))
-          .build();
+      return YAML.readValue(fis, AbstractSpriteFileFormat.class);
     }
-  }
-
-  private static Iterable<String> parseTags(final Map<String, Object> loaded) {
-    final Object tags = loaded.get("tags");
-    if (tags == null) {
-      return emptyList();
-    }
-
-    if (tags instanceof Iterable) {
-      final Iterable<?> tagsIter = (Iterable<?>) tags;
-
-      return StreamSupport.stream(tagsIter.spliterator(), false)
-          .filter(String.class::isInstance)
-          .map(tag -> (String) tag)
-          .collect(Collectors.toUnmodifiableList());
-    }
-
-    if (tags instanceof String) {
-      return Arrays.stream(((String) tags).split(","))
-          .map(String::trim)
-          .collect(Collectors.toUnmodifiableList());
-    }
-
-    // unreadable tags.
-    return emptyList();
   }
 
   public static SpriteFileFormat fromItemSprite(final ItemSprite source) {
@@ -110,38 +67,8 @@ public final class SpriteFileFormatFactory {
   }
 
   public static void save(final SpriteFileFormat spriteFileFormat, final Writer writer) throws IOException {
-    final DumperOptions dumperOptions = new DumperOptions();
-    dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-    dumperOptions.setAllowUnicode(true);
-    dumperOptions.setExplicitStart(false);
-    dumperOptions.setExplicitEnd(false);
-    final Yaml yaml = new Yaml(dumperOptions);
-
-    final Map<String, Object> output = toMap(spriteFileFormat);
-
-    final String yamlString = yaml.dumpAs(output, Tag.MAP, DumperOptions.FlowStyle.BLOCK);
-    writer.append(yamlString);
+    YAML.writeValue(writer, spriteFileFormat);
   }
-
-  private static Map<String, Object> toMap(final SpriteFileFormat spriteFileFormat) {
-    final Map<String, Object> output = new LinkedHashMap<>();
-    output.put("ulid", spriteFileFormat.getUlid().toString());
-    output.put("displayName", spriteFileFormat.getDisplayName());
-    final String authorName = spriteFileFormat.getAuthorName();
-    if (!authorName.isBlank() && !"unknown".equals(authorName)) {
-      output.put("author", authorName);
-    }
-    output.put("data", spriteFileFormat.getData());
-    output.put("palette", spriteFileFormat.getColorPaletteName());
-    spriteFileFormat.getDescription().ifPresent(desc -> output.put("description", desc));
-    if (!spriteFileFormat.getTags().isEmpty()) {
-      output.put("tags", spriteFileFormat.getTags());
-    }
-    output.put("timestamp", spriteFileFormat.getCreationDate().toString());
-
-    return output;
-  }
-
 
   public static SpriteFileFormat create(final String displayName, final String authorName, final byte[] data, final Palette palette) {
     return create(new ULID().nextValue(), displayName, authorName, data, palette, null, emptyList());
@@ -156,9 +83,9 @@ public final class SpriteFileFormatFactory {
 
     return ImmutableSpriteFileFormat.builder()
         .displayName(displayName)
-        .authorName(authorName)
         .data(data)
         .colorPaletteName(palette.getName())
+        .authorName(authorName)
         .description(Optional.ofNullable(description).filter(descr -> !descr.isEmpty()).filter(descr -> !descr.isBlank()))
         .addAllTags(tags)
         .ulid(ulid)

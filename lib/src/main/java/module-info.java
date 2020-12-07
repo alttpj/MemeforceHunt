@@ -1,9 +1,14 @@
 module memforcehunt.lib {
   requires memeforcehunt.common.value;
-  requires io.github.alttpj.library;
-  requires org.yaml.snakeyaml;
+  requires alttpj.library;
 
   requires static org.immutables.value;
+
+  requires com.fasterxml.jackson.databind;
+  requires com.fasterxml.jackson.dataformat.yaml;
+
+  opens io.github.alttpj.memeforcehunt.lib to com.fasterxml.jackson.databind;
+  opens io.github.alttpj.memeforcehunt.lib.impl to com.fasterxml.jackson.databind;
 
   exports io.github.alttpj.memeforcehunt.lib;
 }

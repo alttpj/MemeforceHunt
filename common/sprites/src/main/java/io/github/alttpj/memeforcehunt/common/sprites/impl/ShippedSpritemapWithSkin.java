@@ -27,7 +27,6 @@ import javax.imageio.ImageIO;
 
 public class ShippedSpritemapWithSkin extends AbstractSpritemapWithSkin {
 
-
   private final String skinResourceName;
   private final String skinPreviewPath;
 

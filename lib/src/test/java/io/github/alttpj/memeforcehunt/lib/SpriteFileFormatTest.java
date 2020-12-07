@@ -30,9 +30,9 @@ public class SpriteFileFormatTest {
     // given
     final ImmutableSpriteFileFormat fileFormat = ImmutableSpriteFileFormat.builder()
         .displayName("")
-        .authorName("")
         .data(new byte[TileFactory.BYTES_PER_TILE * 4])
         .colorPaletteName("GREEN")
+        .authorName("")
         .build();
 
     // when

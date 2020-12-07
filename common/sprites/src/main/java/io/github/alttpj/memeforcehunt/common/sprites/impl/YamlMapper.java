@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package io.github.alttpj.memeforcehunt.app.config;
-
+package io.github.alttpj.memeforcehunt.common.sprites.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-public enum YamlProvider {
+public enum YamlMapper {
   INSTANCE;
 
-  private final ObjectMapper objectMapper = createYaml();
+  private final ObjectMapper objectMapper = createYamlMapper();
 
-  public static ObjectMapper createYaml() {
+  public static ObjectMapper getObjectMapper() {
+    return INSTANCE.objectMapper;
+  }
+
+  private ObjectMapper createYamlMapper() {
     return new ObjectMapper(new YAMLFactory()).findAndRegisterModules();
   }
 }

@@ -16,20 +16,20 @@
 
 package io.github.alttpj.memeforcehunt.common.sprites.impl;
 
-import io.github.alttpj.memeforcehunt.common.value.ItemPalette;
 import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
 
-import org.yaml.snakeyaml.Yaml;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class SpriteLoader {
+
+  private static final ObjectMapper YAML = YamlMapper.getObjectMapper();
 
   private final InputStream is;
   private final AtomicBoolean isAlreadyLoaded = new AtomicBoolean();
@@ -43,47 +43,32 @@ public class SpriteLoader {
     if (this.isAlreadyLoaded.get()) {
       return this.loaded;
     }
-    final Yaml yaml = new Yaml();
-    @SuppressWarnings("unchecked") final Map<String, Object> spriteMap = yaml.loadAs(this.is, Map.class);
-    @SuppressWarnings("unchecked") final List<Object> sprites = (List<Object>) spriteMap.get("sprites");
 
-    this.loaded = sprites.stream()
-        .filter(Objects::nonNull)
-        .map(this::loadSprite)
-        .collect(Collectors.toList());
+    try {
+      final AbstractJsonShippedSpritemapWithSkin[] sprites = YAML.readValue(this.is, AbstractJsonShippedSpritemapWithSkin[].class);
 
-    return this.loaded;
+      this.loaded = Arrays.stream(sprites)
+          .map(this::toSpriteMapWithSkin)
+          .collect(Collectors.toUnmodifiableList());
+
+      return this.loaded;
+    } catch (final IOException ioException) {
+      throw new UnsupportedOperationException("not yet implemented: [${CLASS_NAME}::${METHOD_NAME}].", ioException);
+    }
   }
 
-  private SpritemapWithSkin loadSprite(final Object sprite) {
-    if (!(sprite instanceof Map)) {
-      throw new IllegalArgumentException("invalid yaml, not a map: " + sprite);
-    }
-
-    @SuppressWarnings("unchecked") final Map<String, String> spriteMap = (Map<String, String>) sprite;
-
-    final String spriteName = Objects.requireNonNull(spriteMap.get("spriteName"), "field 'spriteName' may not be missing.").trim();
-
-    final Optional<String> displayName = Optional.ofNullable(spriteMap.get("displayName"))
-        .filter(yamlDisplayName -> !yamlDisplayName.isBlank());
-
-    final String description = Optional.ofNullable(spriteMap.get("description"))
-        .filter(yamlDesc -> !yamlDesc.isBlank())
-        .or(() -> displayName)
-        .orElse(spriteName);
-
-    final String author = Optional.ofNullable(spriteMap.get("author"))
-        .filter(yamlAuthor -> !yamlAuthor.isBlank())
-        .orElse("unknown");
+  private SpritemapWithSkin toSpriteMapWithSkin(final AbstractJsonShippedSpritemapWithSkin sprite) {
+    final String spriteName = sprite.getSpriteName();
 
     return new ShippedSpritemapWithSkin(
-        spriteMap.get("id"),
-        displayName.orElse(spriteName),
-        spriteMap.get("displayName"),
-        description,
-        author,
-        spriteMap.get("uri"),
-        spriteMap.get("preview"),
-        ItemPalette.valueOf(spriteMap.get("palette")));
+        sprite.getUlid().toString(),
+        spriteName,
+        sprite.getDisplayName().orElse(spriteName),
+        sprite.getDescription().or(sprite::getDisplayName).orElse(spriteName),
+        sprite.getAuthor().orElse("unknown"),
+        sprite.getUri().toString(),
+        sprite.getPreview().toString(),
+        sprite.getItemPalette()
+    );
   }
 }

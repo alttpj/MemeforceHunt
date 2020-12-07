@@ -16,7 +16,7 @@
 
 package io.github.alttpj.memeforcehunt.app.config;
 
-import org.yaml.snakeyaml.Yaml;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +26,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.Locale;
 import java.util.Map;
@@ -36,6 +37,8 @@ import java.util.logging.Logger;
 public class YamlConfigurator extends AbstractOsConfigurationFile {
 
   private static final Logger LOG = java.util.logging.Logger.getLogger(YamlConfigurator.class.getCanonicalName());
+
+  private static final ObjectMapper YAML = YamlProvider.createYaml();
 
   /**
    * Offset not set.
@@ -56,9 +59,8 @@ public class YamlConfigurator extends AbstractOsConfigurationFile {
   }
 
   private <T> T readFromYaml(final String fieldName, final T defaultValue) {
-    final Yaml yaml = YamlProvider.createYaml();
     try (final InputStream yamlInputStream = Files.newInputStream(getConfigFilePath(), StandardOpenOption.READ)) {
-      final Map<String, Object> yamlConfig = (Map<String, Object>) yaml.load(yamlInputStream);
+      final Map<String, Object> yamlConfig = (Map<String, Object>) YAML.readValue(yamlInputStream, Map.class);
 
       if (yamlConfig == null) {
         return defaultValue;
@@ -83,11 +85,10 @@ public class YamlConfigurator extends AbstractOsConfigurationFile {
       return;
     }
 
-    final Yaml yaml = YamlProvider.createYaml();
     final Map<String, Object> yamlConfig = new ConcurrentHashMap<>();
 
     try (final InputStream yamlInputStream = Files.newInputStream(getConfigFilePath(), StandardOpenOption.READ)) {
-      final Map<String, Object> loadedConfig = yaml.load(yamlInputStream);
+      final Map<String, Object> loadedConfig = YAML.readValue(yamlInputStream, Map.class);
       if (loadedConfig != null) {
         yamlConfig.putAll(loadedConfig);
       }
@@ -97,7 +98,7 @@ public class YamlConfigurator extends AbstractOsConfigurationFile {
 
       // make a backup before (over-)writing.
       try {
-        Files.copy(getConfigFilePath(), destination);
+        Files.copy(getConfigFilePath(), destination, StandardCopyOption.REPLACE_EXISTING);
       } catch (final IOException copyIoEx) {
         LOG.log(Level.SEVERE, copyIoEx,
             () -> String.format(Locale.ENGLISH, "Unable to write backup from [%s] to [%s].",
@@ -110,8 +111,7 @@ public class YamlConfigurator extends AbstractOsConfigurationFile {
 
     try (final OutputStream outputStream = Files.newOutputStream(getConfigFilePath(), StandardOpenOption.WRITE);
          final OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8)) {
-      yaml.dump(yamlConfig, outputStreamWriter);
-      outputStreamWriter.flush();
+      YAML.writeValue(outputStreamWriter, yamlConfig);
     } catch (final IOException ioException) {
       LOG.log(Level.SEVERE, ioException, () -> "Unable to write config to [" + getConfigFile().getAbsolutePath() + "].");
     }
