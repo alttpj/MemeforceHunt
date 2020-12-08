@@ -39,11 +39,26 @@ jobs:
           jdk: graalvm@20.3.0
           javaHomeEnvironmentVariable: GRAALVM_HOME
 
-      - name: Build with Maven
-        run: mvn clean verify -B -Pdocs,ci,run-its
+      - name: Build with Maven (windows)
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: mvn clean verify --batch-mode -Pdocs -Pci -Prun-its -Djavafx.platform=windows
+
+      - name: Build with Maven (linux) 
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: mvn clean verify --batch-mode -Pdocs,ci,run-its -Djavafx.platform=linux
 
       - name: Deploy snapshot
-        if: ${{ matrix.java == '11' && matrix.os == 'ubuntu-latest' }}
+        if: ${{ matrix.java == '11' }}
         run: mvn deploy --batch-mode -Pdocs,deploy-github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          # Artifact name
+          name: jlink-${{ env.target }}
+          # A file, directory or wildcard pattern that describes what to upload
+          path: app/target/memeforce-app*.zip
+          # The desired behavior if no files are found using the provided path.
+          if-no-files-found: error
