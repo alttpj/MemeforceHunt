@@ -1,0 +1,38 @@
+/*
+ * Copyright 2020-2020 the ALttPJ Team @ https://github.com/alttpj
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package io.github.alttpj.memeforcehunt.lib.impl;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+
+import java.io.IOException;
+import java.time.Instant;
+
+public class InstantDeserializer extends StdDeserializer<Instant> {
+  private static final long serialVersionUID = 4684762307066065802L;
+
+  public InstantDeserializer() {
+    super(Instant.class);
+  }
+
+  @Override
+  public Instant deserialize(final JsonParser parser, final DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    return Instant.parse(parser.getText());
+  }
+}
