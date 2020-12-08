@@ -31,7 +31,7 @@ If the installation was successful, you can now use this tool as described in th
 * *javafx*
 * *javafx metro* theme
 * *picocli* for the CLI option parsing
-* *snakeyaml* for parsing the sprite library.
+* *Jackson* for parsing the sprite library.
 * (soon): *alttpj-library* for creating your own sprites.
 
 === Test dependencies

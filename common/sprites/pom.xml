@@ -80,4 +80,23 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths>
+            <dependency>
+              <groupId>org.immutables</groupId>
+              <artifactId>value</artifactId>
+              <version>${dependency.immutables.version}</version>
+            </dependency>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
 </project>
