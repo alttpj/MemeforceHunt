@@ -32,12 +32,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
-      - name: Install GRAALVM
-        if: ${{ matrix.java == '11' }}
-        uses: battila7/jdk-via-jabba@v1
-        with:
-          jdk: graalvm@20.3.0
-          javaHomeEnvironmentVariable: GRAALVM_HOME
 
       - name: Build with Maven (windows)
         if: ${{ matrix.os == 'windows-latest' }}
