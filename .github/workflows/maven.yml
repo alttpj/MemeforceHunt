@@ -35,11 +35,11 @@ jobs:
 
       - name: Build with Maven (windows)
         if: ${{ matrix.os == 'windows-latest' }}
-        run: mvn clean verify --batch-mode -Pdocs -Pci -Prun-its -Djavafx.platform=windows
+        run: mvn clean verify --batch-mode -Pjlink -Pdocs -Pci -Prun-its -Djavafx.platform=windows
 
       - name: Build with Maven (linux) 
         if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: mvn clean verify --batch-mode -Pdocs,ci,run-its -Djavafx.platform=linux
+        run: mvn clean verify --batch-mode -Pjlink,docs,ci,run-its -Djavafx.platform=linux
 
       - name: Deploy snapshot
         if: ${{ matrix.java == '11' }}
