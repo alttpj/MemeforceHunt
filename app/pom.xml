@@ -294,7 +294,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jlink-plugin</artifactId>
-            <version>3.0.0.ENHANCED</version>
+            <version>3.1.0</version>
             <executions>
               <execution>
                 <id>create-runtime-image</id>
@@ -303,7 +303,9 @@
                   <goal>jlink</goal>
                 </goals>
                 <configuration>
-                  <launcher>memeforcehunt=memeforcehunt.app/io.github.alttpj.memeforcehunt.app.cli.MemeforceHuntApp
+                  <classifier>${javafx.platform}</classifier>
+                  <launcher>
+                    memeforcehunt=memeforcehunt.app/io.github.alttpj.memeforcehunt.app.cli.MemeforceHuntApp
                   </launcher>
                   <modulePaths>
                     <modulePath>${project.build.directory}/modules</modulePath>
