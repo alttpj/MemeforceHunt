@@ -30,9 +30,9 @@
 
   <properties>
     <!-- jdk needed -->
-    <jdk.version>16</jdk.version>
+    <jdk.version>15</jdk.version>
     <!-- compile to -->
-    <java.version>16</java.version>
+    <java.version>15</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -493,9 +493,10 @@
           <failOnUnsupportedJava>false</failOnUnsupportedJava>
           <targetVersion>${java.version}</targetVersion>
           <bundledSignatures>
-            <bundledSignature>jdk-unsafe-15</bundledSignature>
-            <bundledSignature>jdk-deprecated-15</bundledSignature>
-            <bundledSignature>jdk-internal-15</bundledSignature>
+            <!-- BOGUS: XXX: Workaround until 16 (and 17) is available -->
+            <bundledSignature>jdk-unsafe-${maven.compiler.release}</bundledSignature>
+            <bundledSignature>jdk-deprecated-${maven.compiler.release}</bundledSignature>
+            <bundledSignature>jdk-internal-${maven.compiler.release}</bundledSignature>
             <!-- disallow undocumented classes like sun.misc.Unsafe: -->
             <bundledSignature>jdk-non-portable</bundledSignature>
             <bundledSignature>jdk-system-out</bundledSignature>

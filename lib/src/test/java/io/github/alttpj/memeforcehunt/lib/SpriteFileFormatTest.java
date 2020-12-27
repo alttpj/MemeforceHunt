@@ -34,7 +34,7 @@ public class SpriteFileFormatTest {
     final ImmutableSpriteFileFormat fileFormat = new ImmutableSpriteFileFormat(
         new ULID().nextValue(),
         Instant.now(),
-        java.util.Optional.of(""),
+        null,
         "",
         "",
         new byte[TileFactory.BYTES_PER_TILE * 4],
