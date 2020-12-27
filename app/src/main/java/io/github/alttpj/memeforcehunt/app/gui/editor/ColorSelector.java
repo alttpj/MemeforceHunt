@@ -28,7 +28,7 @@ import javafx.scene.layout.GridPane;
 import java.util.Arrays;
 import java.util.List;
 
-public class ColorSelector extends GridPane {
+public final class ColorSelector extends GridPane {
 
   private final ObjectProperty<ColorSelectorCell> selectedColor = new SimpleObjectProperty<>();
 

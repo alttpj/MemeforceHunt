@@ -22,6 +22,7 @@ import io.github.alttpj.memeforcehunt.common.value.ULID;
 import io.github.alttpj.memeforcehunt.lib.SpriteFileFormat;
 import io.github.alttpj.memeforcehunt.lib.SpriteFileFormatFactory;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.github.alttpj.library.image.SnesTilePacker;
 import io.github.alttpj.library.image.Tile;
 import io.github.alttpj.library.image.TiledSprite;
@@ -242,7 +243,7 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
     final SpriteFileFormat spriteFileFormat = SpriteFileFormatFactory.fromFile(file);
 
     final PaintableGrid paintableGrid = this.spriteGridCanvas.getPaintableGrid();
-    switch (spriteFileFormat.getColorPaletteName()) {
+    switch (spriteFileFormat.colorPaletteName()) {
       case "RED":
         this.paletteSelector.select(Palette3bpp.RED);
         this.colorSelector.setColors(Palette3bpp.RED);
@@ -261,23 +262,27 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
     }
 
     final Tile[] tiles = new Tile[] {
-        () -> Arrays.copyOfRange(spriteFileFormat.getData(), 0, 24),
-        () -> Arrays.copyOfRange(spriteFileFormat.getData(), 24, 48),
-        () -> Arrays.copyOfRange(spriteFileFormat.getData(), 48, 72),
-        () -> Arrays.copyOfRange(spriteFileFormat.getData(), 72, 96)
+        () -> Arrays.copyOfRange(spriteFileFormat.data(), 0, 24),
+        () -> Arrays.copyOfRange(spriteFileFormat.data(), 24, 48),
+        () -> Arrays.copyOfRange(spriteFileFormat.data(), 48, 72),
+        () -> Arrays.copyOfRange(spriteFileFormat.data(), 72, 96)
     };
 
     new Painter().paint(paintableGrid, tiles, this.colorSelector);
 
-    this.displayNameProperty.set(spriteFileFormat.getDisplayName());
-    this.authorNameProperty.set(spriteFileFormat.getAuthorName());
-    this.descriptionProperty.set(spriteFileFormat.getDescription().orElse(""));
-    this.ulid.set(spriteFileFormat.getUlid().toString());
+    this.displayNameProperty.set(spriteFileFormat.displayName());
+    this.authorNameProperty.set(spriteFileFormat.authorName());
+    this.descriptionProperty.set(spriteFileFormat.description().orElse(""));
+    this.ulid.set(spriteFileFormat.ulid().toString());
     this.tags.clear();
-    this.tags.addAll(spriteFileFormat.getTags());
+    this.tags.addAll(spriteFileFormat.tags());
   }
 
   @FXML
+  @SuppressFBWarnings(
+      value = "PATH_TRAVERSAL_IN",
+      justification = "patching user supplied ROM file"
+  )
   public void onExport(final ActionEvent actionEvent) {
     final byte[] bytes = packTiles();
 
@@ -395,7 +400,7 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
         unpackedTiles[indexInTile] = unpackedBytes1616[index];
       }
 
-      if (index < unpackedBytes1616.length / 2 && (index / 8) % 2 == 1) {
+      if (index < unpackedBytes1616.length / 2 && (index / 8) % 2 != 0) {
         // 2nd  tile
         unpackedTiles[indexInTile + 64] = unpackedBytes1616[index];
       }
@@ -405,7 +410,7 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
         unpackedTiles[indexInTile + 128] = unpackedBytes1616[index];
       }
 
-      if (index >= unpackedBytes1616.length / 2 && (index / 8) % 2 == 1) {
+      if (index >= unpackedBytes1616.length / 2 && (index / 8) % 2 != 0) {
         // 3rd  tile
         unpackedTiles[indexInTile + 192] = unpackedBytes1616[index];
       }

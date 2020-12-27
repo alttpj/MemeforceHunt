@@ -52,7 +52,7 @@ public class SpriteGridCanvas extends StackPane {
     initialize(editable);
   }
 
-  protected void initialize(final boolean editable) {
+  protected final void initialize(final boolean editable) {
     setAlignment(Pos.CENTER);
     setAlignment(this.bgImage, Pos.CENTER);
     getChildren().add(this.bgImage);

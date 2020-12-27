@@ -18,7 +18,6 @@ package io.github.alttpj.memeforcehunt.lib;
 
 import static java.util.Collections.emptyList;
 
-import io.github.alttpj.memeforcehunt.common.value.ItemSprite;
 import io.github.alttpj.memeforcehunt.common.value.ULID;
 import io.github.alttpj.memeforcehunt.lib.impl.YamlProvider;
 
@@ -34,7 +33,9 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.time.Instant;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public final class SpriteFileFormatFactory {
@@ -47,16 +48,18 @@ public final class SpriteFileFormatFactory {
 
   public static SpriteFileFormat fromFile(final File inputFile) throws IOException {
     try (final InputStream fis = Files.newInputStream(inputFile.toPath())) {
-      return YAML.readValue(fis, AbstractSpriteFileFormat.class);
+      return YAML.readValue(fis, ImmutableSpriteFileFormat.class);
     }
   }
 
+  /*
   public static SpriteFileFormat fromItemSprite(final ItemSprite source) {
     final String paletteName = source.getPalette().name();
     final String author = source.getAuthor();
 
     throw new UnsupportedOperationException("not implemented");
   }
+  */
 
   public static void saveFile(final SpriteFileFormat spriteFileFormat, final File targetFile) throws IOException {
     try (final OutputStream os = Files.newOutputStream(targetFile.toPath(),
@@ -81,14 +84,15 @@ public final class SpriteFileFormatFactory {
       throw new IllegalArgumentException("Expected data length to be " + TileFactory.BYTES_PER_TILE * 4 + " bytes.");
     }
 
-    return ImmutableSpriteFileFormat.builder()
-        .displayName(displayName)
-        .data(data)
-        .colorPaletteName(palette.getName())
-        .authorName(authorName)
-        .description(Optional.ofNullable(description).filter(descr -> !descr.isEmpty()).filter(descr -> !descr.isBlank()))
-        .addAllTags(tags)
-        .ulid(ulid)
-        .build();
+    return new ImmutableSpriteFileFormat(
+        ulid,
+        Instant.now(),
+        Optional.ofNullable(description).filter(descr -> !descr.isEmpty()).filter(descr -> !descr.isBlank()),
+        displayName,
+        authorName,
+        data,
+        palette.getName(),
+        List.copyOf(tags)
+    );
   }
 }

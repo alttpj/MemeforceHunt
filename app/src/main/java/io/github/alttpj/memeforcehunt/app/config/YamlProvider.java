@@ -25,7 +25,11 @@ public enum YamlProvider {
 
   private final ObjectMapper objectMapper = createYaml();
 
-  public static ObjectMapper createYaml() {
+  private ObjectMapper createYaml() {
     return new ObjectMapper(new YAMLFactory()).findAndRegisterModules();
+  }
+
+  public static ObjectMapper getObjectMapper() {
+    return INSTANCE.objectMapper;
   }
 }

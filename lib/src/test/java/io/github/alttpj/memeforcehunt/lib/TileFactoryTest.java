@@ -16,10 +16,12 @@
 
 package io.github.alttpj.memeforcehunt.lib;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.github.alttpj.library.image.Tile;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -37,5 +39,12 @@ public class TileFactoryTest {
     assertAll(
         () -> assertEquals(4, tiles.length)
     );
+  }
+
+  @Test
+  public void testGetDefaultOffsets() {
+    final int[] defaultOffsets = TileFactory.getDefaultOffsets();
+
+    assertThat(defaultOffsets.length, Matchers.is(4));
   }
 }

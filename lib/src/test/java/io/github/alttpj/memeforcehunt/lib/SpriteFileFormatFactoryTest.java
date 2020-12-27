@@ -57,9 +57,9 @@ public class SpriteFileFormatFactoryTest {
 
     // then
     assertAll(
-        () -> assertTrue(spriteFileFormat.getDescription().isEmpty()),
-        () -> assertEquals("me", spriteFileFormat.getAuthorName()),
-        () -> assertEquals(palette.getName(), spriteFileFormat.getColorPaletteName())
+        () -> assertTrue(spriteFileFormat.description().isEmpty()),
+        () -> assertEquals("me", spriteFileFormat.authorName()),
+        () -> assertEquals(palette.getName(), spriteFileFormat.colorPaletteName())
     );
   }
 }

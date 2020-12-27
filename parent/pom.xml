@@ -30,9 +30,9 @@
 
   <properties>
     <!-- jdk needed -->
-    <jdk.version>11</jdk.version>
+    <jdk.version>16</jdk.version>
     <!-- compile to -->
-    <java.version>11</java.version>
+    <java.version>16</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,6 +41,7 @@
     <!--suppress UnresolvedMavenProperty -->
     <project.buildasset.dir>${maven.multiModuleProjectDirectory}/build</project.buildasset.dir>
     <checkstyle.header.file>${project.buildasset.dir}/header.txt</checkstyle.header.file>
+    <spotbugs.exclude.file>${project.buildasset.dir}/spotbugs/excludes.xml</spotbugs.exclude.file>
 
     <!-- default fork arguments. -->
     <argLine>-Xmx1024m</argLine>
@@ -49,6 +50,7 @@
     <javafx.platform>linux</javafx.platform>
     <dependency.jackson.version>2.11.1</dependency.jackson.version>
     <dependency.snakeyaml.version>1.26</dependency.snakeyaml.version>
+    <dependency.spotbugs.version>4.2.0</dependency.spotbugs.version>
   </properties>
 
   <!-- dependencies in the management section are not forced upon the child modules. -->
@@ -207,6 +209,23 @@
         <scope>test</scope>
       </dependency>
 
+      <!-- verify dependencies -->
+      <dependency>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs</artifactId>
+        <version>${dependency.spotbugs.version}</version>
+        <scope>provided</scope>
+        <optional>true</optional>
+      </dependency>
+      <dependency>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-annotations</artifactId>
+        <version>${dependency.spotbugs.version}</version>
+        <scope>provided</scope>
+        <optional>true</optional>
+      </dependency>
+
+
     </dependencies>
   </dependencyManagement>
 
@@ -243,7 +262,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M3</version>
+          <version>3.0.0-M5</version>
         </plugin>
 
         <plugin>
@@ -268,7 +287,7 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.5</version>
+          <version>0.8.6</version>
         </plugin>
 
         <plugin>
@@ -292,7 +311,7 @@
         <plugin>
           <groupId>de.thetaphi</groupId>
           <artifactId>forbiddenapis</artifactId>
-          <version>2.7</version>
+          <version>3.1</version>
         </plugin>
 
         <plugin>
@@ -300,6 +319,21 @@
           <artifactId>moditect-maven-plugin</artifactId>
           <version>1.0.0.RC1</version>
         </plugin>
+
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>4.1.4</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs</artifactId>
+              <version>${dependency.spotbugs.version}</version>
+              <scope>compile</scope>
+            </dependency>
+          </dependencies>
+        </plugin>
+
       </plugins>
     </pluginManagement>
 
@@ -311,11 +345,18 @@
         <configuration>
           <showDeprecation>true</showDeprecation>
           <showWarnings>true</showWarnings>
+          <compilerArgs>
+            <compilerArg>--enable-preview</compilerArg>
+          </compilerArgs>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <argLine>@{argLine} --enable-preview</argLine>
+        </configuration>
       </plugin>
 
 
@@ -436,7 +477,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.31</version>
+            <version>8.38</version>
           </dependency>
         </dependencies>
         <executions>
@@ -458,9 +499,9 @@
           <failOnUnsupportedJava>false</failOnUnsupportedJava>
           <targetVersion>${java.version}</targetVersion>
           <bundledSignatures>
-            <bundledSignature>jdk-unsafe</bundledSignature>
-            <bundledSignature>jdk-deprecated</bundledSignature>
-            <bundledSignature>jdk-internal</bundledSignature>
+            <bundledSignature>jdk-unsafe-15</bundledSignature>
+            <bundledSignature>jdk-deprecated-15</bundledSignature>
+            <bundledSignature>jdk-internal-15</bundledSignature>
             <!-- disallow undocumented classes like sun.misc.Unsafe: -->
             <bundledSignature>jdk-non-portable</bundledSignature>
             <bundledSignature>jdk-system-out</bundledSignature>
@@ -484,6 +525,36 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <configuration>
+          <!--
+            <effort>Max</effort>
+            <threshold>Low</threshold>
+          -->
+          <failOnError>true</failOnError>
+          <excludeFilterFile>${spotbugs.exclude.file}</excludeFilterFile>
+          <plugins>
+            <plugin>
+              <groupId>com.h3xstream.findsecbugs</groupId>
+              <artifactId>findsecbugs-plugin</artifactId>
+              <version>1.11.0</version>
+            </plugin>
+          </plugins>
+        </configuration>
+        <executions>
+          <execution>
+            <id>scan</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 
@@ -501,6 +572,9 @@
               <!-- do not show every java line -->
               <quiet>true</quiet>
               <serialwarn>true</serialwarn>
+              <additionalOptions>
+                <additionalOption>--enable-preview</additionalOption>
+              </additionalOptions>
             </configuration>
             <executions>
               <execution>
@@ -530,29 +604,7 @@
     </profile>
 
     <profile>
-      <id>integration-tests</id>
-    </profile>
-
-    <profile>
-      <!-- sign the artifacts. -->
-      <id>deploy</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
+      <id>run-its</id>
     </profile>
 
     <!-- deploy to a different location. Still needs deploy-profile to sign the artifacts! -->

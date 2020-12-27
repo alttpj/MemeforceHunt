@@ -87,7 +87,7 @@ public class MetadataWindow extends Stage implements Initializable {
     this.displayNameProperty().bindBidirectional(this.displayNameTextField.textProperty());
     this.authorNameProperty().bindBidirectional(this.authorTextField.textProperty());
     this.descriptionProperty().bindBidirectional(this.descriptionTextField.textProperty());
-    this.metadataSaveButton.disableProperty().setValue(true);
+    this.metadataSaveButton.disableProperty().set(true);
     this.displayNameProperty().addListener((source, oldVal, newVal) -> {
       if (newVal.isBlank() || newVal.isEmpty()) {
         this.metadataSaveButton.disableProperty().set(true);
@@ -101,7 +101,7 @@ public class MetadataWindow extends Stage implements Initializable {
   @FXML
   public void onSaveClick(final ActionEvent clickedEvent) {
     if (getDisplayName().isBlank() || getDisplayName().isEmpty()) {
-      this.canceledProperty().setValue(true);
+      this.canceledProperty().set(true);
     }
 
     this.close();

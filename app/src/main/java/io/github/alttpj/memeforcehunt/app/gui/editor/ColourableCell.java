@@ -27,7 +27,7 @@ import javafx.scene.paint.Color;
 
 import java.util.StringJoiner;
 
-public class ColourableCell extends StackPane {
+public final class ColourableCell extends StackPane {
 
   private final int column;
   private final int row;

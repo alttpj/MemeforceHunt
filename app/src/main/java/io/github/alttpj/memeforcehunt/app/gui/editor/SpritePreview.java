@@ -22,7 +22,7 @@ import javafx.geometry.Pos;
 
 import java.util.StringJoiner;
 
-public class SpritePreview extends SpriteGridCanvas {
+public final class SpritePreview extends SpriteGridCanvas {
 
   private final IntegerProperty wantedHeight = new SimpleIntegerProperty(64);
   private final IntegerProperty wantedWidth = new SimpleIntegerProperty(64);

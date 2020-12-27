@@ -17,8 +17,8 @@
 package io.github.alttpj.memeforcehunt.app.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,6 +26,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.Locale;
@@ -38,7 +39,7 @@ public class YamlConfigurator extends AbstractOsConfigurationFile {
 
   private static final Logger LOG = java.util.logging.Logger.getLogger(YamlConfigurator.class.getCanonicalName());
 
-  private static final ObjectMapper YAML = YamlProvider.createYaml();
+  private static final ObjectMapper YAML = YamlProvider.getObjectMapper();
 
   /**
    * Offset not set.
@@ -55,7 +56,7 @@ public class YamlConfigurator extends AbstractOsConfigurationFile {
       return false;
     }
 
-    return readFromYaml("useCustomPatchOffset", false);
+    return readFromYaml("useCustomPatchOffset", Boolean.FALSE);
   }
 
   private <T> T readFromYaml(final String fieldName, final T defaultValue) {
@@ -93,18 +94,7 @@ public class YamlConfigurator extends AbstractOsConfigurationFile {
         yamlConfig.putAll(loadedConfig);
       }
     } catch (final ClassCastException | IOException ioEx) {
-      LOG.log(Level.SEVERE, ioEx, () -> "Unable to read config from [" + getConfigFilePath() + "].");
-      final Path destination = new File(getConfigFile().getAbsolutePath() + ".old").toPath();
-
-      // make a backup before (over-)writing.
-      try {
-        Files.copy(getConfigFilePath(), destination, StandardCopyOption.REPLACE_EXISTING);
-      } catch (final IOException copyIoEx) {
-        LOG.log(Level.SEVERE, copyIoEx,
-            () -> String.format(Locale.ENGLISH, "Unable to write backup from [%s] to [%s].",
-                getConfigFilePath(),
-                destination));
-      }
+      readBackupConfig(ioEx);
     }
 
     yamlConfig.put(fieldName, value);
@@ -114,6 +104,25 @@ public class YamlConfigurator extends AbstractOsConfigurationFile {
       YAML.writeValue(outputStreamWriter, yamlConfig);
     } catch (final IOException ioException) {
       LOG.log(Level.SEVERE, ioException, () -> "Unable to write config to [" + getConfigFile().getAbsolutePath() + "].");
+    }
+  }
+
+  @SuppressFBWarnings(
+      value = "PATH_TRAVERSAL_IN",
+      justification = "relative to known config, not user supplie"
+  )
+  private void readBackupConfig(final Exception ioEx) {
+    LOG.log(Level.SEVERE, ioEx, () -> "Unable to read config from [" + getConfigFilePath() + "].");
+    final Path destination = Paths.get(getConfigFile().getAbsolutePath() + ".old");
+
+    // make a backup before (over-)writing.
+    try {
+      Files.copy(getConfigFilePath(), destination, StandardCopyOption.REPLACE_EXISTING);
+    } catch (final IOException copyIoEx) {
+      LOG.log(Level.SEVERE, copyIoEx,
+          () -> String.format(Locale.ENGLISH, "Unable to write backup from [%s] to [%s].",
+              getConfigFilePath(),
+              destination));
     }
   }
 

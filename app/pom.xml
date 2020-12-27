@@ -54,6 +54,13 @@
     </dependency>
 
     <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-base</artifactId>
       <classifier>${javafx.platform}</classifier>
@@ -198,6 +205,7 @@
           </annotationProcessorPaths>
           <compilerArgs>
             <compilerArg>-Aproject=${project.groupId}/${project.artifactId}</compilerArg>
+            <compilerArg>--enable-preview</compilerArg>
           </compilerArgs>
         </configuration>
       </plugin>
@@ -307,6 +315,9 @@
                   <launcher>
                     memeforcehunt=memeforcehunt.app/io.github.alttpj.memeforcehunt.app.cli.MemeforceHuntApp
                   </launcher>
+                  <addOptions>
+                    <addOption>--enable-preview</addOption>
+                  </addOptions>
                   <modulePaths>
                     <modulePath>${project.build.directory}/modules</modulePath>
                   </modulePaths>

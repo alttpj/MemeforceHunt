@@ -23,22 +23,28 @@ import io.github.alttpj.memeforcehunt.common.value.ULID;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
+import java.util.List;
+
 public class SpriteFileFormatTest {
 
   @Test
   public void testSpriteFileFormat_uid_immutable() {
     // given
-    final ImmutableSpriteFileFormat fileFormat = ImmutableSpriteFileFormat.builder()
-        .displayName("")
-        .data(new byte[TileFactory.BYTES_PER_TILE * 4])
-        .colorPaletteName("GREEN")
-        .authorName("")
-        .build();
+    final ImmutableSpriteFileFormat fileFormat = new ImmutableSpriteFileFormat(
+        new ULID().nextValue(),
+        Instant.now(),
+        java.util.Optional.of(""),
+        "",
+        "",
+        new byte[TileFactory.BYTES_PER_TILE * 4],
+        "GREEN",
+        List.of());
 
     // when
-    final ULID.Value ulid = fileFormat.getUlid();
+    final ULID.Value ulid = fileFormat.ulid();
 
     // then
-    assertThat(ulid, is(fileFormat.getUlid()));
+    assertThat(ulid, is(fileFormat.ulid()));
   }
 }

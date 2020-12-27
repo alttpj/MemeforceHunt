@@ -16,6 +16,9 @@ module memeforcehunt.app {
   requires com.fasterxml.jackson.databind;
   requires com.fasterxml.jackson.dataformat.yaml;
 
+  requires static com.github.spotbugs.annotations;
+
+
   // fxml needs to modify the gui classes.
   opens io.github.alttpj.memeforcehunt.app.gui to javafx.fxml;
   opens io.github.alttpj.memeforcehunt.app.gui.main to javafx.fxml;

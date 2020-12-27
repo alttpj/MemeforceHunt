@@ -33,33 +33,13 @@ public class Painter {
 
     final List<ColorSelectorCell> colorSelectorCells = colorSelector.getColorSelectorCells();
 
-    final byte[] tile0 = this.unpacker.unpack3bppTiles(tiles[0].getBytes());
-    for (int byteIndex = 0; byteIndex < tile0.length; byteIndex++) {
-      final int row = byteIndex / 8;
-      final int column = byteIndex % 8;
-      paintableGrid.getCell(row, column).paint(colorSelectorCells.get(tile0[byteIndex]));
-    }
-
-    final byte[] tile1 = this.unpacker.unpack3bppTiles(tiles[1].getBytes());
-    for (int byteIndex = 0; byteIndex < tile1.length; byteIndex++) {
-      final int row = byteIndex / 8;
-      final int column = byteIndex % 8 + 8;
-      final int colorIndexToPaint = tile1[byteIndex];
-      paintableGrid.getCell(row, column).paint(colorSelectorCells.get(colorIndexToPaint));
-    }
-
-    final byte[] tile2 = this.unpacker.unpack3bppTiles(tiles[2].getBytes());
-    for (int byteIndex = 0; byteIndex < tile2.length; byteIndex++) {
-      final int row = byteIndex / 8 + 8;
-      final int column = byteIndex % 8;
-      paintableGrid.getCell(row, column).paint(colorSelectorCells.get(tile2[byteIndex]));
-    }
-
-    final byte[] tile3 = this.unpacker.unpack3bppTiles(tiles[3].getBytes());
-    for (int byteIndex = 0; byteIndex < tile3.length; byteIndex++) {
-      final int row = byteIndex / 8 + 8;
-      final int column = byteIndex % 8 + 8;
-      paintableGrid.getCell(row, column).paint(colorSelectorCells.get(tile3[byteIndex]));
+    for (final Tile tile : tiles) {
+      final byte[] tileBytes = this.unpacker.unpack3bppTiles(tile.getBytes());
+      for (int byteIndex = 0; byteIndex < tileBytes.length; byteIndex++) {
+        final int row = byteIndex / 8;
+        final int column = byteIndex % 8;
+        paintableGrid.getCell(row, column).paint(colorSelectorCells.get(tileBytes[byteIndex]));
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ module memforcehunt.lib {
   requires alttpj.library;
 
   requires static org.immutables.value;
+  requires static com.github.spotbugs.annotations;
 
   requires com.fasterxml.jackson.databind;
   requires com.fasterxml.jackson.dataformat.yaml;

@@ -221,7 +221,7 @@ public class ULID {
 
   public static class Value
       implements Comparable<Value>, Serializable {
-    private static final long serialVersionUID = -3563159514112487717L;
+    private static final long serialVersionUID = 1;
 
     /*
      * The most significant 64 bits of this ULID.

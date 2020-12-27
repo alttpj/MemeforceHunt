@@ -25,7 +25,7 @@ import java.io.InputStream;
 import java.util.StringJoiner;
 import javax.imageio.ImageIO;
 
-public class ShippedSpritemapWithSkin extends AbstractSpritemapWithSkin {
+public final class ShippedSpritemapWithSkin extends AbstractSpritemapWithSkin {
 
   private final String skinResourceName;
   private final String skinPreviewPath;

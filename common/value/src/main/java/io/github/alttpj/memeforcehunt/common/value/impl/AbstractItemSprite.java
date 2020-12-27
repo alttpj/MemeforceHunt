@@ -52,7 +52,7 @@ public abstract class AbstractItemSprite implements ItemSprite {
     this.displayName = displayName;
     this.description = description;
     this.author = author;
-    this.tiles = tiles;
+    this.tiles = Arrays.copyOf(tiles, tiles.length);
     this.palette = palette;
     check();
   }
@@ -137,12 +137,12 @@ public abstract class AbstractItemSprite implements ItemSprite {
 
   @Override
   public Tile[] getTiles() {
-    return this.tiles;
+    return Arrays.copyOf(this.tiles, this.tiles.length);
   }
 
   @Override
   public int[] getTilePositions() {
-    return TRIFORCE_TILE_POSITIONS;
+    return Arrays.copyOf(TRIFORCE_TILE_POSITIONS, TRIFORCE_TILE_POSITIONS.length);
   }
 
   @Override
@@ -170,9 +170,9 @@ public abstract class AbstractItemSprite implements ItemSprite {
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(this.spriteId, this.spriteName, this.displayName, this.description, this.author, this.palette);
-    result = 31 * result + Arrays.hashCode(this.tiles);
-    return result;
+    final int result = Objects.hash(this.spriteId, this.spriteName, this.displayName, this.description, this.author, this.palette);
+
+    return 31 * result + Arrays.hashCode(this.tiles);
   }
 
   @Override

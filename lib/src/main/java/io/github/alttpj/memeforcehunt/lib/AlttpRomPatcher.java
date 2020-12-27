@@ -21,6 +21,7 @@ import io.github.alttpj.memeforcehunt.common.value.ItemSprite;
 import io.github.alttpj.memeforcehunt.common.value.ItemSpriteFactory;
 import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.github.alttpj.library.compress.SnesCompressor;
 import io.github.alttpj.library.compress.SnesDecompressor;
 import io.github.alttpj.library.image.Tile;
@@ -51,6 +52,10 @@ public class AlttpRomPatcher {
     this.paletteLocationOverworld = PAL_OW;
   }
 
+  @SuppressFBWarnings(
+      value = "PATH_TRAVERSAL_IN,PATH_TRAVERSAL_OUT",
+      justification = "patching user supplied ROM file"
+  )
   public void patchROM(final String romTarget, final SpritemapWithSkin spritemapWithSkin) throws IOException {
     final byte[] romStream = readRom(romTarget);
 
@@ -59,6 +64,10 @@ public class AlttpRomPatcher {
     writeRom(romTarget, romStream);
   }
 
+  @SuppressFBWarnings(
+      value = "PATH_TRAVERSAL_IN,PATH_TRAVERSAL_OUT",
+      justification = "patching user supplied ROM file"
+  )
   public void patchROM(final String romTarget, final TiledSprite itemSprite) throws IOException {
     final byte[] romStream = readRom(romTarget);
 
@@ -67,6 +76,10 @@ public class AlttpRomPatcher {
     writeRom(romTarget, romStream);
   }
 
+  @SuppressFBWarnings(
+      value = "PATH_TRAVERSAL_OUT",
+      justification = "patching user supplied ROM file"
+  )
   private void writeRom(final String romTarget, final byte[] romStream) throws IOException {
     try (final FileOutputStream fsOut = new FileOutputStream(romTarget)) {
       fsOut.write(romStream, 0, romStream.length);
@@ -193,12 +206,20 @@ public class AlttpRomPatcher {
     }
   }
 
+  @SuppressFBWarnings(
+      value = "PATH_TRAVERSAL_IN",
+      justification = "patching user supplied ROM file"
+  )
   private byte[] readRom(final String romTarget) throws IOException {
     final byte[] romStream;
 
     try (final FileInputStream fsInput = new FileInputStream(romTarget)) {
-      romStream = new byte[(int) fsInput.getChannel().size()];
-      fsInput.read(romStream);
+      final int size = (int) fsInput.getChannel().size();
+      romStream = new byte[size];
+      final int read = fsInput.read(romStream);
+      if (read != size) {
+        throw new IllegalStateException("Unexpected end of input.");
+      }
       fsInput.getChannel().position(0);
     }
 
@@ -206,8 +227,7 @@ public class AlttpRomPatcher {
   }
 
   public static String getVersion() {
-    try {
-      final InputStream versionProps = AlttpRomPatcher.class.getResourceAsStream("/constants/version.properties");
+    try (final InputStream versionProps = AlttpRomPatcher.class.getResourceAsStream("/constants/version.properties")) {
       final Properties properties = new Properties();
       properties.load(versionProps);
 
