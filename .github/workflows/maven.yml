@@ -35,7 +35,7 @@ jobs:
 
       - name: Build with Maven (windows)
         if: ${{ matrix.os == 'windows-latest' }}
-        run: mvn clean verify --batch-mode -Pjlink -Pdocs -Prun-its -Djavafx.platform=windows
+        run: mvn clean verify --batch-mode -Pjlink -Pdocs -Prun-its "-Djavafx.platform=windows"
 
       - name: Build with Maven (linux)
         if: ${{ matrix.os == 'ubuntu-latest' }}
