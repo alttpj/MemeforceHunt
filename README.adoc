@@ -1,9 +1,8 @@
 = MemeforceHunt
 
 image:https://img.shields.io/badge/License-Apache%202.0-blue.svg[Apache License v2.0,124,20,link=https://opensource.org/licenses/Apache-2.0]
-image:https://www.travis-ci.com/alttpj/MemeforceHunt.svg?branch=master[travis-ci.com,link=https://www.travis-ci.com/alttpj/MemeforceHunt]
+image:https://github.com/alttpj/MemeforceHunt/workflows/Java%20CI%20with%20Maven/badge.svg[Java CI with Maven,link=https://github.com/alttpj/MemeforceHunt/actions?query=workflow%3A%22Java+CI+with+Maven%22]
 image:https://codecov.io/gh/alttpj/MemeforceHunt/branch/master/graph/badge.svg[codecov.io,link=https://codecov.io/gh/alttpj/MemeforceHunt]
-
 
 This application can be used to alter the imagery in an ALttPR game file for the Triforce Piece item.
 
