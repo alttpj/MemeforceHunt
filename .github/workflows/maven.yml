@@ -37,16 +37,20 @@ jobs:
         if: ${{ matrix.os == 'windows-latest' }}
         run: mvn clean verify --batch-mode -Pjlink -Pdocs -Pci -Prun-its -Djavafx.platform=windows
 
-      - name: Build with Maven (linux) 
+      - name: Build with Maven (linux)
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: mvn clean verify --batch-mode -Pjlink,docs,ci,run-its -Djavafx.platform=linux
 
+      - name: Build with Maven (macos)
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: mvn clean verify --batch-mode -Pjlink,docs,ci,run-its -Djavafx.platform=macos
+
       - name: Deploy snapshot
         if: ${{ matrix.java == '11' }}
-        run: mvn deploy --batch-mode -Pdocs,deploy-github
+        run: mvn deploy --batch-mode -Pdocs -Pdeploy-github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.1
         with:
