@@ -46,7 +46,7 @@ jobs:
         run: mvn clean verify --batch-mode -Pjlink,docs,ci,run-its -Djavafx.platform=macos
 
       - name: Deploy snapshot
-        if: ${{ matrix.java == '11' }}
+        if: ${{ matrix.java == '16-ea' }}
         run: mvn deploy --batch-mode -Pdocs -Pdeploy-github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
