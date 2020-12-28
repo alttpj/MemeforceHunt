@@ -31,7 +31,7 @@ public interface SpriteFileFormat extends Comparable<SpriteFileFormat> {
    *
    * @return the ULID
    */
-  ULID.Value ulid();
+  ULID.Value getUlid();
 
   /**
    * A display name which will be shown upon loading. Should not be too long and just describe in one or two words
@@ -56,7 +56,7 @@ public interface SpriteFileFormat extends Comparable<SpriteFileFormat> {
    *
    * @return the display name.
    */
-  String displayName();
+  String getDisplayName();
 
   /**
    * Name of the author. This can be a nickname, a real name or name and e-mail (just as you please).<br>
@@ -67,28 +67,28 @@ public interface SpriteFileFormat extends Comparable<SpriteFileFormat> {
    *
    * @return The author name.
    */
-  String authorName();
+  String getAuthorName();
 
   /**
    * A longer description of the item (about 1 sentence, max 2), usually includes a funny pun.
    *
    * @return an optional description of the item.
    */
-  Optional<String> description();
+  Optional<String> getDescription();
 
   /**
    * When this item sprite was created. Usually derived from the ULID.
    *
    * @return creation date.
    */
-  Instant creationDate();
+  Instant getCreationDate();
 
   /**
    * A base64 encoded tile data string. It is the whole four tiles concatinated and then base64'd.
    *
    * @return the bytes contained in the base64 string.
    */
-  byte[] data();
+  byte[] getData();
 
   /**
    * Name of the Color Palette.
@@ -106,7 +106,7 @@ public interface SpriteFileFormat extends Comparable<SpriteFileFormat> {
    *
    * @return the color palette name.
    */
-  String colorPaletteName();
+  String getColorPaletteName();
 
   /**
    * Optional (default empty) tags for searching.
@@ -124,5 +124,5 @@ public interface SpriteFileFormat extends Comparable<SpriteFileFormat> {
    *
    * @return tags for searching.
    */
-  List<String> tags();
+  List<String> getTags();
 }
