@@ -2,7 +2,7 @@ module memforcehunt.lib {
   requires memeforcehunt.common.value;
   requires alttpj.library;
 
-  requires static org.immutables.value;
+  requires static org.immutables.value.annotations;
   requires static com.github.spotbugs.annotations;
 
   requires com.fasterxml.jackson.databind;

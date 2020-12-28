@@ -1,4 +1,5 @@
 module memeforcehunt.app {
+  requires javafx.base;
   requires javafx.fxml;
   requires java.logging;
   requires javafx.controls;

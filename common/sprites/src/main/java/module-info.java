@@ -5,7 +5,7 @@ module memeforcehunt.common.sprites {
 
   requires memeforcehunt.common.value;
 
-  requires static org.immutables.value;
+  requires static org.immutables.value.annotations;
 
   requires com.fasterxml.jackson.databind;
   requires com.fasterxml.jackson.dataformat.yaml;
