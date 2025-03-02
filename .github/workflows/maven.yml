@@ -3,10 +3,17 @@
 
 name: Java CI with Maven
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - 'm*'
 
 jobs:
   build:
+    if: (github.event_name == 'push' && github.event.pull_request == null) || github.event_name == 'pull_request'
 
     strategy:
       matrix:
