@@ -631,6 +631,15 @@
     <connection>scm:git:https://github.com:alttpj/MemeforceHunt.git</connection>
     <developerConnection>scm:git:https://github.com:alttpj/MemeforceHunt.git</developerConnection>
   </scm>
+  <developers>
+    <developer>
+      <name>Benjamin Marwell</name>
+      <id>bmarwell</id>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
 
   <ciManagement>
     <system>Travis-CI.com</system>
