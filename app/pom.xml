@@ -30,7 +30,7 @@
   <name>Memeforce Hunt :: app</name>
 
   <properties>
-    <dependency.picocli.version>4.2.0</dependency.picocli.version>
+    <dependency.picocli.version>4.7.6</dependency.picocli.version>
   </properties>
 
   <dependencies>
