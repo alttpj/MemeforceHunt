@@ -50,7 +50,9 @@
     <javafx.platform>linux</javafx.platform>
     <dependency.jackson.version>2.18.3</dependency.jackson.version>
     <dependency.snakeyaml.version>2.4</dependency.snakeyaml.version>
-    <dependency.spotbugs.version>4.2.0</dependency.spotbugs.version>
+
+    <dependency.spotbugs.version>4.9.1</dependency.spotbugs.version>
+    <plugin.spotbugs.version>4.9.1.0</plugin.spotbugs.version>
   </properties>
 
   <!-- dependencies in the management section are not forced upon the child modules. -->
@@ -323,7 +325,7 @@
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.9.1.0</version>
+          <version>${plugin.spotbugs.version}</version>
           <dependencies>
             <dependency>
               <groupId>com.github.spotbugs</groupId>
