@@ -30,9 +30,9 @@
 
   <properties>
     <!-- jdk needed -->
-    <jdk.version>15</jdk.version>
+    <jdk.version>21</jdk.version>
     <!-- compile to -->
-    <java.version>15</java.version>
+    <java.version>21</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -44,7 +44,7 @@
     <spotbugs.exclude.file>${project.buildasset.dir}/spotbugs/excludes.xml</spotbugs.exclude.file>
 
     <!-- default fork arguments. -->
-    <argLine>-Xmx1024m</argLine>
+    <argLine></argLine>
     <dependency.javafx.version>15.0.1</dependency.javafx.version>
     <dependency.immutables.version>2.8.8</dependency.immutables.version>
     <javafx.platform>linux</javafx.platform>
@@ -459,7 +459,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.1.2</version>
         <configuration>
           <configLocation>${project.buildasset.dir}/checkstyle.xml</configLocation>
           <encoding>UTF-8</encoding>
@@ -653,6 +653,13 @@
       </snapshots>
     </repository>
   </repositories>
+      <pluginRepositories>
+    <pluginRepository>
+      <id>staged-releases</id>
+      <url>https://repository.apache.org/content/repositories/maven-1624/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
 
   <distributionManagement>
     <repository>
