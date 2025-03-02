@@ -40,12 +40,15 @@ import java.security.SecureRandom;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.SplittableRandom;
+import java.util.random.RandomGenerator;
+import java.util.random.RandomGeneratorFactory;
 
 /*
  * https://github.com/ulid/spec
  */
 @SuppressWarnings("PMD.ShortClassName")
-public class ULID {
+public final class ULID {
   private static final char[] ENCODING_CHARS = {
       '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K',
@@ -94,15 +97,15 @@ public class ULID {
   private static final long TIMESTAMP_MSB_MASK = 0xFFFF_FFFF_FFFF_0000L;
   private static final long RANDOM_MSB_MASK = 0xFFFFL;
 
-  private final Random random;
+  private final SplittableRandom random;
 
   public ULID() {
-    this(new SecureRandom());
+    this(new SplittableRandom());
   }
 
-  public ULID(final Random random) {
+  public ULID(final SplittableRandom random) {
     Objects.requireNonNull(random, "random must not be null!");
-    this.random = random;
+    this.random = random.split();
   }
 
   public void appendULID(final StringBuilder stringBuilder) {
@@ -115,7 +118,7 @@ public class ULID {
   }
 
   public String nextULID(final long timestamp) {
-    return internalUIDString(timestamp, this.random);
+    return internalUIDString(timestamp, this.random.split());
   }
 
   public Value nextValue() {
@@ -123,7 +126,7 @@ public class ULID {
   }
 
   public Value nextValue(final long timestamp) {
-    return internalNextValue(timestamp, this.random);
+    return internalNextValue(timestamp, this.random.split());
   }
 
   /**
@@ -374,7 +377,7 @@ public class ULID {
     }
   }
 
-  static String internalUIDString(final long timestamp, final Random random) {
+  static String internalUIDString(final long timestamp, final SplittableRandom random) {
     checkTimestamp(timestamp);
 
     final char[] buffer = new char[26];
@@ -387,7 +390,7 @@ public class ULID {
     return new String(buffer);
   }
 
-  static void internalAppendULID(final StringBuilder builder, final long timestamp, final Random random) {
+  static void internalAppendULID(final StringBuilder builder, final long timestamp, final SplittableRandom random) {
     checkTimestamp(timestamp);
 
     internalAppendCrockford(builder, timestamp, 10);
@@ -396,7 +399,7 @@ public class ULID {
     internalAppendCrockford(builder, random.nextLong(), 8);
   }
 
-  static Value internalNextValue(final long timestamp, final Random random) {
+  static Value internalNextValue(final long timestamp, final SplittableRandom random) {
     checkTimestamp(timestamp);
     // could use nextBytes(byte[] bytes) instead
     long mostSignificantBits = random.nextLong();

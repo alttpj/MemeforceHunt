@@ -66,12 +66,15 @@ public interface ItemSprite {
    * @return the byte offset in the spritemap for each tile.
    */
   default int[] getTileOffsets() {
-    final int[] offsets = new int[getTilePositions().length];
-    final int[] tilePositions = getTilePositions();
+    return getTileOffsets(getTilePositions(), getPalette());
+  }
+
+  static int[] getTileOffsets(int[] tilePositions, ItemPalette palette) {
+    final int[] offsets = new int[tilePositions.length];
 
     for (int tileNumber = 0; tileNumber < tilePositions.length; tileNumber++) {
       final int tilePosition = tilePositions[tileNumber];
-      offsets[tileNumber] = tilePosition * getPalette().getBitsPerPixel() * 8;
+      offsets[tileNumber] = tilePosition * palette.getBitsPerPixel() * 8;
     }
 
     return offsets;

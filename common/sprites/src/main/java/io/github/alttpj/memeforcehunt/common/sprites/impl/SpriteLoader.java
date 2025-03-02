@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
 public class SpriteLoader {
 
@@ -41,7 +40,7 @@ public class SpriteLoader {
 
   public List<SpritemapWithSkin> load() {
     if (this.isAlreadyLoaded.get()) {
-      return this.loaded;
+      return List.copyOf(this.loaded);
     }
 
     try {
@@ -49,9 +48,9 @@ public class SpriteLoader {
 
       this.loaded = Arrays.stream(sprites)
           .map(this::toSpriteMapWithSkin)
-          .collect(Collectors.toUnmodifiableList());
+          .toList();
 
-      return this.loaded;
+      return List.copyOf(this.loaded);
     } catch (final IOException ioException) {
       throw new UnsupportedOperationException("not yet implemented: [${CLASS_NAME}::${METHOD_NAME}].", ioException);
     }

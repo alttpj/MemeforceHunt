@@ -25,7 +25,7 @@ public enum YamlMapper {
   private final ObjectMapper objectMapper = createYamlMapper();
 
   public static ObjectMapper getObjectMapper() {
-    return INSTANCE.objectMapper;
+    return INSTANCE.objectMapper.copy();
   }
 
   private ObjectMapper createYamlMapper() {
