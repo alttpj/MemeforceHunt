@@ -45,11 +45,11 @@
 
     <!-- default fork arguments. -->
     <argLine></argLine>
-    <dependency.javafx.version>15.0.1</dependency.javafx.version>
+    <dependency.javafx.version>17.0.10</dependency.javafx.version>
     <dependency.immutables.version>2.8.8</dependency.immutables.version>
     <javafx.platform>linux</javafx.platform>
     <dependency.jackson.version>2.18.3</dependency.jackson.version>
-    <dependency.snakeyaml.version>1.26</dependency.snakeyaml.version>
+    <dependency.snakeyaml.version>2.0</dependency.snakeyaml.version>
     <dependency.spotbugs.version>4.2.0</dependency.spotbugs.version>
   </properties>
 
