@@ -16,6 +16,8 @@
 
 package io.github.alttpj.memeforcehunt.app.cli;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +29,7 @@ public class ToLogPrintStream extends PrintStream {
   private final Logger logger;
   private final Level level;
 
+  @SuppressFBWarnings("EI_EXPOSE_REP2")
   public ToLogPrintStream(final Logger logger, final Level level) {
     super(OutputStream.nullOutputStream(), true, StandardCharsets.UTF_8);
     this.logger = logger;

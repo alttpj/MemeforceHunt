@@ -18,6 +18,7 @@ package io.github.alttpj.memeforcehunt.app.gui.editor;
 
 import static java.util.Collections.unmodifiableList;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.github.alttpj.library.image.palette.Palette;
 import io.github.alttpj.library.image.palette.Palette3bpp;
 import javafx.beans.property.ObjectProperty;
@@ -80,6 +81,7 @@ public final class ColorSelector extends GridPane {
     return this.selectedColor.get();
   }
 
+  @SuppressFBWarnings("EI_EXPOSE_REP")
   public ObjectProperty<ColorSelectorCell> selectedColorProperty() {
     return this.selectedColor;
   }
@@ -88,6 +90,7 @@ public final class ColorSelector extends GridPane {
     this.selectedColor.set(selectedColor);
   }
 
+  @SuppressFBWarnings("EI_EXPOSE_REP")
   public List<ColorSelectorCell> getColorSelectorCells() {
     return unmodifiableList(Arrays.asList(this.colorSelectorCells));
   }

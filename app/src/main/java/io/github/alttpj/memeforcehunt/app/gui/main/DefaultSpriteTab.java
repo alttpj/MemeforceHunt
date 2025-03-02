@@ -21,6 +21,7 @@ import io.github.alttpj.memeforcehunt.app.gui.properties.SelectedFileProperty;
 import io.github.alttpj.memeforcehunt.common.sprites.DefaultSpritemapWithSkins;
 import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,14 +33,19 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.SecureRandom;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.random.RandomGenerator;
+import java.util.random.RandomGeneratorFactory;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class DefaultSpriteTab extends HBox implements Initializable {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(DefaultSpriteTab.class.getCanonicalName());
+
+  private final RandomGenerator random = RandomGeneratorFactory.getDefault().create();
+
   @FXML
   private ItemSkinList defaultSpritesItemSkinList;
 
@@ -50,6 +56,7 @@ public class DefaultSpriteTab extends HBox implements Initializable {
   private Button randomButton;
   private final SelectedFileProperty selectedFileProperty = new SelectedFileProperty();
 
+  @SuppressFBWarnings(value = "CT_CONSTRUCTOR_THROW", justification = "fxml")
   public DefaultSpriteTab() {
     // fmxl
     final FXMLLoader fxmlLoader =
@@ -132,8 +139,7 @@ public class DefaultSpriteTab extends HBox implements Initializable {
   public void doPatchRandom(final ActionEvent actionEvent) {
     final ObservableList<SpritemapWithSkin> availableItems = getDefaultSpritesItemSkinList().getItems();
     final int max = availableItems.size();
-    final SecureRandom secureRandom = new SecureRandom();
-    final int randomItemNumber = secureRandom.nextInt(max);
+    final int randomItemNumber = this.random.nextInt(max);
     final SpritemapWithSkin selectedItem = availableItems.get(randomItemNumber);
 
     try {

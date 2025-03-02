@@ -22,6 +22,7 @@ import io.github.alttpj.memeforcehunt.app.gui.main.MainPane;
 import io.github.alttpj.memeforcehunt.app.gui.preferences.Preferences;
 import io.github.alttpj.memeforcehunt.app.gui.properties.SelectedFileProperty;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
@@ -41,6 +42,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class MainWindow extends BorderPane implements Initializable {
 
   private static final FileChooser.ExtensionFilter SFC_EXTENSION_FILTER =
@@ -65,6 +67,7 @@ public class MainWindow extends BorderPane implements Initializable {
 
   private final SelectedFileProperty selectedFileProperty = new SelectedFileProperty();
 
+  @SuppressFBWarnings(value = "CT_CONSTRUCTOR_THROW", justification = "fxml")
   public MainWindow() {
     // fmxl
     final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/io/github/alttpj/memeforcehunt/app/gui/MainWindow.fxml"));

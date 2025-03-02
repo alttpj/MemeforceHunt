@@ -16,7 +16,7 @@
 
 package io.github.alttpj.memeforcehunt.common.value;
 
-import io.github.alttpj.memeforcehunt.common.value.impl.ImmutableItemSprite;
+import io.github.alttpj.memeforcehunt.common.value.impl.ItemSpriteRecord;
 
 import io.github.alttpj.library.image.Tile;
 
@@ -35,7 +35,7 @@ public final class ItemSpriteFactory {
 
     final ItemPalette palette = fromPaletteBytes(spritemapWithSkin.getItemPalette(), spritemapWithSkin.getPaletteOW());
 
-    return new ImmutableItemSprite(
+    return new ItemSpriteRecord(
         spritemapWithSkin.getId(),
         spritemapWithSkin.getSpriteName(),
         spritemapWithSkin.getDisplayName(),

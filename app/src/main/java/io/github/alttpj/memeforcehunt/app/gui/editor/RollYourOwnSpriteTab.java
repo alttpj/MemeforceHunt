@@ -57,6 +57,7 @@ import java.util.StringJoiner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class RollYourOwnSpriteTab extends HBox implements Initializable {
 
   private static final Logger LOG = Logger.getLogger(RollYourOwnSpriteTab.class.getCanonicalName());
@@ -108,6 +109,7 @@ public class RollYourOwnSpriteTab extends HBox implements Initializable {
 
   private final StringProperty ulid = new SimpleStringProperty();
 
+  @SuppressFBWarnings(value = "CT_CONSTRUCTOR_THROW", justification = "fxml")
   public RollYourOwnSpriteTab() {
     // fmxl
     final FXMLLoader fxmlLoader =

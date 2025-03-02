@@ -16,6 +16,7 @@
 
 package io.github.alttpj.memeforcehunt.app.gui.editor;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -27,6 +28,7 @@ import javafx.scene.paint.Color;
 
 import java.util.StringJoiner;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public final class ColourableCell extends StackPane {
 
   private final int column;

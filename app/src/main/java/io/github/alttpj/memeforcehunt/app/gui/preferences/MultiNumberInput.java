@@ -16,6 +16,7 @@
 
 package io.github.alttpj.memeforcehunt.app.gui.preferences;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -37,6 +38,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class MultiNumberInput extends VBox implements Initializable {
 
   private static final Pattern HEX = Pattern.compile("[a-fA-F0-9]*");
@@ -56,7 +58,7 @@ public class MultiNumberInput extends VBox implements Initializable {
   @FXML
   private RadioButton radioHex;
 
-
+  @SuppressFBWarnings(value = "CT_CONSTRUCTOR_THROW", justification = "fxml")
   public MultiNumberInput() {
     // fmxl
     final FXMLLoader fxmlLoader =

@@ -30,6 +30,6 @@ public enum YamlProvider {
   }
 
   public static ObjectMapper getObjectMapper() {
-    return INSTANCE.objectMapper;
+    return INSTANCE.objectMapper.copy();
   }
 }

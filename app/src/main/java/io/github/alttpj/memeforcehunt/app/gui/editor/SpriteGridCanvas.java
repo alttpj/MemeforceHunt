@@ -16,6 +16,7 @@
 
 package io.github.alttpj.memeforcehunt.app.gui.editor;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -30,6 +31,7 @@ import java.util.StringJoiner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class SpriteGridCanvas extends StackPane {
 
   private static final Logger LOG = Logger.getLogger(SpriteGridCanvas.class.getCanonicalName());

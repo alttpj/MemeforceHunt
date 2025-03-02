@@ -18,6 +18,7 @@ package io.github.alttpj.memeforcehunt.app.gui.main;
 
 import io.github.alttpj.memeforcehunt.common.value.SpritemapWithSkin;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -33,6 +34,7 @@ import javafx.scene.text.TextAlignment;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class SkinListCell extends ListCell<SpritemapWithSkin> {
 
   private static final Insets DEFAULT_PADDING = new Insets(0.0d, 1.0d, 0.0d, 5.0d);
