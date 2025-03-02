@@ -16,12 +16,14 @@
 
 package io.github.alttpj.memeforcehunt.app.gui.editor;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
 
 import java.util.StringJoiner;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public final class SpritePreview extends SpriteGridCanvas {
 
   private final IntegerProperty wantedHeight = new SimpleIntegerProperty(64);

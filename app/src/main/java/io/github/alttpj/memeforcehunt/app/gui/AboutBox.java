@@ -19,6 +19,7 @@ package io.github.alttpj.memeforcehunt.app.gui;
 import io.github.alttpj.memeforcehunt.app.gui.actions.StaticGuiActions;
 import io.github.alttpj.memeforcehunt.lib.AlttpRomPatcher;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,6 +49,7 @@ public class AboutBox extends Stage implements Initializable {
   @FXML
   private Text textNameVersion;
 
+  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public AboutBox(final Window owner, final HostServices hostServices) {
     this.hostServices = hostServices;
     this.initOwner(owner);

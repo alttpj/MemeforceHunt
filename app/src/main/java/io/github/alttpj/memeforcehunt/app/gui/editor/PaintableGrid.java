@@ -18,6 +18,7 @@ package io.github.alttpj.memeforcehunt.app.gui.editor;
 
 import static java.util.stream.Collectors.toList;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.github.alttpj.library.image.palette.Palette;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.logging.Logger;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class PaintableGrid extends Pane {
 
   private static final Logger LOG = Logger.getLogger(PaintableGrid.class.getCanonicalName());

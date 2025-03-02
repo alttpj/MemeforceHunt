@@ -18,6 +18,7 @@ package io.github.alttpj.memeforcehunt.app.gui.main;
 
 import io.github.alttpj.memeforcehunt.app.gui.editor.RollYourOwnSpriteTab;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class MainPane extends HBox implements Initializable {
 
   @FXML
@@ -35,6 +37,7 @@ public class MainPane extends HBox implements Initializable {
   @FXML
   private RollYourOwnSpriteTab rollYourOwnSpriteTab;
 
+  @SuppressFBWarnings(value = "CT_CONSTRUCTOR_THROW", justification = "fxml")
   public MainPane() {
     // fmxl
     final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/io/github/alttpj/memeforcehunt/app/gui/MainPane.fxml"));

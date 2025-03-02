@@ -16,6 +16,7 @@
 
 package io.github.alttpj.memeforcehunt.app.gui.editor;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.github.alttpj.library.image.palette.Palette;
 import io.github.alttpj.library.image.palette.Palette3bpp;
 import javafx.beans.property.ObjectProperty;
@@ -28,6 +29,7 @@ import javafx.scene.layout.FlowPane;
 
 import java.util.Optional;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class PaletteSelector extends FlowPane {
 
   private final ObjectProperty<Palette> selectedPalette = new SimpleObjectProperty<>();

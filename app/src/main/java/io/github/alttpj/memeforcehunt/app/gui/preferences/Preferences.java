@@ -19,6 +19,7 @@ package io.github.alttpj.memeforcehunt.app.gui.preferences;
 import io.github.alttpj.memeforcehunt.app.config.YamlConfigurator;
 import io.github.alttpj.memeforcehunt.lib.AlttpRomPatcher;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -42,6 +43,7 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class Preferences extends Stage implements Initializable {
 
   @FXML
@@ -58,7 +60,12 @@ public class Preferences extends Stage implements Initializable {
 
   private final StringProperty hexString = new SimpleStringProperty();
 
+  @SuppressFBWarnings(value = "CT_CONSTRUCTOR_THROW", justification = "fxml")
   public Preferences(final Window owner) {
+    initialize(owner);
+  }
+
+  private void initialize(final Window owner) {
     this.initOwner(owner);
     this.initModality(Modality.WINDOW_MODAL);
 

@@ -16,6 +16,7 @@
 
 package io.github.alttpj.memeforcehunt.app.gui.editor;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -38,6 +39,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@SuppressFBWarnings("EI_EXPOSE_REP")
 public class MetadataWindow extends Stage implements Initializable {
 
   @FXML
@@ -60,6 +62,7 @@ public class MetadataWindow extends Stage implements Initializable {
 
   private final StringProperty description = new SimpleStringProperty("");
 
+  @SuppressFBWarnings(value = "CT_CONSTRUCTOR_THROW", justification = "fxml")
   public MetadataWindow(final Window owner) {
     this.initOwner(owner);
     this.initModality(Modality.WINDOW_MODAL);
