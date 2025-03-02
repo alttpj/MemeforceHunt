@@ -235,7 +235,7 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <groupId>org.apache.maven.plugins</groupId>
-          <version>3.8.1</version>
+          <version>3.14.0</version>
           <configuration>
             <release>${maven.compiler.release}</release>
           </configuration>
@@ -287,13 +287,13 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.6</version>
+          <version>0.8.12</version>
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
+          <version>3.1.4</version>
         </plugin>
 
         <plugin>
@@ -311,7 +311,7 @@
         <plugin>
           <groupId>de.thetaphi</groupId>
           <artifactId>forbiddenapis</artifactId>
-          <version>3.1</version>
+          <version>3.8</version>
         </plugin>
 
         <plugin>
@@ -459,10 +459,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.2</version>
+        <version>3.6.0</version>
         <configuration>
           <configLocation>${project.buildasset.dir}/checkstyle.xml</configLocation>
-          <encoding>UTF-8</encoding>
           <consoleOutput>false</consoleOutput>
           <linkXRef>false</linkXRef>
           <propertyExpansion>project.buildasset.dir=${project.buildasset.dir}</propertyExpansion>
