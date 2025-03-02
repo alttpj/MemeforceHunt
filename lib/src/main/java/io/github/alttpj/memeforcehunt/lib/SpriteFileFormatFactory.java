@@ -87,7 +87,7 @@ public final class SpriteFileFormatFactory {
     return new ImmutableSpriteFileFormat(
         ulid,
         Instant.now(),
-        Optional.ofNullable(description).filter(descr -> !descr.isEmpty()).filter(descr -> !descr.isBlank()).orElse(null),
+        Optional.ofNullable(description).filter(descr -> !descr.isEmpty()).filter(descr -> !descr.isBlank()),
         displayName,
         authorName,
         data,
