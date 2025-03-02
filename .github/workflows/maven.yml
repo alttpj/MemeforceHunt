@@ -44,7 +44,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: ${{ matrix.java }}
-          distribution: "semeru"
+          distribution: "temurin"
 
       - name: Build with Maven (windows)
         if: ${{ matrix.os == 'windows-latest' }}
