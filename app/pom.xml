@@ -104,7 +104,7 @@
     <dependency>
       <groupId>org.jfxtras</groupId>
       <artifactId>jmetro</artifactId>
-      <version>11.6.10</version>
+      <version>11.6.16</version>
       <!-- javas curious module system: We ship our own version. -->
       <exclusions>
         <exclusion>
