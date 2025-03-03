@@ -282,7 +282,7 @@
         <plugin>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-maven-plugin</artifactId>
-          <version>0.0.4</version>
+          <version>0.0.8</version>
         </plugin>
 
         <!-- creates coverage reports and coverage files. -->
