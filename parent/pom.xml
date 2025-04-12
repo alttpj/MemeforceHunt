@@ -45,7 +45,7 @@
 
     <!-- default fork arguments. -->
     <argLine></argLine>
-    <dependency.javafx.version>21.0.6</dependency.javafx.version>
+    <dependency.javafx.version>25-ea+6</dependency.javafx.version>
     <dependency.immutables.version>2.8.8</dependency.immutables.version>
     <javafx.platform>linux</javafx.platform>
     <dependency.jackson.version>2.18.3</dependency.jackson.version>
